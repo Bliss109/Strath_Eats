@@ -18,7 +18,7 @@ class user{
 
         $stmt->bindParam(':name', $name);
         $stmt->bindparam(':email', $email);
-        $stmt->bindParam(':password', $password);
+        $stmt->bindParam(':password', $hashedPassword);
         
         if($stmt->execute()){
             return true;
@@ -37,7 +37,7 @@ class user{
         if($stmt->rowCount() > 0){
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-             if(password_verify($password, $user['passowrd'])){
+             if(password_verify($password, $user['password'])){
                 return $user;
              }
         }
