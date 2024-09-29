@@ -27,5 +27,23 @@ class user{
         }
 
     }
+
+    public function login($email, $password){
+        $sql = "SELECT * FROM " . $this->table . " WHERE email = :email";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+        if($stmt->rowCount() > 0){
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+             if(password_verify($password, $user['passowrd'])){
+                return $user;
+             }
+        }
+
+        return false;
+    }
     
 }
+?>
