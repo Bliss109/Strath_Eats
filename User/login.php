@@ -3,6 +3,8 @@ require_once 'user.php';
 
 session_start();
 
+$data = json_decode(file_get_contents(':php://input'), true);
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
    $email = $_POST['email'];
    $password = $_POST['password'];
