@@ -1,0 +1,170 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+}
+.sidebar {
+    width: 20%;
+    background-color:papayawhip;
+    padding: 20px;
+    color:rgb(84, 56, 5);
+}
+
+.sidebar h2 {
+    margin-bottom: 30px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+main {
+    width: 60%;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-bar {
+    width: 40%;
+    padding: 10px;
+}
+
+.banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    background-color: #ffeeba;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.categories {
+    margin-top: 20px;
+}
+
+.category-list {
+    display: flex;
+    justify-content: space-around;
+}
+
+.category-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: none;
+    background-color: #f0f0f0;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.category-item img{
+    width: 100px;
+    height: auto;
+}
+.category-item span{
+    margin-top: 5px;
+}
+
+.popular-dishes {
+    margin-top: 20px;
+}
+
+.dish-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.dish-card {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dish-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.dish-card p {
+    margin: 10px 0;
+}
+
+.add-btn {
+    background-color: #ffca2c;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.recent-orders {
+    margin-top: 40px;
+}
+
+.order-grid {
+    display: flex;
+    justify-content: space-around;
+}
+
+.order-card {
+    background-color: #f9f9f9;
+    padding: 10px;
+    text-align: center;
+}
+
+.order-card img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+.right-sidebar {
+    width: 15%;
+    padding: 20px;
+    background-color: rgb(210, 181, 128);
+    border-radius: 10px;
+}
+
+.balance {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.order-summary ul {
+    list-style: none;
+    padding: 0;
+}
+
+.checkout-btn {
+    background-color: #ffca2c;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 16px;
+}
