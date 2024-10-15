@@ -13,17 +13,17 @@ addButtons.forEach(button => {
 
 function addToCart(name, price) {
     const orderItem = document.createElement('li');
-    orderItem.textContent = ${name} - KSh ${price.toFixed(2)};
+    orderItem.textContent = `${name} - KSh ${price.toFixed(2)}`;
     orderMenu.appendChild(orderItem);
     
     totalPrice += price;
-    totalAmount.textContent = Total: KSh ${totalPrice.toFixed(2)};
+    totalAmount.textContent = `Total: KSh ${totalPrice.toFixed(2)}`;
 }
 
 const checkoutButton = document.querySelector('.checkout-btn');
 checkoutButton.addEventListener('click', () => {
     if (totalPrice > 0) {
-        alert(Order placed successfully! Total: KSh ${totalPrice.toFixed(2)});
+        alert(`Order placed successfully! Total: KSh ${totalPrice.toFixed(2)}`);
         clearCart();
     } else {
         alert('Your cart is empty!');
