@@ -8,5 +8,11 @@ footer {
 }
 
 #MenuForm{
-
+    margin-top: 100px;
+    margin-left: 100px;
+    margin-right: 100px;
+    /* margin-bottom: 50px; */
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
 }
