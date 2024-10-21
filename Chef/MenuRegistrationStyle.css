@@ -1,18 +1,67 @@
 body {
     background-color: #c19a6b;
+    font-family: Arial, sans-serif;
 }
 
 footer {
     text-align: center;
-    margin-top: 600px;
+    margin-top: 50px;
+    padding: 10px;
+    background-color: #333;
+    color: white;
 }
 
-#MenuForm{
-    margin-top: 100px;
-    margin-left: 100px;
-    margin-right: 100px;
-    /* margin-bottom: 50px; */
+#MenuForm {
+    width: 400px;
+    margin: 100px auto;
     padding: 20px;
     background-color: #f2f2f2;
     border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.MenuRegistration-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+label {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+input[type="file"] {
+    margin-top: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    display: none;
 }

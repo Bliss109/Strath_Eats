@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="MenuRegistrationStyle.css">
-    <title>Document</title>
+    <title>Menu Registration</title>
+    <script src="menuRegistration.js" defer></script>
 </head>
 <body>
     <form id="MenuForm">
@@ -14,12 +15,20 @@
             </center>
             <label for="menuName">Menu Name</label>
             <input type="text" id="menuName" name="menuName" placeholder="Enter Menu Name"><br>
+            <span class="error" id="menuNameError"></span>
+
             <label for="menuDescription">Menu Description</label>
-            <textarea type="text" id="menuDescription" name="menuDescription" placeholder="Enter Menu Description"></textarea><br>
+            <textarea id="menuDescription" name="menuDescription" placeholder="Enter Menu Description"></textarea><br>
+            <span class="error" id="menuDescriptionError"></span>
+
             <label for="menuPrice">Menu Price</label>
             <input type="text" id="menuPrice" name="menuPrice" placeholder="Enter Menu Price"><br>
+            <span class="error" id="menuPriceError"></span>
+
             <label for="menuImage">Menu Image</label>
-            <input type="file" id="menuImage" name="menuImage" placeholder="Upload Menu Image"><br>
+            <input type="file" id="menuImage" name="menuImage"><br>
+            <span class="error" id="menuImageError"></span>
+
             <button type="submit">Submit</button>
         </div>
     </form>
