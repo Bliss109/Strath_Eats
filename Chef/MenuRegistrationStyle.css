@@ -65,3 +65,12 @@ button:hover {
     font-size: 12px;
     display: none;
 }
+
+textarea {
+    min-height: 100px;
+}
+
+/* Added for allergen notice field */
+textarea#allergens {
+    background-color: #fff8dc;
+}
