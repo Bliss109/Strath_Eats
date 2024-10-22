@@ -4,28 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="MenuRegistrationStyle.css">
-    <title>Menu Registration</title>
+    <title>Dish Registration</title>
     <script src="menuRegistration.js" defer></script>
 </head>
 <body>
     <form id="MenuForm">
         <div class="MenuRegistration-container">
             <center>
-            <h1>Menu Registration</h1>
+            <h1>Dish Registration</h1>
             </center>
-            <label for="menuName">Menu Name</label>
-            <input type="text" id="menuName" name="menuName" placeholder="Enter Menu Name"><br>
+
+            <label for="menuName">Dish Name</label>
+            <input type="text" id="menuName" name="menuName" placeholder="Enter Dish Name"><br>
             <span class="error" id="menuNameError"></span>
 
-            <label for="menuDescription">Menu Description</label>
-            <textarea id="menuDescription" name="menuDescription" placeholder="Enter Menu Description"></textarea><br>
+            <label for="menuDescription">Dish Description</label>
+            <textarea id="menuDescription" name="menuDescription" placeholder="Enter Dish Description"></textarea><br>
             <span class="error" id="menuDescriptionError"></span>
 
-            <label for="menuPrice">Menu Price</label>
-            <input type="text" id="menuPrice" name="menuPrice" placeholder="Enter Menu Price"><br>
+            <label for="menuPrice">Price</label>
+            <input type="text" id="menuPrice" name="menuPrice" placeholder="Enter Price"><br>
             <span class="error" id="menuPriceError"></span>
 
-            <label for="menuImage">Menu Image</label>
+            <label for="menuCategory">Category</label>
+            <select id="menuCategory" name="menuCategory">
+                <option value="Appetizer">Appetizer</option>
+                <option value="Main Course">Main Course</option>
+                <option value="Dessert">Dessert</option>
+                <option value="Beverage">Beverage</option>
+            </select><br>
+            <span class="error" id="menuCategoryError"></span>
+
+            <label for="allergens">Allergen Notice</label>
+            <textarea id="allergens" name="allergens" placeholder="Enter any allergens in the dish (e.g., nuts, dairy, gluten, soy)"></textarea><br>
+            <span class="error" id="allergensError"></span>
+
+            <label for="menuImage">Dish Image</label>
             <input type="file" id="menuImage" name="menuImage"><br>
             <span class="error" id="menuImageError"></span>
 
