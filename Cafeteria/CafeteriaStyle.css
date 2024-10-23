@@ -1,8 +1,60 @@
 body {
     background-color: #c19a6b;
+    font-family: Arial, sans-serif;
 }
 
-footer {
+header {
     text-align: center;
-    margin-top: 600px;
+    margin-top: 20px;
+}
+
+h1 {
+    color: #333;
+    font-size: 36px;
+}
+
+.cafeteria-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.cafeteria-card {
+    background-color: #f2f2f2;
+    width: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.cafeteria-card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.cafeteria-card h2 {
+    font-size: 24px;
+    color: #333;
+}
+
+.cafeteria-card p {
+    font-size: 14px;
+    color: #666;
+}
+
+.cafeteria-card button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.cafeteria-card button:hover {
+    background-color: #555;
 }
