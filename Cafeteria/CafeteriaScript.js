@@ -4,18 +4,33 @@ document.addEventListener('DOMContentLoaded', function() {
     // Sample cafeteria data
     const cafeterias = [
         {
-            name: "Cafeteria 1",
-            description: "Best cafeteria serving fast food.",
+            name: "Groundfloor Cafeteria",
+            description: "Plenty of dining space and a wide variety of food options.",
             image: "cafeteria1.jpg"
         },
         {
-            name: "Cafeteria 2",
-            description: "Organic and fresh meals daily.",
+            name: "Springs of Olive Cafeteria",
+            description: "Famously known for its chips and wings.",
             image: "cafeteria2.jpg"
         },
         {
-            name: "Cafeteria 3",
+            name: "Pate Cafeteria",
             description: "Culinary delights from around the world.",
+            image: "cafeteria3.jpg"
+        },
+        {
+            name: "Upesi Joint",
+            description: "Culinary delights from around the world.",
+            image: "cafeteria3.jpg"
+        },
+        {
+            name: "Afya Corner",
+            description: "Culinary delights from around the world.",
+            image: "cafeteria3.jpg"
+        },
+        {
+            name: "Coffee Bar",
+            description: ".Delicious coffee and milkshakes",
             image: "cafeteria3.jpg"
         }
     ];
