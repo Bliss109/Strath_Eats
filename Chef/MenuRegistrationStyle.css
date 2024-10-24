@@ -29,6 +29,7 @@ footer {
 h1 {
     font-size: 24px;
     color: #333;
+    text-align: center;
 }
 
 label {
@@ -36,17 +37,28 @@ label {
     margin-bottom: 5px;
 }
 
+/* General input and textarea styling */
 input[type="text"], textarea {
     width: 90%;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    transition: all 0.3s ease; /* Added transition for smooth animation */
 }
 
 input[type="file"] {
     margin-top: 5px;
 }
 
+/* Animation for expanding on focus */
+input[type="text"]:focus, textarea:focus {
+    width: 95%;  /* Slightly expand width */
+    border-color: #333; /* Change border color */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
+    transform: scale(1.05); /* Slight scaling */
+}
+
+/* Button styling */
 button {
     padding: 10px 20px;
     background-color: #333;
@@ -54,23 +66,46 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 button:hover {
     background-color: #555;
+    transform: scale(1.05); /* Button grows slightly on hover */
 }
 
+/* Error messages */
 .error {
     color: red;
     font-size: 12px;
     display: none;
 }
 
-textarea {
-    min-height: 100px;
-}
-
-/* Added for allergen notice field */
+/* Textarea styling for allergen notice */
 textarea#allergens {
     background-color: #fff8dc;
+    transition: all 0.3s ease; /* Animation for allergen field too */
+}
+
+textarea#allergens:focus {
+    background-color: #fff;
+    border-color: #e9a932; /* Highlighting the allergen notice on focus */
+    box-shadow: 0 0 10px rgba(233, 169, 50, 0.5); /* Slight glow effect */
+}
+
+/* Added rule for smoother scaling */
+textarea {
+    min-height: 100px;
+    transition: all 0.3s ease;
+}
+
+/* Small responsiveness for mobile */
+@media (max-width: 600px) {
+    #MenuForm {
+        width: 90%;
+    }
+
+    input[type="text"], textarea {
+        width: 100%;
+    }
 }
