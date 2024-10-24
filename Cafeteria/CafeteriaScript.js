@@ -19,16 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
             image: "cafeteria3.jpg"
         },
         {
-            name: "Upesi Joint",
-            description: "Culinary delights from around the world.",
-            image: "cafeteria3.jpg"
-        },
-        {
-            name: "Afya Corner",
-            description: "Culinary delights from around the world.",
-            image: "cafeteria3.jpg"
-        },
-        {
             name: "Coffee Bar",
             description: ".Delicious coffee and milkshakes",
             image: "cafeteria3.jpg"
