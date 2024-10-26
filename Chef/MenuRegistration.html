@@ -1,0 +1,49 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="MenuRegistrationStyle.css">
+    <title>Dish Registration</title>
+    <script src="menuRegistration.js" defer></script>
+</head>
+<body>
+    <form id="MenuForm">
+        <div class="MenuRegistration-container">
+            <center>
+            <h1>Dish Registration</h1>
+            </center>
+
+            <label for="menuName">Dish Name</label>
+            <input type="text" id="menuName" name="menuName" placeholder="Enter Dish Name"><br>
+            <span class="error" id="menuNameError"></span>
+
+            <label for="menuDescription">Dish Description</label>
+            <textarea id="menuDescription" name="menuDescription" placeholder="Enter Dish Description"></textarea><br>
+            <span class="error" id="menuDescriptionError"></span>
+
+            <label for="menuPrice">Price</label>
+            <input type="text" id="menuPrice" name="menuPrice" placeholder="Enter Price"><br>
+            <span class="error" id="menuPriceError"></span>
+
+            <label for="menuCategory">Category</label>
+            <select id="menuCategory" name="menuCategory">
+                <option value="Appetizer">Breakfast</option>
+                <option value="Main Course">Lunch</option>
+            </select><br>
+            <span class="error" id="menuCategoryError"></span>
+
+            <label for="allergens">Allergen Notice</label>
+            <textarea id="allergens" name="allergens" placeholder="Enter any allergens in the dish (e.g., nuts, dairy, gluten, soy)"></textarea><br>
+            <span class="error" id="allergensError"></span>
+
+            <label for="menuImage">Dish Image</label>
+            <input type="file" id="menuImage" name="menuImage"><br>
+            <span class="error" id="menuImageError"></span>
+
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+    <footer class="footer">&copy; 2024 StrathEats. All rights reserved.</footer>
+</body>
+</html>

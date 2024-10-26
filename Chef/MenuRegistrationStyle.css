@@ -1,0 +1,111 @@
+body {
+    background-color: #c19a6b;
+    font-family: Arial, sans-serif;
+}
+
+footer {
+    text-align: center;
+    margin-top: 50px;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+}
+
+#MenuForm {
+    width: 500px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.MenuRegistration-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+
+label {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+/* General input and textarea styling */
+input[type="text"], textarea {
+    width: 90%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease; /* Added transition for smooth animation */
+}
+
+input[type="file"] {
+    margin-top: 5px;
+}
+
+/* Animation for expanding on focus */
+input[type="text"]:focus, textarea:focus {
+    width: 95%;  /* Slightly expand width */
+    border-color: #333; /* Change border color */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
+    transform: scale(1.05); /* Slight scaling */
+}
+
+/* Button styling */
+button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #555;
+    transform: scale(1.05); /* Button grows slightly on hover */
+}
+
+/* Error messages */
+.error {
+    color: red;
+    font-size: 12px;
+    display: none;
+}
+
+/* Textarea styling for allergen notice */
+textarea#allergens {
+    background-color: #fff8dc;
+    transition: all 0.3s ease; /* Animation for allergen field too */
+}
+
+textarea#allergens:focus {
+    background-color: #fff;
+    border-color: #e9a932; /* Highlighting the allergen notice on focus */
+    box-shadow: 0 0 10px rgba(233, 169, 50, 0.5); /* Slight glow effect */
+}
+
+/* Added rule for smoother scaling */
+textarea {
+    min-height: 100px;
+    transition: all 0.3s ease;
+}
+
+/* Small responsiveness for mobile */
+@media (max-width: 600px) {
+    #MenuForm {
+        width: 90%;
+    }
+
+    input[type="text"], textarea {
+        width: 100%;
+    }
+}
