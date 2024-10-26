@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             name: "Coffee Bar",
-            description: ".Delicious coffee and milkshakes",
+            description: "Delicious coffee and milkshakes",
             image: "images/cafeteria3.jpg"
         }
     ];

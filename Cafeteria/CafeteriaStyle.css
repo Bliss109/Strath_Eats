@@ -23,7 +23,7 @@ h1 {
 
 .cafeteria-card {
     background-color: #f2f2f2;
-    width: 300px;
+    width: 350px;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -57,4 +57,13 @@ h1 {
 
 .cafeteria-card button:hover {
     background-color: #555;
+}
+.cafeteria-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    justify-content: center; /* Center the items horizontally */
+    align-items: center;
+    margin: 0 auto;
+    margin-left: 130px;
 }
