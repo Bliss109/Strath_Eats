@@ -1,5 +1,9 @@
 <?php
+<<<<<<< HEAD
 require_once 'connection.php';
+=======
+require_once '../dbConn/Connection.php';
+>>>>>>> master
 
 class user{
     private $conn;
@@ -46,4 +50,8 @@ class user{
     }
     
 }
+<<<<<<< HEAD
 ?>
+=======
+?>
+>>>>>>> master
