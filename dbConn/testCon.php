@@ -7,8 +7,4 @@ if($conn){
     echo "Connnected Successfully ^_^";
 }else{
     echo "Connection Failed!";
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> master

@@ -1,11 +1,7 @@
 <?php
-<<<<<<< HEAD
-require_once 'connection.php';
-=======
 require_once '../dbConn/Connection.php';
->>>>>>> master
 
-class user{
+class User {
     private $conn;
     private $table = 'users';
 
@@ -50,8 +46,3 @@ class user{
     }
     
 }
-<<<<<<< HEAD
-?>
-=======
-?>
->>>>>>> master
