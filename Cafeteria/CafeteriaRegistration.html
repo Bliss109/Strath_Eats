@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="MenuRegistrationStyle.css">
+    <title>Cafeteria Registration</title>
+    <link rel="stylesheet" href="CafeteriaRegistrationStyle.css">
+    <script src="CafeteriaRegistrationScript.js" defer></script>
+</head>
+<body>
+    <form id="CafeteriaForm">
+        <div class="MenuRegistration-container">
+            <center>
+                <h1>Cafeteria Registration</h1>
+            </center>
+
+            <label for="cafeteriaName">Cafeteria Name</label>
+            <input type="text" id="cafeteriaName" name="cafeteriaName" placeholder="Enter Cafeteria Name"><br>
+            <span class="error" id="cafeteriaNameError"></span>
+
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" placeholder="Enter Location"><br>
+            <span class="error" id="locationError"></span>
+
+            <label for="openingHours">Opening Hours</label>
+            <input type="text" id="openingHours" name="openingHours" placeholder="e.g., 8:00 AM - 5:00 PM"><br>
+            <span class="error" id="openingHoursError"></span>
+
+            <label for="contactInfo">Contact Information</label>
+            <input type="text" id="contactInfo" name="contactInfo" placeholder="Enter Contact Information (e.g., phone or email)"><br>
+            <span class="error" id="contactInfoError"></span>
+
+            <label for="description">Cafeteria Description</label>
+            <textarea id="description" name="description" placeholder="Enter a brief description of the cafeteria"></textarea><br>
+            <span class="error" id="descriptionError"></span>
+
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+    <footer class="footer">&copy; 2024 StrathEats. All rights reserved.</footer>
+</body>
+</html>
