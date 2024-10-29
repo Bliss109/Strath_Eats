@@ -1,16 +1,9 @@
 <?php
 class Database {
-<<<<<<< HEAD
-    private $host = '127.0.0.1';
-    private $db_name = 'strath_eats';
-    private $username = 'root';
-    private $password = 'Patrickmaina05$';
-=======
     private $host = 'localhost';
     private $db_name = 'strath_eats';
     private $username = 'root';
     private $password = '';
->>>>>>> master
     public $conn;
 
     public function getConnection(){
@@ -24,8 +17,4 @@ class Database {
         }
         return $this->conn;
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> master
