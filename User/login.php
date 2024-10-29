@@ -3,11 +3,11 @@ require_once 'user.php';
 
 session_start();
 
-$data = json_decode(file_get_contents(':php://input'), true);
+$data = json_decode(file_get_contents('php://input'), true);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-   $email = $_POST['email'];
-   $password = $_POST['password'];
+   $email = $data['email'];
+   $password = $data['password'];
 
    if(empty($email) || empty($password)){
     echo "Enter 'email' and 'password' to proceed";
