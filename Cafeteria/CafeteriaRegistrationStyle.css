@@ -1,0 +1,108 @@
+/* General body styling */
+body {
+    background-color: #c19a6b;
+    font-family: Arial, sans-serif;
+}
+
+footer {
+    text-align: center;
+    margin-top: 50px;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+}
+
+/* Form container styling */
+#CafeteriaForm {
+    width: 500px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.CafeteriaRegistration-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+
+label {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+/* Input and textarea styling */
+input[type="text"], input[type="number"], textarea {
+    width: 90%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease;
+}
+
+input[type="file"] {
+    margin-top: 5px;
+}
+
+/* Expanding animation on focus */
+input[type="text"]:focus, input[type="number"]:focus, textarea:focus {
+    width: 95%;
+    border-color: #333;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+
+/* Button styling */
+button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #555;
+    transform: scale(1.05);
+}
+
+/* Error messages */
+.error {
+    color: red;
+    font-size: 12px;
+    display: none;
+}
+
+/* Textarea for description */
+textarea#description {
+    min-height: 100px;
+    background-color: #fff8dc;
+    transition: all 0.3s ease;
+}
+
+textarea#description:focus {
+    background-color: #fff;
+    border-color: #e9a932;
+    box-shadow: 0 0 10px rgba(233, 169, 50, 0.5);
+}
+
+/* Responsive styling */
+@media (max-width: 600px) {
+    #CafeteriaForm {
+        width: 90%;
+    }
+
+    input[type="text"], textarea {
+        width: 100%;
+    }
+}
