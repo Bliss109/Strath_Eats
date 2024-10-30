@@ -1,6 +1,8 @@
 # Ignore all files in uploads
 uploads/*
 
-# Don'
+
 !uploads/.gitkeep
+!uploads/profile_pictures/
+uploads/profile_pictures/*
 !uploads/profile_pictures/.gitkeep
