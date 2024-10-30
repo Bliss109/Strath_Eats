@@ -111,6 +111,11 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `balance` decimal(10,2) DEFAULT 0.00,
+  `phone_number` varchar(20) DEFAULT NULL,
+  `profile_picture` varchar(255) DEFAULT NULL,
+  `student_id` varchar(20) DEFAULT NULL,
+  `last_login` timestamp NULL DEFAULT NULL,
+  `status` enum('active','inactive','suspended') DEFAULT 'active',
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB;
 
