@@ -132,5 +132,9 @@ class Cart{
         $this->items = [];
         $_SESSION['cart'] = [];
     }
+
+    public function getItemCount() {
+        return isset($_SESSION['cart']) ? array_sum(array_column($_SESSION['cart'], 'quantity')) : 0;
+    }
 }
 ?>
