@@ -2,19 +2,18 @@
 require_once '../dbConn/Connection.php';
 
 class User {
-    private $conn;
-    private $table = 'users';
+    private $db;
 
-    public function __construct(){
-        $db =new Database();
-        $this->conn = $db->getConnection();
+    public function __construct() {
+        $db = new Database();
+        $this->db = $db->getConnection();
     }
 
     public function register ($name, $email, $Password){
         $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO " . $this->table . "(name, email, password) VALUES (:name, :email, :password)";
-        $stmt = $this->conn->prepare($sql);
+        $sql = "INSERT INTO users (name, email, password) VALUES (:name, :email, :password)";
+        $stmt = $this->db->prepare($sql);
 
         $stmt->bindParam(':name', $name);
         $stmt->bindparam(':email', $email);
@@ -29,8 +28,8 @@ class User {
     }
 
     public function login($email, $password){
-        $sql = "SELECT * FROM " . $this->table . " WHERE email = :email";
-        $stmt = $this->conn->prepare($sql);
+        $sql = "SELECT * FROM users WHERE email = :email";
+        $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
 
@@ -46,25 +45,20 @@ class User {
     }
 
     public function getUserProfile($userId) {
-        $sql = "SELECT id, name, email, phone_number, profile_picture 
-                FROM " . $this->table . " 
-                WHERE id = :userId";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':userId', $userId);
-        $stmt->execute();
-
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE user_id = ?");
+        $stmt->execute([$userId]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function updateProfile($userId, $data) {
-        $allowedFields = ['name', 'email', 'phone_number'];
+        $allowedFields = ['email', 'phone_number', 'student_id'];
         $updates = [];
-        $params = [];
+        $values = [];
 
-        foreach ($data as $field => $value) {
-            if (in_array($field, $allowedFields)) {
-                $updates[] = "$field = :$field";
-                $params[":$field"] = $value;
+        foreach ($allowedFields as $field) {
+            if (isset($data[$field])) {
+                $updates[] = "$field = ?";
+                $values[] = $data[$field];
             }
         }
 
@@ -72,25 +66,31 @@ class User {
             return false;
         }
 
-        $params[':userId'] = $userId;
-        
-        $sql = "UPDATE " . $this->table . " 
-                SET " . implode(', ', $updates) . " 
-                WHERE id = :userId";
-        
-        $stmt = $this->conn->prepare($sql);
-        return $stmt->execute($params);
+        $values[] = $userId;
+        $sql = "UPDATE users SET " . implode(', ', $updates) . " WHERE user_id = ?";
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute($values);
     }
 
-    public function updateProfilePicture($userId, $imagePath) {
-        $sql = "UPDATE " . $this->table . " 
-                SET profile_picture = :imagePath 
-                WHERE id = :userId";
-        
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':imagePath', $imagePath);
-        $stmt->bindParam(':userId', $userId);
-        
-        return $stmt->execute();
+    public function updateProfilePicture($userId, $fileName) {
+        $stmt = $this->db->prepare("UPDATE users SET profile_picture = ? WHERE user_id = ?");
+        return $stmt->execute([$fileName, $userId]);
+    }
+
+    public function verifyPassword($userId, $currentPassword) {
+        $stmt = $this->db->prepare("SELECT password FROM users WHERE user_id = ?");
+        $stmt->execute([$userId]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user && password_verify($currentPassword, $user['password'])) {
+            return true;
+        }
+        return false;
+    }
+
+    public function updatePassword($userId, $newPassword) {
+        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+        $stmt = $this->db->prepare("UPDATE users SET password = ? WHERE user_id = ?");
+        return $stmt->execute([$hashedPassword, $userId]);
     }
 }
