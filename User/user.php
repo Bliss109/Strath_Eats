@@ -44,5 +44,53 @@ class User {
 
         return false;
     }
-    
+
+    public function getUserProfile($userId) {
+        $sql = "SELECT id, name, email, phone_number, profile_picture 
+                FROM " . $this->table . " 
+                WHERE id = :userId";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':userId', $userId);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function updateProfile($userId, $data) {
+        $allowedFields = ['name', 'email', 'phone_number'];
+        $updates = [];
+        $params = [];
+
+        foreach ($data as $field => $value) {
+            if (in_array($field, $allowedFields)) {
+                $updates[] = "$field = :$field";
+                $params[":$field"] = $value;
+            }
+        }
+
+        if (empty($updates)) {
+            return false;
+        }
+
+        $params[':userId'] = $userId;
+        
+        $sql = "UPDATE " . $this->table . " 
+                SET " . implode(', ', $updates) . " 
+                WHERE id = :userId";
+        
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute($params);
+    }
+
+    public function updateProfilePicture($userId, $imagePath) {
+        $sql = "UPDATE " . $this->table . " 
+                SET profile_picture = :imagePath 
+                WHERE id = :userId";
+        
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':imagePath', $imagePath);
+        $stmt->bindParam(':userId', $userId);
+        
+        return $stmt->execute();
+    }
 }
