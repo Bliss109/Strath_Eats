@@ -110,6 +110,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `role` enum('student','staff','admin') NOT NULL,
   `password` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `balance` decimal(10,2) DEFAULT 0.00,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB;
 
@@ -122,6 +123,19 @@ CREATE TABLE IF NOT EXISTS `cafeterias` (
   `description` text,
   `open_hours` varchar(255),
   PRIMARY KEY (`cafe_id`)
+) ENGINE=InnoDB;
+
+-- Table structure for `transactions`
+CREATE TABLE IF NOT EXISTS `transactions` (
+  `transaction_id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `type` enum('deposit','withdrawal','payment') NOT NULL,
+  `description` varchar(255),
+  `timestamp` timestamp DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`transaction_id`),
+  KEY `idx_user_id` (`user_id`),
+  CONSTRAINT `fk_transactions_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB;
 
 -- Foreign Key Constraints
