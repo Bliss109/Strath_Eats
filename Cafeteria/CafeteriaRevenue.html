@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafeteria Daily Revenue</title>
+    <link rel="stylesheet" href="CafeteriaRevenueStyle.css">
+</head>
+<body>
+    <header>
+        <h1>Daily Revenue Report</h1>
+    </header>
+
+    <section class="revenue-container">
+        <!-- Table View -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Price per Item</th>
+                    <th>Quantity Sold</th>
+                    <th>Total Revenue</th>
+                </tr>
+            </thead>
+            <tbody id="revenueData">
+                <!-- Revenue data will be dynamically inserted here -->
+            </tbody>
+        </table>
+
+        <!-- Order View -->
+        <div class="order-list">
+            <h2>Orders in Chronological Order</h2>
+            <div id="orderData">
+                <!-- Order data will be dynamically inserted here -->
+            </div>
+        </div>
+
+        <!-- Summary Section -->
+        <div class="summary">
+            <p><strong>Total Revenue:</strong> $<span id="totalRevenue">0.00</span></p>
+            <p><strong>Amount Due to Employees:</strong> $<span id="employeeWages">0.00</span></p>
+            <p><strong>Amount Due to Delivery Personnel:</strong> $<span id="deliveryWages">0.00</span></p>
+        </div>
+    </section>
+</body>
+<script src="CafeteriaRevenueScript.js"></script>
+</html>

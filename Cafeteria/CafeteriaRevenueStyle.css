@@ -1,0 +1,98 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #c19a6b;
+    color: #333;
+    padding: 20px;
+}
+
+header h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Revenue Table */
+.revenue-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.revenue-container th,
+.revenue-container td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.revenue-container th {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+}
+
+.revenue-container td {
+    font-size: 16px;
+}
+
+.revenue-container tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Order List */
+.order-list {
+    margin-top: 30px;
+}
+
+.order-list h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #007bff;
+}
+
+.order-container {
+    background-color: #ffffff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #007bff;
+}
+
+.order-container p {
+    margin: 5px 0;
+    font-size: 15px;
+}
+
+.order-container p strong {
+    color: #333;
+}
+
+/* Summary Section */
+.summary {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #007bff;
+    color: #ffffff;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 16px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.summary p {
+    margin: 10px 0;
+}
+
+.summary p strong {
+    font-weight: bold;
+}
