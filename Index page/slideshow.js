@@ -1,15 +1,10 @@
 let slideIndex = 0;
-showSlides(slideIndex);
-
-function currentSlide(n) {
-    showSlides(slideIndex = n - 1);
-}
+showSlides();
 
 function showSlides() {
     let i;
     let slides = document.getElementsByClassName("mySlides");
     let dots = document.getElementsByClassName("dot");
-
     for (i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";  
     }
@@ -18,7 +13,12 @@ function showSlides() {
     for (i = 0; i < dots.length; i++) {
         dots[i].className = dots[i].className.replace(" active", "");
     }
-    slides[slideIndex - 1].style.display = "block";  
-    dots[slideIndex - 1].className += " active";
-    setTimeout(showSlides, 5000); 
+    slides[slideIndex-1].style.display = "block";  
+    dots[slideIndex-1].className += " active";
+    setTimeout(showSlides, 4000); // Change image every 4 seconds
+}
+
+function currentSlide(n) {
+    slideIndex = n;
+    showSlides();
 }
