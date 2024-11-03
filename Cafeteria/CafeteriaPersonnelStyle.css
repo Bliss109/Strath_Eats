@@ -1,0 +1,87 @@
+/* General body and header styling */
+body {
+    background-color: #c19a6b;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    text-align: center;
+    margin-top: 20px;
+}
+
+h1 {
+    color: #333;
+    font-size: 36px;
+}
+
+/* Personnel Container Styling */
+.personnel-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Styling for Each Role Section */
+.personnel-section {
+    width: 80%;
+    margin: 20px 0;
+}
+
+.personnel-section h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Personnel List Grid Layout */
+.personnel-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+/* Individual Personnel Card Styling */
+.person {
+    background-color: #f2f2f2;
+    width: 250px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.person img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.person p {
+    font-size: 16px;
+    color: #666;
+    margin: 8px 0;
+}
+
+.person strong {
+    color: #333;
+}
+
+/* Button Style for Viewing Details */
+.person button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.person button:hover {
+    background-color: #555;
+}
