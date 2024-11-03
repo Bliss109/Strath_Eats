@@ -126,7 +126,7 @@ body {
     background-color: #717171;
 }
 footer {
-    background: none; /* Remove background color */
+    background: none; 
     color: #fff;
     text-align: center;
     padding: 20px 0;
@@ -141,7 +141,6 @@ footer {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /*background: rgba(0, 0, 0, 0.5); /* Add subtle transparency */
     padding: 10px;
     width: 100%;
 }
