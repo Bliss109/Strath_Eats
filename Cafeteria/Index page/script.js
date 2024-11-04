@@ -53,3 +53,22 @@ function filterDishes(category) {
         }
     });
 }
+document.addEventListener("DOMContentLoaded", () => {
+    const walletBalanceElement = document.getElementById("wallet-balance").querySelector("span");
+
+    // Fetch wallet balance (example using an API endpoint)
+    fetch("get_balance.php")
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                walletBalanceElement.textContent = data.balance;
+            } else {
+                alert("Error fetching wallet balance.");
+            }
+        });
+});
+
+// Function to handle opening a deposit modal
+function openDepositModal() {
+    alert("Deposit functionality will go here!");
+}

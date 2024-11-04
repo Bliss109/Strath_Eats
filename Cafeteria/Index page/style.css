@@ -210,3 +210,34 @@ header {
     height:5px;
 }
 
+.right-sidebar .wallet {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.right-sidebar .wallet h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.right-sidebar .wallet p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.right-sidebar .wallet button {
+    padding: 15px 15px;
+    font-size: 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.right-sidebar .wallet button:hover {
+    background-color: #0056b3;
+}
