@@ -1,56 +1,36 @@
 <?php
-require_once '../dbConn/Connection.php';
+require_once '../User/user.php';
+session_start();
 
-class User {
-    private $conn;
-    private $table = 'users';
+// At the top of login.php
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Methods: POST");
 
-    public function __construct() {
-        $db = new Database();
-        $this->conn = $db->getConnection();
-    }
+$rawData = file_get_contents('php://input');
+$data = json_decode($rawData, true);
 
-    public function register($name, $email, $password) {
-        try {
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+if ($data === null) {
+   echo json_encode(["message" => "No data received or JSON is malformed."]);
+   exit;
+}
 
-            $sql = "INSERT INTO " . $this->table . " (name, email, password) VALUES (:name, :email, :password)";
-            $stmt = $this->conn->prepare($sql);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+   $name = $data['name'] ?? '';
+   $password = $data['password'] ?? '';
 
-            $stmt->bindParam(':name', $name);
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':password', $hashedPassword);
+   if (empty($name) || empty($password)) {
+      echo json_encode(["message" => "Both name and password are required!"]);
+      exit;
+   }
 
-            return $stmt->execute();
-        } catch (PDOException $e) {
-            error_log("Registration error: " . $e->getMessage());
-            return false;
-        }
-    }
-
-    public function login($email, $password) {
-        try {
-            $sql = "SELECT * FROM " . $this->table . " WHERE email = :email";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':email', $email);
-            $stmt->execute();
-
-            if ($stmt->rowCount() > 0) {
-                $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-                if (password_verify($password, $user['password'])) {
-                    return ["status" => "success", "user" => $user];
-                } else {
-                    return ["status" => "error", "message" => "Invalid password"];
-                }
-            } else {
-                return ["status" => "error", "message" => "User not found"];
-            }
-        } catch (PDOException $e) {
-            error_log("Login error: " . $e->getMessage());
-            return ["status" => "error", "message" => "Database error occurred"];
-        }
-    }
+   $user = new User();
+   // Assuming the User class has a method named 'login' for authentication
+   if ($user->login($name, $password)) {
+      // Here you can set session or token for the logged-in user
+      echo json_encode(["message" => "Login Successful"]);
+   } else {
+      echo json_encode(["message" => "Invalid User Name or password"]);
+   }
 }
 ?>
-
