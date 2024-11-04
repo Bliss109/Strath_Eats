@@ -3,75 +3,57 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>StrathEats</title>
+    <title>StrathEats </title>
     <link rel="stylesheet" href="landing.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
-    <nav class="navbar">
-      <div class="logo">
-        <img src="logo.png" alt="StrathEats Logo" />
+    <div class="top">
+      <div class="logo">StrathEats Logo</div>
+      <div class="nav">
+        <a href="">Log in</a>
+        <a href="">Home</a>
+        <a href="">Menu</a>
+        <a href="">About</a>
+        
       </div>
-
-      <div class="search-box">
-        <input type="text" placeholder="Search Cafe" />
+      <div class="search">
+        <i class="fa-solid fa-bars" onclick="toggleSidebar()"></i>
       </div>
+    </div>
 
-      <ul class="nav-links">
-        <li><a href="#">Log In</a></li>
-        <li><a href="#">Menu</a></li>
-        <li><a href="#">Order</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-    </nav>
-
-    <section class="hero">
-      <div class="slideshow-container">
-        <div class="mySlides fade">
-          <img src="../Images/image 1.avif" style="width: 100%" />
-        </div>
-
-        <div class="mySlides fade">
-          <img src="../Images/image 2.avif" style="width: 100%" />
-        </div>
-
-        <div class="mySlides fade">
-          <img src="../Images/image 3.avif" style="width: 100%" />
-        </div>
+    <div class="heading">
+      <div class="left">
+        <p>WELCOME TO STRATHEATS</p>
+        <h1>Are you Hungry?</h1>
+        <p>Start by Ordering Food Now</p>
+        <button class="button">EXPLORE CAFES</button>
+        <button class="button">JOIN US</button>
       </div>
-      <div class="hero-content">
-        <h1>Welcome to StrathEats</h1>
-        <div>
-          <a href="index.html" class="cta-button">Explore Cafes</a>
-        </div>
-        <div>
-          <a href="#" class="join-button">JOIN US</a>
-        </div>
+      <div class="right" id="food"></div>
+      <div class="social">
+        <i class="fa-brands fa-square-instagram"></i>
+        <i class="fa-brands fa-square-x-twitter"></i>
+        <i class="fa-brands fa-tiktok"></i>
       </div>
-      <div class="slide-indicators">
-        <span class="dot" onclick="currentSlide(1)"></span>
-        <span class="dot" onclick="currentSlide(2)"></span>
-        <span class="dot" onclick="currentSlide(3)"></span>
-      </div>
-    </section>
+    </div>
 
+  
+    <div class="sidebar" id="sidebar">
+        <a href="">Contact us</a>
+      <a href="#">Terms and Conditions</a>
+      <a href="#">FAQ</a>
+      <a href="#">Newsletter</a>
+    </div>
     <footer>
-      <div class="footer-content">
-        <p>&copy; 2024 StrathEats. All Rights Reserved.</p>
-        <div class="links">
-          <a href="#">Privacy Policy</a> |
-          <a href="#">Terms and Conditions</a> | <a href="#">ABOUT US</a> |
-          <a href="#">FAQ</a>
-        </div>
-        <div class="social-media">
-          <a href="#"><img src="../Images/tiktok logo.png" alt="Tiktok" /></a>
-          <a href="#"><img src="../Images/x logo.jpg" alt="X" /></a>
-          <a href="#"
-            ><img src="../Images/instagram logo.jpg" alt="Instagram"
-          /></a>
-        </div>
-      </div>
+        <p>&copy 2024 StrathEats.All rights reserved.</p>
     </footer>
-
-    <script src="slideshow.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
