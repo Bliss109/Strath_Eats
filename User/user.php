@@ -2,95 +2,55 @@
 require_once '../dbConn/Connection.php';
 
 class User {
-    private $db;
+    private $conn;
+    private $table = 'users';
 
     public function __construct() {
         $db = new Database();
-        $this->db = $db->getConnection();
+        $this->conn = $db->getConnection();
     }
 
-    public function register ($name, $email, $Password){
-        $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
+    public function register($name, $email, $password) {
+        try {
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO users (name, email, password) VALUES (:name, :email, :password)";
-        $stmt = $this->db->prepare($sql);
+            $sql = "INSERT INTO " . $this->table . " (name, email, password) VALUES (:name, :email, :password)";
+            $stmt = $this->conn->prepare($sql);
 
-        $stmt->bindParam(':name', $name);
-        $stmt->bindparam(':email', $email);
-        $stmt->bindParam(':password', $hashedPassword);
-        
-        if($stmt->execute()){
-            return true;
-        }else{
+            $stmt->bindParam(':name', $name);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':password', $hashedPassword);
+
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Registration error: " . $e->getMessage());
             return false;
         }
-
     }
 
-    public function login($email, $password){
-        $sql = "SELECT * FROM users WHERE email = :email";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
+    public function login($email, $password) {
+        try {
+            $sql = "SELECT * FROM " . $this->table . " WHERE email = :email";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
 
-        if($stmt->rowCount() > 0){
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($stmt->rowCount() > 0) {
+                $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-             if(password_verify($password, $user['password'])){
-                return $user;
-             }
-        }
-
-        return false;
-    }
-
-    public function getUserProfile($userId) {
-        $stmt = $this->db->prepare("SELECT * FROM users WHERE user_id = ?");
-        $stmt->execute([$userId]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-
-    public function updateProfile($userId, $data) {
-        $allowedFields = ['email', 'phone_number', 'student_id'];
-        $updates = [];
-        $values = [];
-
-        foreach ($allowedFields as $field) {
-            if (isset($data[$field])) {
-                $updates[] = "$field = ?";
-                $values[] = $data[$field];
+                if (password_verify($password, $user['password'])) {
+                    return ["status" => "success", "user" => $user];
+                } else {
+                    return ["status" => "error", "message" => "Invalid password"];
+                }
+            } else {
+                return ["status" => "error", "message" => "User not found"];
             }
+        } catch (PDOException $e) {
+            error_log("Login error: " . $e->getMessage());
+            return ["status" => "error", "message" => "Database error occurred"];
         }
-
-        if (empty($updates)) {
-            return false;
-        }
-
-        $values[] = $userId;
-        $sql = "UPDATE users SET " . implode(', ', $updates) . " WHERE user_id = ?";
-        $stmt = $this->db->prepare($sql);
-        return $stmt->execute($values);
-    }
-
-    public function updateProfilePicture($userId, $fileName) {
-        $stmt = $this->db->prepare("UPDATE users SET profile_picture = ? WHERE user_id = ?");
-        return $stmt->execute([$fileName, $userId]);
-    }
-
-    public function verifyPassword($userId, $currentPassword) {
-        $stmt = $this->db->prepare("SELECT password FROM users WHERE user_id = ?");
-        $stmt->execute([$userId]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($user && password_verify($currentPassword, $user['password'])) {
-            return true;
-        }
-        return false;
-    }
-
-    public function updatePassword($userId, $newPassword) {
-        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-        $stmt = $this->db->prepare("UPDATE users SET password = ? WHERE user_id = ?");
-        return $stmt->execute([$hashedPassword, $userId]);
     }
 }
+?>
+
