@@ -1,3 +1,18 @@
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.style.display = sidebar.style.display === 'none' || sidebar.style.display === '' ? 'flex' : 'none';
+
+sidebar.classList.toggle('visible');
+}
+
+
+function toggleSubmenu(event, submenuId) {
+    event.preventDefault();
+    const submenu = document.getElementById(submenuId);
+    submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+}
+
+
 let orderMenu = document.getElementById('order-menu');
 let totalAmount = document.getElementById('total-amount');
 let totalPrice = 0;
@@ -70,4 +85,10 @@ function filterBySearch(query) {
             }
         });
     }    
+    function toggleSidebar() {
+        const sidebar = document.querySelector('.sidebar');
+        const main = document.querySelector('main');
+        sidebar.classList.toggle('active');
+        main.classList.toggle('active');
+    }
 }

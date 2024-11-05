@@ -1,177 +1,178 @@
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    color: #fff;
-    background: url('../Images/background.jpg') no-repeat center center fixed;
+*{
+    padding:0;
+    margin:0;
+}
+body{
+    width:100%;
+    height:100vh;
+    background-image: url(Background2.png);
     background-size: cover;
 }
-.navbar {
+.top{
     display: flex;
-    align-items: center;
+    flex-direction: row;
     justify-content: space-between;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    padding: 10px 20px;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-    flex-wrap: wrap;
-}
-.navbar .logo img {
-    height: 40px;
-}
-.nav-links {
-    list-style: none;
-    display: flex;
-    padding: 0;
-    margin: 0;
-    flex-wrap: wrap;
-    padding-right: 30px;
-}
-.nav-links li {
-    margin-left: 15px;
-}
-.nav-links a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s;
-}
-.nav-links a:hover {
-    color: #ffcc00;
-}
-.search-box{
-    flex:1;
-    display: flex;
-    justify-content: center;
-    min-width:200px;
-}
-.search-box input {
-    padding: 5px 10px;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-    width: 60%;
-    max-width: 300px;
-}
-.hero {
-    position: relative;
-    margin-top: 60px;
-    text-align: center;
-}
-.slideshow-container {
-    max-width: 100%;
-    position: relative;
-    margin: auto;
-}
-.mySlides {
-    display: none;
-}
-.mySlides img {
-    width: 100%;
-    vertical-align: middle;
-}
-.hero-content div{
-    margin-top: 15px;
-}
-.hero-content {
-    position: absolute;
-    top: 29%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-.hero-content h1{
-    color:black;
+    height: 80px;
+    align-items: center;
+    padding: 0px 40px;
 }
 
-.cta-button, .join-button {
-    background-color: #ffcc00;
-    border: none;
-    padding: 12px 24px;
-    font-size: 1em;
-    cursor: pointer;
-    border-radius: 30px;
-    margin-top: 10px;
-    color: #333;
+.logo{
+    font-size: 30px;
+    color:orange;
+
+}
+.nav{
+    position: relative;
+    left:15px;
+
+}
+.nav a{
+    padding: 5px 5px ;
+    color:orange;
+    font-size: 20px;
     text-decoration: none;
-    transition:all background-color 0.3s ease;
-    display: inline-block;
-    font-weight: bold;
 }
-.cta-button:hover, .join-button:hover {
-    background-color: #e6b800;
-    box-shadow: 0px 6px 12px rgb(0,0,0,0.3);
-    transform: translateY(-3px);
+
+.nav a:hover{
+    color:white;
+    text-decoration: underline;
+    text-underline-position: under;
 }
-.slide-indicators {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.dot {
-    height: 10px;
-    width: 10px;
-    margin: 5 0px;
-    background-color: orange;
-    border-radius: 50%;
-    display: inline-block;
+
+.search{
+    font-size: 25px;
+    position: relative;
     cursor: pointer;
-    transition: background-color 0.3s;
+
 }
-.active, .dot:hover {
-    background-color: #717171;
+.search i{
+    margin-left: 10px;
+    cursor: pointer;
 }
-footer {
-    background: none; /* Remove background color */
-    color: #fff;
-    text-align: center;
-    padding: 20px 0;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-    font-size: 14px;
-    z-index: 1000;
-}
-.footer-content {
+.heading{
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    padding: 65px;
     align-items: center;
+}
+.right{
+    width: 440px;
+    height:440px;
+    background-image: url(food.jpg);
+    background-size: cover;
+    border-radius: 400px;
     justify-content: center;
-    /*background: rgba(0, 0, 0, 0.5); /* Add subtle transparency */
+    align-items: center;
+    display: flex;
+    margin-right: 118px;
+    margin-top: 46px;
+}
+.right:before{
+    width: 430px;
+    height: 430px;
+    border: 2px solid white;
+    content: "";
+    position: absolute;
+    border-radius: 440px;
     padding: 10px;
-    width: 100%;
 }
-.footer-content p {
-    margin: 5px 0;
+.left{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    text-align: center;
+    padding-top: 20px;
 }
-.links {
-    margin: 10px 0;
+.left p:nth-child(1){
+    color:white;
+    font-size: 30px;
+    letter-spacing: 1px;
+    font-style: italic;
 }
-.links a {
-    color: black;
-    text-decoration: none;
-    margin: 0 5px;
-    transition: color 0.3s;
+
+.left h1{
+    font-size: 90px;
+    color:white;
 }
-.links a:hover {
-    color: #fff;
+
+.left p:nth-child(3){
+    color:orange;
+    font-size: 40px;
+    font-style:italic;
 }
-.social-media {
-    margin-top: 10px;
-}
-.social-media a img {
-    width: 40px;
+.left .button{
+    display: block;
+    width: 180px;
     height: 40px;
-    margin: 0 10px;
-    transition: transform 0.3s, opacity 0.3s;
-    opacity: 0.8s;
-    filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.3));
+    font-size: 18px;
+    border: 2px solid white;
+    background-color: transparent;
+    color:white;
+    margin:10px 0px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease; 
 }
-.social-media a img:hover {
-    transform: scale(1.2);
-    opacity: 1;
+.left .button:hover{
+    background-color: white;
+    color: orange;
+    border-color: orange;
+}
+.social{
+    position: absolute;
+    right:0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    width: 40px;
+    height:200px;
+    background-color: white;
+    font-size:25px;
+}
+.social i:hover{
+    color:orange;
+}
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -200px; 
+    width: 200px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    flex-direction: column;
+    padding-top: 80px;
+    transition: right 0.3s ease; 
+}
+
+.sidebar visible{
+    right:0;
+}
+.sidebar a {
+    display: block;
+    padding: 15px;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+.sidebar a:hover {
+    background-color: orange;
+    color: white;
+}
+
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: white;
+    font-size: 14px;
+    position:fixed;
+    bottom: 0;
+    width:100%;
 }

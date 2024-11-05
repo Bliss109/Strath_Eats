@@ -67,6 +67,9 @@ CREATE TABLE IF NOT EXISTS `products` (
   `category` varchar(100) DEFAULT NULL,
   `stock_quantity` int DEFAULT '0',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `picture` varchar(255) DEFAULT NULL,
+  `allergens` text DEFAULT NULL,
+  `preparation_time` int DEFAULT NULL COMMENT 'Preparation time in minutes',
   PRIMARY KEY (`product_id`)
 ) ENGINE=InnoDB;
 
@@ -127,6 +130,8 @@ CREATE TABLE IF NOT EXISTS `cafeterias` (
   `contact_info` varchar(255),
   `description` text,
   `open_hours` varchar(255),
+  `photo` varchar(255) DEFAULT NULL,
+  `menus` text DEFAULT NULL,
   PRIMARY KEY (`cafe_id`)
 ) ENGINE=InnoDB;
 
@@ -160,5 +165,16 @@ ALTER TABLE `product_categories`
 
 ALTER TABLE `stock`
   ADD CONSTRAINT `fk_stock_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
+
+-- Add columns to the cafeterias table
+ALTER TABLE `cafeterias`
+  ADD COLUMN `photo` varchar(255) DEFAULT NULL,
+  ADD COLUMN `menus` text DEFAULT NULL;
+
+-- Add columns to the products table
+ALTER TABLE `products`
+  ADD COLUMN `picture` varchar(255) DEFAULT NULL,
+  ADD COLUMN `allergens` text DEFAULT NULL,
+  ADD COLUMN `preparation_time` int DEFAULT NULL COMMENT 'Preparation time in minutes';
 
 COMMIT;
