@@ -16,6 +16,7 @@ header h1 {
     text-align: center;
     color: #333;
     margin-bottom: 20px;
+    font-size: 28px;
 }
 
 /* Revenue Table */
@@ -23,8 +24,10 @@ header h1 {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
-    background-color: #fff;
+    background-color: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 .revenue-container th,
@@ -36,8 +39,9 @@ header h1 {
 
 .revenue-container th {
     background-color: #007bff;
-    color: #fff;
+    color: #ffffff;
     font-weight: bold;
+    font-size: 16px;
 }
 
 .revenue-container td {
@@ -95,4 +99,54 @@ header h1 {
 
 .summary p strong {
     font-weight: bold;
+}
+
+/* Analytics Container */
+.analytics-container {
+    margin-top: 30px;
+}
+
+.analytics-container h2 {
+    font-size: 22px;
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.chart-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.chart-grid div {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex: 1 1 calc(50% - 10px); /* Two columns */
+    max-width: calc(50% - 10px); /* Ensures two columns with spacing */
+}
+
+.full-width-chart {
+    margin-top: 20px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Take full width */
+}
+
+.analytics-container h3 {
+    color: #007bff;
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Chart Styling */
+canvas {
+    max-width: 100%;
+    height: auto;
 }
