@@ -1,15 +1,15 @@
 <?php
-// Add these at the very top to show errors
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Test the connection and data
+
 require_once 'Analytics.php';
 
 try {
     $analytics = new Analytics();
     
-    // Get the totals
+    
     $totalUsers = $analytics->getTotalUsers();
     $totalOrders = $analytics->getTotalOrders();
     $totalRevenue = $analytics->getTotalRevenue();
@@ -29,9 +29,9 @@ try {
 <head>
     <title>Admin Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Add basic CSS to make sure styles are loading -->
+    
     <style>
-        /* Modern color scheme and base styles */
+       
         :root {
             --primary-color: #2c3e50;
             --secondary-color: #34495e;
@@ -51,7 +51,7 @@ try {
             color: var(--text-color);
         }
 
-        /* Header Styling */
+       
         .dashboard-header {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
@@ -66,7 +66,7 @@ try {
             font-weight: 500;
         }
 
-        /* Main Container */
+       
         .dashboard-container {
             padding: 20px;
             max-width: 1400px;
@@ -76,7 +76,7 @@ try {
             gap: 25px;
         }
 
-        /* Chart Containers */
+       
         .chart-container {
             background: var(--card-color);
             padding: 25px;
@@ -90,7 +90,7 @@ try {
             box-shadow: 0 6px 12px rgba(0,0,0,0.1);
         }
 
-        /* Chart Headers */
+        
         .chart-container h2 {
             color: var(--primary-color);
             font-size: 18px;
@@ -100,7 +100,7 @@ try {
             border-bottom: 2px solid var(--background-color);
         }
 
-        /* Stats Cards */
+        
         .stats-overview {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -136,7 +136,7 @@ try {
             letter-spacing: 0.5px;
         }
 
-        /* Responsive Design */
+        
         @media (max-width: 768px) {
             .dashboard-container {
                 grid-template-columns: 1fr;
@@ -152,7 +152,7 @@ try {
             }
         }
 
-        /* Loading States */
+        
         .loading {
             position: relative;
             opacity: 0.7;
@@ -168,7 +168,7 @@ try {
             color: var(--accent-color);
         }
 
-        /* Error Messages */
+        
         .error-message {
             color: #e74c3c;
             text-align: center;
@@ -221,11 +221,11 @@ try {
         </div>
     </div>
 
-    <!-- Add console debug -->
+    
     <script>
         console.log('JavaScript is running');
         
-        // Debug data
+        
         const userData = <?php echo json_encode($userStats ?? []); ?>;
         console.log('User Data:', userData);
         
@@ -253,7 +253,7 @@ try {
             document.querySelector('.chart-container').innerHTML += '<p>No data available</p>';
         }
 
-        // Popular Items Chart
+       
         const itemsCtx = document.getElementById('itemsChart');
         new Chart(itemsCtx, {
             type: 'bar',
@@ -267,7 +267,7 @@ try {
             }
         });
 
-        // Revenue Chart
+        
         const revenueData = <?php echo json_encode($revenueStats ?? []); ?>;
         if (revenueData && revenueData.length > 0) {
             new Chart(document.getElementById('revenueChart'), {
@@ -294,7 +294,7 @@ try {
                 '<p style="color: red;">No revenue data available for the last 7 days</p>');
         }
 
-        // Category Chart
+       
         const categoryData = <?php echo json_encode($categoryStats ?? []); ?>;
         if (categoryData && categoryData.length > 0) {
             new Chart(document.getElementById('categoryChart'), {
