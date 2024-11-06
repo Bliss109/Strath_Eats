@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cafeteria Daily Revenue</title>
-    <link rel="stylesheet" href="CafeteriaRevenueStyle.css">
+    <link rel="stylesheet" href="CafeteriaAnalyticsStyle.css">
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <header>
@@ -42,6 +44,38 @@
             <p><strong>Amount Due to Delivery Personnel:</strong> $<span id="deliveryWages">0.00</span></p>
         </div>
     </section>
+
+    <!-- Analytics Section -->
+    <section class="analytics-container">
+        <h2>Analytics</h2>
+        
+        <!-- Grid for charts -->
+        <div class="chart-grid">
+            <div>
+                <h3>Popular Dish Categories</h3>
+                <canvas id="dishCategoriesChart"></canvas>
+            </div>
+            <div>
+                <h3>Frequent Out-of-Stock Items (Hot-sellers)</h3>
+                <canvas id="stockOutChart"></canvas>
+            </div>
+            <div>
+                <h3>Supplier Distribution</h3>
+                <canvas id="supplierChart"></canvas>
+            </div>
+            <div>
+                <h3>Commonly Bought Together Items</h3>
+                <canvas id="pairingChart"></canvas>
+            </div>
+
+        </div>
+
+        <div class="full-width-chart">
+            <h3>Yearly Revenue</h3>
+            <canvas id="yearlyRevenueChart"></canvas>
+        </div>
+    </section>
+
+    <script src="CafeteriaAnalyticsScript.js"></script>
 </body>
-<script src="CafeteriaRevenueScript.js"></script>
 </html>
