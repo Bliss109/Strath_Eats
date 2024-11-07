@@ -28,13 +28,15 @@
                 <input type="checkbox" class="check-box"><span>Remember Password</span>
                 <button type="submit" class="submit-btn">Log In</button>
             </form>
-            
+
             <!-- Register form with updated ID and method for preventing default submission -->
-            <form id="register" class="input-group" method="POST">
+            <form id="register" class="input-group" method="POST" enctype="multipart/form-data">
                 <input type="text" class="input-field" placeholder="User Name" name="name" required id="name">
                 <input type="email" class="input-field" placeholder="Email" name="email" required id="email">
                 <input type="password" class="input-field" placeholder="Enter Password" name="password" required id="password">
-                <input type="tel" class="input-field" placeholder="e.g 2547xxxx" pattern="\254[0-9]{9}"name="phone_number"required id="phone_number">
+                <input type="tel" class="input-field" placeholder="e.g 2547xxxx" pattern="\254[0-9]{9}" name="phone_number" required id="phone_number">
+                <!-- Profile Picture Upload -->
+                <input type="file" class="input-field" name="profile_picture" accept="image/*" id="profile_picture">
                 <input type="checkbox" class="check-box" id="terms"><span>I agree to the terms & conditions</span>
                 <button type="submit" class="submit-btn">Register</button>
             </form>
@@ -57,10 +59,8 @@
             y.style.left = "450px";
             z.style.left = "0";
         }
-
-        // Attach the submit event handler to the registration form
         document.getElementById('register').addEventListener('submit', function(event) {
-            event.preventDefault();  // Prevent default form submission
+            event.preventDefault(); // Prevent default form submission
 
             // Retrieve form data
             const name = document.getElementById('name').value;
@@ -68,6 +68,14 @@
             const password = document.getElementById('password').value;
             const phone_number = document.getElementById('phone_number').value;
             const termsAccepted = document.getElementById('terms').checked;
+            const profile_picture = document.getElementById('profile_picture').files[0]; // Get the selected file
+
+            // Log the collected data for debugging
+            console.log("name:", name);
+            console.log("Email:", email);
+            console.log("Password:", password);
+            console.log("Phone:", phone_number);
+            console.log("Profile Picture:", profile_picture);
 
             // Check if terms are accepted
             if (!termsAccepted) {
@@ -76,21 +84,59 @@
             }
 
             // Check for empty fields
-            if (!name || !email || !password ||!phone_number) {
+            if (!username || !email || !password || !phone_number || !profile_picture) {
                 alert("All fields are required!");
                 return;
             }
 
-            // Create JSON data
+            // Create FormData object to handle file upload and other form fields
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('email', email);
+            formData.append('password', password);
+            formData.append('phone_number', phone_number);
+
+            // Append profile picture only if it's selected
+            if (profile_picture) {
+                formData.append('profile_picture', profile_picture);
+            }
+
+            // Send FormData using fetch API
+            fetch('../User/register.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(result => {
+                    // Display server response
+                    alert(result);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+
+
+        document.getElementById('login').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            //Retrieve form data
+            const name = document.getElementById('name').value;
+            const password = document.getElementById('password').value;
+
+            //Check for empty fields
+            if (!name || !password) {
+                alert("Both fields are required!");
+                return;
+            }
+            //Create JSON data
             const data = {
                 name: name,
-                email: email,
-                password: password,
-                phone_number: phone_number
+                password: password
             };
 
-            // Send JSON data using fetch API
-            fetch('../User/register.php', {
+            //Send JSON data using fetch API
+            fetch('../User/login.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -99,7 +145,7 @@
                 })
                 .then(response => response.text())
                 .then(result => {
-                    // Display server response
+                    // Display server response (could be a success message or error)
                     alert(result);
                 })
                 .catch(error => {
