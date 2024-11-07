@@ -19,8 +19,8 @@ class DeliveryModule {
         <nav>
             <ul>
                 <li><a href="DeliveryHome.php">Home</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Wallet</a></li>
+                <li><a href="DeliveryProfile.php">Profile</a></li>
+                <li><a href="DeliveryWallet.php">Wallet</a></li>
                 <li><a href="AvailableJobs.php">Available Jobs </a></li>
                 <li><a href="#">Logout</a></li>
             </ul>
@@ -225,6 +225,18 @@ class DeliveryModule {
             echo "Deliverer not found.";
             return null; // or return 0 if you'd like to return a default balance
         }
+    }
+    public function deliveryAnalysis($userId) {
+        // Query to count orders grouped by delivery_date in descending order
+        $stmt = $this->pdo->prepare("
+            SELECT delivery_date, COUNT(order_id) AS order_count
+            FROM deliveries
+            WHERE deliverer_id = :user_id
+            GROUP BY delivery_date
+            ORDER BY delivery_date DESC
+        ");
+        $stmt->execute(['user_id' => $userId]);
+        $results = $stmt->fetchAll();
     }
 }
 
