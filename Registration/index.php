@@ -17,9 +17,9 @@
                 <button type="button" class="toggle-btn" onclick="register()">Register</button>
             </div>
             <div class="social-icons">
-                <img src="./Assets/instagram.png">
-                <img src="./Assets/facebook.png">
-                <img src="./Assets/twitter.png">
+                <img src="../Registration/Assets/instagram (2).png">
+                <img src="../Registration/Assets/facebook (2).png">
+                <img src="../Registration/Assets/twitterx.png">
             </div>
             <!-- Login form remains unchanged -->
             <form id="login" action="../User/login.php" class="input-group" method="POST">
@@ -34,6 +34,7 @@
                 <input type="text" class="input-field" placeholder="User Name" name="name" required id="name">
                 <input type="email" class="input-field" placeholder="Email" name="email" required id="email">
                 <input type="password" class="input-field" placeholder="Enter Password" name="password" required id="password">
+                <input type="tel" class="input-field" placeholder="e.g 2547xxxx" pattern="\254[0-9]{9}"name="phone_number"required id="phone_number">
                 <input type="checkbox" class="check-box" id="terms"><span>I agree to the terms & conditions</span>
                 <button type="submit" class="submit-btn">Register</button>
             </form>
@@ -65,6 +66,7 @@
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+            const phone_number = document.getElementById('phone_number').value;
             const termsAccepted = document.getElementById('terms').checked;
 
             // Check if terms are accepted
@@ -74,7 +76,7 @@
             }
 
             // Check for empty fields
-            if (!name || !email || !password) {
+            if (!name || !email || !password ||!phone_number) {
                 alert("All fields are required!");
                 return;
             }
@@ -83,7 +85,8 @@
             const data = {
                 name: name,
                 email: email,
-                password: password
+                password: password,
+                phone_number: phone_number
             };
 
             // Send JSON data using fetch API
@@ -107,4 +110,3 @@
 </body>
 
 </html>
-
