@@ -13,10 +13,62 @@ class DeliveryModule {
     }
 
     // Function to display deliveries with "Add Delivery" buttons
+    
+    public function navbar() {
+        echo '
+        <nav>
+            <ul>
+                <li><a href="DeliveryHome.php">Home</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Wallet</a></li>
+                <li><a href="AvailableJobs.php">Available Jobs </a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </nav>
+        ';
+    }
+
+    public function AvailableJobs($userId) {
+        // Fetch available jobs with status 'pending' from the deliveries table
+        $stmt = $this->pdo->prepare("SELECT order_id, delivery_location FROM deliveries WHERE delivery_status = 'pending'");
+        $stmt->execute();
+        $jobs = $stmt->fetchAll();
+    
+        if ($jobs) {
+            echo "<table>";
+            echo "<tr><th>Order ID</th><th>Delivery Location</th><th>Action</th></tr>";
+    
+            foreach ($jobs as $job) {
+                echo "<tr>";
+                echo "<td>{$job['order_id']}</td>";
+                echo "<td>{$job['delivery_location']}</td>";
+                echo "<td>
+                        <form method='POST'>
+                            <input type='hidden' name='order_id' value='{$job['order_id']}'>
+                            <button type='submit' name='take_job'>Take Job</button>
+                        </form>
+                      </td>";
+                echo "</tr>";
+            }
+            
+            echo "</table>";
+    
+            // Handle Take Job button action
+            if (isset($_POST['take_job']) && isset($_POST['order_id'])) {
+                $orderId = $_POST['order_id'];
+                $this->assignJobToDeliverer($orderId, $userId);
+            }
+        } else {
+            echo "No available jobs at the moment.";
+        }
+    }
+    
+
     public function deliveries() {
         $stmt = $this->pdo->query("SELECT order_id, location, restaurant, client_id FROM orders WHERE type = 'delivery'");
         $orders = $stmt->fetchAll();
 
+        echo "The available jobs are:";
         echo "<table>";
         echo "<tr><th>Order ID</th><th>Location</th><th>Restaurant</th><th>Client ID</th><th>Action</th></tr>";
         foreach ($orders as $order) {
@@ -36,7 +88,60 @@ class DeliveryModule {
             $this->addDelivery($_POST['order_id'], $delivererId);
         }
     }
-
+    public function currentPickupJobs($userId) {
+        // Fetch current jobs from the deliveries table
+        $stmt = $this->pdo->prepare("SELECT order_id, delivery_status, delivery_location FROM deliveries WHERE deliverer_id = :user_id AND delivery_status = 'pickup'");
+        $stmt->execute(['user_id' => $userId]);
+        $jobs = $stmt->fetchAll();
+    
+        if ($jobs) {
+            echo "<table>";
+            echo "<tr><th>Order ID</th><th>Delivery Status</th><th>Delivery Location</th><th>Action</th></tr>";
+    
+            foreach ($jobs as $job) {
+                echo "<tr>";
+                echo "<td>{$job['order_id']}</td>";
+                echo "<td>{$job['delivery_status']}</td>";
+                echo "<td>{$job['delivery_location']}</td>";
+                echo "<td>
+                        <form method='POST'>
+                            <input type='hidden' name='order_id' value='{$job['order_id']}'>
+                            <button type='submit' name='pickup'>Pickup</button>
+                        </form>
+                      </td>";
+                echo "</tr>";
+            }
+            
+            echo "</table>";
+        }
+    }
+    public function currentDeliveryJobs($userId) {
+        // Fetch delivery jobs from the deliveries table
+        $stmt = $this->pdo->prepare("SELECT order_id, delivery_status, delivery_location FROM deliveries WHERE deliverer_id = :user_id AND delivery_status = 'delivery'");
+        $stmt->execute(['user_id' => $userId]);
+        $jobs = $stmt->fetchAll();
+    
+        if ($jobs) {
+            echo "<table>";
+            echo "<tr><th>Order ID</th><th>Delivery Status</th><th>Delivery Location</th><th>Action</th></tr>";
+    
+            foreach ($jobs as $job) {
+                echo "<tr>";
+                echo "<td>{$job['order_id']}</td>";
+                echo "<td>{$job['delivery_status']}</td>";
+                echo "<td>{$job['delivery_location']}</td>";
+                echo "<td>
+                        <form method='POST'>
+                            <input type='hidden' name='order_id' value='{$job['order_id']}'>
+                            <button type='submit' name='delivered'>Delivered</button>
+                        </form>
+                      </td>";
+                echo "</tr>";
+            }
+            
+            echo "</table>";
+        }
+    }    
     // Function to add a delivery to the pickup table
     private function addDelivery($orderId, $delivererId) {
         // Get order details to add to pickup table
@@ -46,7 +151,8 @@ class DeliveryModule {
 
         if ($order) {
             // Insert into pickup table
-            $insertStmt = $this->pdo->prepare("INSERT INTO pickup (deliverer_id, client_id, location, order_id, status) VALUES (:deliverer_id, :client_id, :location, :order_id, 'pickup')");
+            //echo "This is the table of your current jobs:";
+            $insertStmt = $this->pdo->prepare("INSERT INTO deliveries (deliverer_id, client_id, location, order_id, status) VALUES (:deliverer_id, :client_id, :location, :order_id, 'pickup')");
             $insertStmt->execute([
                 'deliverer_id' => $delivererId,
                 'client_id' => $order['client_id'],
