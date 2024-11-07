@@ -56,7 +56,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Cafeteria Manager') {
             <span class="error" id="menuImageError"></span>
 
             <label for="Cafeteria">Cafeteria</label>
-            <select id="menuCategory" name="menuCategory">
+            <select id="cafeteria" name="cafeteria">
                 <option value="Groundfloor">Groundfloor</option>
                 <option value="Springs of Olive">Springs of Olive</option>
                 <option value="Pate Cafeteria">Pate Cafeteria</option>
