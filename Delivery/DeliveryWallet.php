@@ -2,6 +2,6 @@
 session_start();
 require_once 'load.php';
 $deliveryModule->navbar();
-$deliveryModule->getBalance();
+$deliveryModule->Balance();
 $deliveryModule->deliveryAnalysis($userId);
 ?>
