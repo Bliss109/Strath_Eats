@@ -133,7 +133,7 @@ class DeliveryModule {
                 echo "<td>
                         <form method='POST'>
                             <input type='hidden' name='order_id' value='{$job['order_id']}'>
-                            <button type='submit' name='delivered'>Delivered</button>
+                            <button type='submit' name='delivered' action='$this->addDelivery()'>Delivered</button>
                         </form>
                       </td>";
                 echo "</tr>";
@@ -143,25 +143,20 @@ class DeliveryModule {
         }
     }    
     // Function to add a delivery to the pickup table
-    private function addDelivery($orderId, $delivererId) {
-        // Get order details to add to pickup table
-        $stmt = $this->pdo->prepare("SELECT order_id, location, client_id FROM orders WHERE order_id = :order_id AND type = 'delivery'");
+    public function AddDelivery($orderId) {
+        // Update the delivery_status to 'pickup' for the given order_id
+        $stmt = $this->pdo->prepare("
+            UPDATE deliveries 
+            SET delivery_status = 'pickup' 
+            WHERE order_id = :order_id
+        ");
         $stmt->execute(['order_id' => $orderId]);
-        $order = $stmt->fetch();
-
-        if ($order) {
-            // Insert into pickup table
-            //echo "This is the table of your current jobs:";
-            $insertStmt = $this->pdo->prepare("INSERT INTO deliveries (deliverer_id, client_id, location, order_id, status) VALUES (:deliverer_id, :client_id, :location, :order_id, 'pickup')");
-            $insertStmt->execute([
-                'deliverer_id' => $delivererId,
-                'client_id' => $order['client_id'],
-                'location' => $order['location'],
-                'order_id' => $order['order_id']
-            ]);
-            echo "Delivery added for Order ID: $orderId";
+    
+        // Check if any rows were affected
+        if ($stmt->rowCount() > 0) {
+            echo "Order ID $orderId has been set to 'pickup'.";
         } else {
-            echo "Order not found or is not a delivery.";
+            echo "Failed to update order status. Please check the order ID.";
         }
     }
 
@@ -244,18 +239,20 @@ class DeliveryModule {
 ?>
 
 <!-- Form for picking up a delivery -->
-<form method="POST">
+<form method="POST" action="<?php $this->AddDelivery()?>">
     <label for="order_id">Order ID:</label>
     <input type="text" name="order_id" required>
-    <label for="user_id">User ID:</label>
+    <label for="user_id">Deliverer ID:</label>
     <input type="text" name="user_id" required>
     <button type="submit" name="pick_delivery">Pick Delivery</button>
 </form>
 
 <!-- Form for completing a delivery -->
-<form method="POST">
+<form method="POST" action="<?php $this->completeDelivery()?>">
     <label for="complete_order_id">Order ID:</label>
     <input type="text" name="complete_order_id" required>
+    <label for="userID">User ID:</label>
+    <input type="text" name="userID" required>
     <button type="submit" name="complete_delivery">Complete Delivery</button>
 </form>
 <?php

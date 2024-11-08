@@ -19,7 +19,7 @@
         <div class="profile-section">
             <div class="left-section">
                 <div class="profile-photo">
-                    <img src="./assets/cindy.jpeg" alt="Profile photo">
+                    <img src="./cindy.jpeg" alt="Profile photo">
                     <button class="btn btn-secondary">Change photo</button>
                 </div>
 
@@ -73,10 +73,10 @@
                     <label>Payment Methods</label>
                     <div class="payment-methods">
                         <div class="payment-card">
-                            <img  src="./assets/visa.jpeg" alt="">
+                            <img  src="./visa.jpeg" alt="">
                         </div>
                         <div class="payment-card">
-                            <img  src="./assets/mpesa.jpeg" alt="">
+                            <img  src="./mpesa.jpeg" alt="">
                         </div>
                     </div>
                 </div>
