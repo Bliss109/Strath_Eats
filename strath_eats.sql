@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `category_id` int NOT NULL AUTO_INCREMENT,
   `category_name` varchar(100) NOT NULL,
   PRIMARY KEY (`category_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Table structure for `deliveries`
 CREATE TABLE IF NOT EXISTS `deliveries` (
@@ -165,16 +165,5 @@ ALTER TABLE `product_categories`
 
 ALTER TABLE `stock`
   ADD CONSTRAINT `fk_stock_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
-
--- Add columns to the cafeterias table
-ALTER TABLE `cafeterias`
-  ADD COLUMN `photo` varchar(255) DEFAULT NULL,
-  ADD COLUMN `menus` text DEFAULT NULL;
-
--- Add columns to the products table
-ALTER TABLE `products`
-  ADD COLUMN `picture` varchar(255) DEFAULT NULL,
-  ADD COLUMN `allergens` text DEFAULT NULL,
-  ADD COLUMN `preparation_time` int DEFAULT NULL COMMENT 'Preparation time in minutes';
 
 COMMIT;

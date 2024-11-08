@@ -1,18 +1,26 @@
-<!DOCTYPE html> 
+<?php
+/*
+session_start();
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Cafeteria Manager') {
+    header("Location: login.php");
+    exit();
+}
+*/
+?>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="MenuRegistrationStyle.css">
     <title>Dish Registration</title>
-    <script src="menuRegistration.js" defer></script>
+    <script src="MenuRegistration.js" defer></script>
 </head>
 <body>
-    <form id="MenuForm">
+    <form id="MenuForm" action="MenuRegistrationDB.php" method="POST" enctype="multipart/form-data">
         <div class="MenuRegistration-container">
-            <center>
-            <h1>Dish Registration</h1>
-            </center>
+            <center><h1>Dish Registration</h1></center>
 
             <label for="menuName">Dish Name</label>
             <input type="text" id="menuName" name="menuName" placeholder="Enter Dish Name"><br>
@@ -35,12 +43,12 @@
             </select><br>
             <span class="error" id="menuCategoryError"></span>
 
-             <label for="prepTime">Preparation Time (in minutes)</label>
-             <input type="number" id="prepTime" name="prepTime" placeholder="Enter Preparation Time"><br>
-             <span class="error" id="prepTimeError"></span>
+            <label for="prepTime">Preparation Time (in minutes)</label>
+            <input type="number" id="prepTime" name="prepTime" placeholder="Enter Preparation Time"><br>
+            <span class="error" id="prepTimeError"></span>
 
             <label for="allergens">Allergen Notice</label>
-            <textarea id="allergens" name="allergens" placeholder="Enter any allergens in the dish (e.g., nuts, dairy, gluten, soy)"></textarea><br>
+            <textarea id="allergens" name="allergens" placeholder="Enter any allergens in the dish"></textarea><br>
             <span class="error" id="allergensError"></span>
 
             <label for="menuImage">Dish Image</label>
@@ -48,7 +56,7 @@
             <span class="error" id="menuImageError"></span>
 
             <label for="Cafeteria">Cafeteria</label>
-            <select id="menuCategory" name="menuCategory">
+            <select id="cafeteria" name="cafeteria">
                 <option value="Groundfloor">Groundfloor</option>
                 <option value="Springs of Olive">Springs of Olive</option>
                 <option value="Pate Cafeteria">Pate Cafeteria</option>

@@ -5,51 +5,55 @@ class User {
     private $db;
 
     public function __construct() {
-        $db = new Database();
-        $this->db = $db->getConnection();
+        $this->db = (new Database())->getConnection();
     }
 
-    public function register ($name, $email, $Password){
-        $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
-
-        $sql = "INSERT INTO users (name, email, password) VALUES (:name, :email, :password)";
-        $stmt = $this->db->prepare($sql);
-
-        $stmt->bindParam(':name', $name);
-        $stmt->bindparam(':email', $email);
-        $stmt->bindParam(':password', $hashedPassword);
+    // Register a new user
+    public function register($name, $email, $password, $phone_number) {
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         
-        if($stmt->execute()){
-            return true;
-        }else{
+        $sql = "INSERT INTO users (name, email, password, phone_number) VALUES (:name, :email, :password, :phone_number)";
+        $stmt = $this->db->prepare($sql);
+        
+        // Bind parameters
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $hashedPassword);
+        $stmt->bindParam(':phone_number', $phone_number);
+
+        try {
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            // Log error message (not shown here) or handle it as needed
             return false;
         }
-
     }
 
-    public function login($email, $password){
+    // Login user
+    public function login($email, $password) {
         $sql = "SELECT * FROM users WHERE email = :email";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
 
-        if($stmt->rowCount() > 0){
+        if ($stmt->rowCount() > 0) {
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-             if(password_verify($password, $user['password'])){
+            if (password_verify($password, $user['password'])) {
                 return $user;
-             }
+            }
         }
-
+        
         return false;
     }
 
+    // Get user profile by user ID
     public function getUserProfile($userId) {
         $stmt = $this->db->prepare("SELECT * FROM users WHERE user_id = ?");
         $stmt->execute([$userId]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    // Update user profile information
     public function updateProfile($userId, $data) {
         $allowedFields = ['email', 'phone_number', 'student_id'];
         $updates = [];
@@ -69,28 +73,41 @@ class User {
         $values[] = $userId;
         $sql = "UPDATE users SET " . implode(', ', $updates) . " WHERE user_id = ?";
         $stmt = $this->db->prepare($sql);
-        return $stmt->execute($values);
+        
+        try {
+            return $stmt->execute($values);
+        } catch (PDOException $e) {
+            // Log error message (not shown here) or handle it as needed
+            return false;
+        }
     }
 
+    // Update profile picture
     public function updateProfilePicture($userId, $fileName) {
         $stmt = $this->db->prepare("UPDATE users SET profile_picture = ? WHERE user_id = ?");
         return $stmt->execute([$fileName, $userId]);
     }
 
+    // Verify if a given password matches the stored password
     public function verifyPassword($userId, $currentPassword) {
         $stmt = $this->db->prepare("SELECT password FROM users WHERE user_id = ?");
         $stmt->execute([$userId]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($user && password_verify($currentPassword, $user['password'])) {
-            return true;
-        }
-        return false;
+        return $user && password_verify($currentPassword, $user['password']);
     }
 
+    // Update password
     public function updatePassword($userId, $newPassword) {
         $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
         $stmt = $this->db->prepare("UPDATE users SET password = ? WHERE user_id = ?");
-        return $stmt->execute([$hashedPassword, $userId]);
+        
+        try {
+            return $stmt->execute([$hashedPassword, $userId]);
+        } catch (PDOException $e) {
+            // Log error message (not shown here) or handle it as needed
+            return false;
+        }
     }
 }
+
