@@ -5,7 +5,7 @@ class DeliveryModule {
 
     // Constructor to initialize PDO connection
     public function __construct($host, $dbname, $username, $password) {
-        $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
+        $dsn = "mysql:host=localhost;dbname=starth_eats;charset=utf8mb4";
         $options = [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -36,6 +36,7 @@ class DeliveryModule {
         $jobs = $stmt->fetchAll();
     
         if ($jobs) {
+            echo "<h3>The available jobs are:</h3>";
             echo "<table>";
             echo "<tr><th>Order ID</th><th>Delivery Location</th><th>Action</th></tr>";
     
@@ -60,9 +61,23 @@ class DeliveryModule {
                 $this->assignJobToDeliverer($orderId, $userId);
             }
         } else {
-            echo "No available jobs at the moment.";
+            echo "<div>No available jobs at the moment.</div>";
         }
     }
+    
+    public function assignJobToDeliverer($orderId, $delivererId) {
+        // Update the delivery record to assign deliverer and set status to 'pickup'
+        $stmt = $this->pdo->prepare("
+            UPDATE deliveries 
+            SET deliverer_id = :deliverer_id, delivery_status = 'pickup' 
+            WHERE order_id = :order_id AND delivery_status = 'pending'
+        ");
+        $stmt->execute([
+            'deliverer_id' => $delivererId,
+            'order_id' => $orderId
+        ]);
+    }
+    
     
 
     public function deliveries() {
@@ -96,6 +111,7 @@ class DeliveryModule {
         $jobs = $stmt->fetchAll();
     
         if ($jobs) {
+            echo "Your current jobs ready to be picked up are:";
             echo "<table>";
             echo "<tr><th>Order ID</th><th>Delivery Status</th><th>Delivery Location</th><th>Action</th></tr>";
     
@@ -107,7 +123,7 @@ class DeliveryModule {
                 echo "<td>
                         <form method='POST'>
                             <input type='hidden' name='order_id' value='{$job['order_id']}'>
-                            <button action='$this->PickDeliveryForm' type='submit' name='pickup'>Pickup</button>
+                            <button action='$this->PickDeliveryForm()' type='submit' name='pickup'>Pickup</button>
                         </form>
                       </td>";
                 echo "</tr>";
@@ -124,6 +140,7 @@ class DeliveryModule {
     
         if ($jobs) {
             echo "<table>";
+            echo "<h3>Your current jobs on delivery jobs are:</h3>";
             echo "<tr><th>Order ID</th><th>Delivery Status</th><th>Delivery Location</th><th>Action</th></tr>";
     
             foreach ($jobs as $job) {
@@ -177,37 +194,22 @@ class DeliveryModule {
 
     // Function to complete a delivery, moving the status in orders table to "complete"
     public function completeDelivery($orderId) {
-        // Verify the order exists in the pickup table with status 'delivery'
-        $stmt = $this->pdo->prepare("SELECT deliverer_id FROM pickup WHERE order_id = :order_id AND status = 'delivery'");
+        // Update the delivery_status to 'completed' for the given order_id
+        $stmt = $this->pdo->prepare("
+            UPDATE deliveries 
+            SET delivery_status = 'completed' 
+            WHERE order_id = :order_id
+        ");
         $stmt->execute(['order_id' => $orderId]);
-        $order = $stmt->fetch();
     
-        if ($order) {
-            $delivererId = $order['deliverer_id'];
-            
-            // Update the orders table and remove from pickup table
-            $this->pdo->beginTransaction();
-            try {
-                // Mark order as complete in the orders table
-                $this->pdo->prepare("UPDATE orders SET status = 'complete' WHERE order_id = :order_id")->execute(['order_id' => $orderId]);
-                
-                // Remove order from the pickup table
-                $this->pdo->prepare("DELETE FROM pickup WHERE order_id = :order_id")->execute(['order_id' => $orderId]);
-    
-                // Add 30 to the balance of the deliverer in the users table
-                $this->pdo->prepare("UPDATE users SET balance = balance + 30 WHERE user_id = :deliverer_id")->execute(['deliverer_id' => $delivererId]);
-    
-                $this->pdo->commit();
-                echo "Order ID: $orderId marked as complete, and balance updated for Deliverer ID: $delivererId.";
-            } catch (Exception $e) {
-                $this->pdo->rollBack();
-                echo "Failed to complete the order: " . $e->getMessage();
-            }
+        // Check if any rows were affected
+        if ($stmt->rowCount() > 0) {
+            echo "Order ID $orderId has been marked as 'completed'.";
         } else {
-            echo "Order not found or not in 'delivery' status.";
+            echo "Failed to update order status. Please check the order ID.";
         }
     }
-    public function getBalance($delivererId) {
+    public function Balance($delivererId) {
         // Prepare and execute the SQL statement to fetch the balance
         $stmt = $this->pdo->prepare("SELECT balance FROM users WHERE user_id = :deliverer_id");
         $stmt->execute(['deliverer_id' => $delivererId]);
@@ -216,7 +218,7 @@ class DeliveryModule {
         $result = $stmt->fetch();
     
         if ($result) {
-            return $result['balance'];
+            echo "<div>Balance: >". $result['balance']."</div" ;
         } else {
             echo "Deliverer not found.";
             return null; // or return 0 if you'd like to return a default balance
@@ -239,18 +241,34 @@ class DeliveryModule {
 
  
 public function PickDeliveryForm(){
-    echo "<form method='POST' action='$this->AddDelivery()'>
+    echo "<form method='POST' action='$this->pickDeliveryAction()'>
+    <label>Enter your ID and the order ID for validation</label>
     <label for='order_id'>Order ID:</label>
     <input type='text' name='order_id' required>
     <label for='user_id'>Deliverer ID:</label>
-    <input type='text' name='user_id' required>
+    <input type='text' name='deliverer_id' required>
     <button type='submit' name='pick_delivery'>Pick Delivery</button>
-</form>";
+    </form>";
+}
+public function pickDeliveryAction(){
+    if (isset($_POST['pick_delivery'])) {
+        $orderId = $_POST['order_id'];
+        $userId = $_POST['user_id'];
+        $stmt = $this->pdo->prepare("SELECT order_id, deliverer_id FROM deliveries WHERE order_id = $orderId");
+        $stmt->execute();
+        $order_id1 = $result['order_id'];
+        $deliverer_id = $result['deliverer_id'];
+        if ($orderId==$order_id1 && $userId==$deliverer_id){
+            $deliveryModule->pickDelivery($orderId, $userId);
+    
+            }
+    }
 }
 
 
 public function CompleteDeliveryForm(){
-    echo"<form method='POST' action='<?php $this->completeDelivery()?>'>
+    echo"<form method='POST' action='<?php $this->completeDeliveryAction()?>'>
+    <label>Enter your ID and the order ID for validation</label>
     <label for='complete_order_id'>Order ID:</label>
     <input type='text' name='complete_order_id' required>
     <label for'userID'>User ID:</label>
@@ -258,20 +276,27 @@ public function CompleteDeliveryForm(){
     <button type='submit' name='complete_delivery'>Complete Delivery</button>
 </form>";
 }
+public function completeDeliveryAction(){
+    if (isset($_POST['complete_delivery'])) {
+        $orderId = $_POST['complete_order_id'];
+        $userId = $_POST['user_id'];    
+        $stmt = $this->pdo->prepare("SELECT order_id, user_id FROM users WHERE order_id = $orderId ");
+        $stmt->execute();
+        $order_id_done = $result['order_id'];
+        $user_id_done = $result['user_id'];
+    
+        if ($orderId==$order_id_done && $userId==$user_id_done){
+            $deliveryModule->completeDelivery($orderId);
+        }
+    }
+}
 
 }
 
 
-if (isset($_POST['pick_delivery'])) {
-    $orderId = $_POST['order_id'];
-    $userId = $_POST['user_id'];
-    $deliveryModule->pickDelivery($orderId, $userId);
-}
 
-if (isset($_POST['complete_delivery'])) {
-    $orderId = $_POST['complete_order_id'];
-    $deliveryModule->completeDelivery($orderId);
-}
+
+
 
 
 ?>
