@@ -23,6 +23,7 @@ class DeliveryModule {
                 <li><a href="DeliveryProfile.php">Profile</a></li>
                 <li><a href="DeliveryWallet.php">Wallet</a></li>
                 <li><a href="AvailableJobs.php">Available Jobs </a></li>
+                <li><a href="#">Order</a></li>
                 <li><a href="#">Logout</a></li>
             </ul>
         </nav>
