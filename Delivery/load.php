@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'DeliveryModule.php';
 
 // Initialize the DeliveryModule instance with your database credentials

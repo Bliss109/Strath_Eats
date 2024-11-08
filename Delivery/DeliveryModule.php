@@ -1,4 +1,5 @@
 <?php
+session_start();
 class DeliveryModule {
     private $pdo;
 
@@ -106,7 +107,7 @@ class DeliveryModule {
                 echo "<td>
                         <form method='POST'>
                             <input type='hidden' name='order_id' value='{$job['order_id']}'>
-                            <button type='submit' name='pickup'>Pickup</button>
+                            <button action='$this->PickDeliveryForm' type='submit' name='pickup'>Pickup</button>
                         </form>
                       </td>";
                 echo "</tr>";
@@ -133,7 +134,7 @@ class DeliveryModule {
                 echo "<td>
                         <form method='POST'>
                             <input type='hidden' name='order_id' value='{$job['order_id']}'>
-                            <button type='submit' name='delivered' action='$this->addDelivery()'>Delivered</button>
+                            <button type='submit' name='delivered' action='$this->CompleteDeliveryForm()'>Delivered</button>
                         </form>
                       </td>";
                 echo "</tr>";
@@ -233,29 +234,34 @@ class DeliveryModule {
         $stmt->execute(['user_id' => $userId]);
         $results = $stmt->fetchAll();
     }
+
+
+
+ 
+public function PickDeliveryForm(){
+    echo "<form method='POST' action='$this->AddDelivery()'>
+    <label for='order_id'>Order ID:</label>
+    <input type='text' name='order_id' required>
+    <label for='user_id'>Deliverer ID:</label>
+    <input type='text' name='user_id' required>
+    <button type='submit' name='pick_delivery'>Pick Delivery</button>
+</form>";
 }
 
 
-?>
+public function CompleteDeliveryForm(){
+    echo"<form method='POST' action='<?php $this->completeDelivery()?>'>
+    <label for='complete_order_id'>Order ID:</label>
+    <input type='text' name='complete_order_id' required>
+    <label for'userID'>User ID:</label>
+    <input type='text' name='userID' required>
+    <button type='submit' name='complete_delivery'>Complete Delivery</button>
+</form>";
+}
 
-<!-- Form for picking up a delivery -->
-<form method="POST" action="<?php $this->AddDelivery()?>">
-    <label for="order_id">Order ID:</label>
-    <input type="text" name="order_id" required>
-    <label for="user_id">Deliverer ID:</label>
-    <input type="text" name="user_id" required>
-    <button type="submit" name="pick_delivery">Pick Delivery</button>
-</form>
+}
 
-<!-- Form for completing a delivery -->
-<form method="POST" action="<?php $this->completeDelivery()?>">
-    <label for="complete_order_id">Order ID:</label>
-    <input type="text" name="complete_order_id" required>
-    <label for="userID">User ID:</label>
-    <input type="text" name="userID" required>
-    <button type="submit" name="complete_delivery">Complete Delivery</button>
-</form>
-<?php
+
 if (isset($_POST['pick_delivery'])) {
     $orderId = $_POST['order_id'];
     $userId = $_POST['user_id'];
