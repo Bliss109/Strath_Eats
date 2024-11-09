@@ -39,6 +39,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Cafeteria Manager') {
                 <option value="Breakfast">Breakfast</option>
                 <option value="Main Course">Lunch</option>
                 <option value="Snacks">Snacks</option>
+                <option value="Dessert">Dessert</option>
                 <option value="Drinks">Drinks</option>
             </select><br>
             <span class="error" id="menuCategoryError"></span>

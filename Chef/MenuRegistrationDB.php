@@ -1,9 +1,9 @@
 <?php
-session_start();
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Cafeteria Manager') {
-    header("Location: login.php");
-    exit();
-}
+// session_start();
+// if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Cafeteria Manager') {
+//     header("Location: login.php");
+//     exit();
+// }
 
 // Database connection
 $host = 'localhost';
@@ -40,9 +40,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->bind_param("ssdssss", $name, $description, $price, $category, $prepTime, $allergens, $imagePath);
 
     if ($stmt->execute()) {
-        echo "Dish registered successfully!";
+        echo "<script>alert('Dish registered successfully!'); window.location.href = 'MenuRegistration.php';</script>";
     } else {
-        echo "Error: " . $stmt->error;
+        echo "<script>alert('Error: " . $stmt->error . "'); window.history.back();</script>";
     }
     $stmt->close();
     $db->close();
