@@ -24,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $category = $_POST['menuCategory'];
     $prepTime = $_POST['prepTime'];
     $allergens = $_POST['allergens'];
+    $cafeteria = $_POST['cafeteria']; // Retrieve cafeteria selection
     $imagePath = '';
 
     // Image upload handling
@@ -35,9 +36,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
-    // Insert into products table
-    $stmt = $db->prepare("INSERT INTO products (name, description, price, category, preparation_time, allergens, picture, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
-    $stmt->bind_param("ssdssss", $name, $description, $price, $category, $prepTime, $allergens, $imagePath);
+    // Insert into products table, including cafeteria column
+    $stmt = $db->prepare("INSERT INTO products (name, description, price, category, preparation_time, allergens, picture, cafeteria, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())");
+    $stmt->bind_param("ssdsssss", $name, $description, $price, $category, $prepTime, $allergens, $imagePath, $cafeteria);
 
     if ($stmt->execute()) {
         echo "<script>alert('Dish registered successfully!'); window.location.href = 'MenuRegistration.php';</script>";
