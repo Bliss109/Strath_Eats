@@ -1,5 +1,4 @@
 <?php
-session_start();
 // Include the DeliveryModule class file
 require_once 'DeliveryModule.php';
 

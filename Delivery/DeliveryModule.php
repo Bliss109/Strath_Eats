@@ -1,16 +1,15 @@
 <?php
-session_start();
 class DeliveryModule {
     private $pdo;
 
     // Constructor to initialize PDO connection
     public function __construct($host, $dbname, $username, $password) {
-        $dsn = "mysql:host=localhost;dbname=starth_eats;charset=utf8mb4";
+        $dsn = "mysql:host=localhost;dbname=strath_eats;charset=utf8mb4";
         $options = [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         ];
-        $this->pdo = new PDO($dsn, $username, $password, $options);
+        $this->pdo = new PDO($dsn, "root", "", $options);
     }
 
     // Function to display deliveries with "Add Delivery" buttons
@@ -81,7 +80,7 @@ class DeliveryModule {
     
     
 
-    public function deliveries() {
+    /*public function deliveries() {
         $stmt = $this->pdo->query("SELECT order_id, location, restaurant, client_id FROM orders WHERE type = 'delivery'");
         $orders = $stmt->fetchAll();
 
@@ -104,7 +103,7 @@ class DeliveryModule {
             $delivererId = $id; // Replace with actual deliverer ID from session or input
             $this->addDelivery($_POST['order_id'], $delivererId);
         }
-    }
+    }*/
     public function currentPickupJobs($userId) {
         // Fetch current jobs from the deliveries table
         $stmt = $this->pdo->prepare("SELECT order_id, delivery_status, delivery_location FROM deliveries WHERE deliverer_id = :user_id AND delivery_status = 'pickup'");
