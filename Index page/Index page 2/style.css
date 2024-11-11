@@ -177,7 +177,7 @@ body{
 }
 /* cover section */
 .cover{
-    background-image: url("../Images/croissant.jpg");
+    background-image: url("../../Images/croissant.jpg");
     background-size: cover;
     height: 25vh;
     background-position: center;
