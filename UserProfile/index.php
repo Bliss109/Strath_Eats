@@ -121,7 +121,7 @@ if (isset($_SESSION['profile_picture'])) {
                         <label>Payment Methods</label>
                         <div class="payment-methods">
                             <div class="payment-card">
-                                <a href="../Payment System/Payment System/index.php" ><img src="../UserProfile/mpesa.jpeg" alt=""></a>
+                                <a href="../Payment System/index.php" ><img src="../UserProfile/mpesa.jpeg" alt=""></a>
                             </div>
                         </div>
                     </div>
