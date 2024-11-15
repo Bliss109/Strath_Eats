@@ -48,9 +48,7 @@ if (isset($_SESSION['profile_picture'])) {
                         <img id="profileImagePreview" src="<?php echo $profilePicture; ?>" alt="profile_picture"/>
 
                         <!-- Change Photo Form -->
-                        <form action="../User/profile.php" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" name="user_id" value="1"> <!-- Replace with dynamic user ID -->
-
+                        <form id="profileForm" action="../User/profile.php" method="POST" enctype="multipart/form-data">
                             <!-- Hidden File Input -->
                             <input type="file" name="profile_picture" id="profilePictureInput" style="display: none;" accept="image/*" onchange="previewImage(event)">
 
@@ -140,6 +138,30 @@ if (isset($_SESSION['profile_picture'])) {
             };
             reader.readAsDataURL(event.target.files[0]);
         }
+
+        // Handle form submission
+        document.getElementById('profileForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+
+            fetch(this.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.success);
+                    location.reload();
+                } else {
+                    alert(data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while updating the profile picture.');
+            });
+        });
     </script>
 </body>
 
