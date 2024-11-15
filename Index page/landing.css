@@ -27,6 +27,7 @@ body {
 .logo-image {
     width: 130px;
     height: auto;
+    margin-top: 40px;
 }
 
 .nav {
