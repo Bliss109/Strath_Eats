@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 throw new Exception("Invalid file type. Only JPG, JPEG, and PNG are allowed.");
             }
 
-            if ($_FILES['profile_picture']['size'] > 5 * 1024 * 1024) { // 5MB limit
+            if ($_FILES['profile_picture']['size'] > 5 * 1024 * 1024) { 
                 throw new Exception("File size exceeds the 5MB limit.");
             }
 
