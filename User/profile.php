@@ -2,11 +2,14 @@
 session_start();
 require_once '../dbConn/Connection.php';
 
+header('Content-Type: application/json');
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         $pdo = (new Database())->getConnection();  
         
-        $user_id = $_POST['user_id'] ?? null;
+        // Assuming user_id is stored in the session
+        $user_id = $_SESSION['user_id'] ?? null;
         if (empty($user_id)) {
             throw new Exception("User ID is required.");
         }
