@@ -1,11 +1,8 @@
 <?php
-session_start(); // Start session to store image info
-
-// Check if the user has uploaded a profile picture and save it in the session
+session_start();
 if (isset($_SESSION['profile_picture'])) {
-    $profilePicture = $_SESSION['profile_picture'];
+    $profilePicture = 'uploads/' . $_SESSION['profile_picture'];
 } else {
-    // Default profile picture if no image uploaded
     $profilePicture = '../UserProfile/cindy.jpeg';
 }
 ?>
@@ -48,12 +45,10 @@ if (isset($_SESSION['profile_picture'])) {
                 <div class="left-section">
                     <div class="profile-photo">
                         <!-- Display Current Profile Image -->
-                        <img src="<?php echo $profilePicture; ?>" alt="Profile photo" id="profileImagePreview">
+                        <img id="profileImagePreview" src="<?php echo $profilePicture; ?>" alt="profile_picture"/>
 
                         <!-- Change Photo Form -->
-                        <form action="updateProfile.php" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" name="user_id" value="<?php echo $userId; ?>">
-
+                        <form id="profileForm" action="../User/profile.php" method="POST" enctype="multipart/form-data">
                             <!-- Hidden File Input -->
                             <input type="file" name="profile_picture" id="profilePictureInput" style="display: none;" accept="image/*" onchange="previewImage(event)">
 
@@ -103,7 +98,7 @@ if (isset($_SESSION['profile_picture'])) {
                         <input type="date" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>Address</label>
+                        <label>Student id (if applicable)</label>
                         <input type="text" class="form-control" value="">
                     </div>
                     <div class="form-group">
@@ -112,8 +107,8 @@ if (isset($_SESSION['profile_picture'])) {
                             <option value="">Select a role</option>
                             <option value="admin">Admin</option>
                             <option value="user">Student</option>
-                            <option value="editor">Editor</option>
-                            <option value="viewer">Viewer</option>
+                            <option value="editor">Cafeteria Manager</option>
+                            <option value="viewer">Delivery Guy</option>
                             <!-- Add more roles as needed -->
                         </select>
                     </div>
@@ -121,10 +116,7 @@ if (isset($_SESSION['profile_picture'])) {
                         <label>Payment Methods</label>
                         <div class="payment-methods">
                             <div class="payment-card">
-                                <img src="../UserProfile/visa.jpeg" alt="">
-                            </div>
-                            <div class="payment-card">
-                                <img src="../UserProfile/mpesa.jpeg" alt="">
+                                <a href="../Payment System/Payment System/index.php" ><img src="../UserProfile/mpesa.jpeg" alt=""></a>
                             </div>
                         </div>
                     </div>
@@ -146,6 +138,30 @@ if (isset($_SESSION['profile_picture'])) {
             };
             reader.readAsDataURL(event.target.files[0]);
         }
+
+        // Handle form submission
+        document.getElementById('profileForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+
+            fetch(this.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.success);
+                    location.reload();
+                } else {
+                    alert(data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while updating the profile picture.');
+            });
+        });
     </script>
 </body>
 
