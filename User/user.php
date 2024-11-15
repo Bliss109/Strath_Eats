@@ -15,7 +15,7 @@ class User
     {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO users (name, email, password, phone_number) VALUES (:name, :email, :password, :phone_number)";
+        $sql = "INSERT INTO users (name, email, password, phone_number, profile_picture) VALUES (:name, :email, :password, :phone_number, :profile_picture)";
         $stmt = $this->db->prepare($sql);
 
         // Bind parameters
@@ -23,7 +23,7 @@ class User
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $hashedPassword);
         $stmt->bindParam(':phone_number', $phone_number);
-        
+        $stmt->bindParam(':profile_picture', $profile_picture);
 
         try {
             return $stmt->execute();
@@ -34,7 +34,42 @@ class User
     }
 
     // Login user
-    
+    public function login($name, $password)
+{
+      // Trim whitespace from the name to avoid unintended issues
+      $name = trim($name);
+    // Fetch the user by name
+    $query = "SELECT * FROM users WHERE name = :name";
+    $stmt = $this->db->prepare($query);
+
+    // Bind the parameter
+    $stmt->bindParam(":name", $name);
+
+    // Execute the query
+    $stmt->execute();
+
+    // Fetch the result
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user) {
+        // Debug output to check hashed password in DB
+        echo "Stored hashed password: " . $user['password'] . "<br>";
+
+        // Verify the password
+        if (password_verify($password, $user['password'])) {
+            echo "Password matched!";
+            return ["success" => true, "user_id" => $user['user_id']];
+        } else {
+            echo "Password does not match.<br>";
+        }
+    } else {
+        echo "User not found.<br>";
+    }
+
+    return ["success" => false, "error" => "Invalid username or password."];
+}
+
+
 
     // Get user profile by user ID
     public function getUserProfile($userId)
