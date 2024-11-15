@@ -103,7 +103,7 @@ if (isset($_SESSION['profile_picture'])) {
                         <input type="date" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>Address</label>
+                        <label>Student id (if applicable)</label>
                         <input type="text" class="form-control" value="">
                     </div>
                     <div class="form-group">
@@ -112,8 +112,8 @@ if (isset($_SESSION['profile_picture'])) {
                             <option value="">Select a role</option>
                             <option value="admin">Admin</option>
                             <option value="user">Student</option>
-                            <option value="editor">Editor</option>
-                            <option value="viewer">Viewer</option>
+                            <option value="editor">Cafeteria Manager</option>
+                            <option value="viewer">Delivery Guy</option>
                             <!-- Add more roles as needed -->
                         </select>
                     </div>
@@ -121,10 +121,7 @@ if (isset($_SESSION['profile_picture'])) {
                         <label>Payment Methods</label>
                         <div class="payment-methods">
                             <div class="payment-card">
-                                <img src="../UserProfile/visa.jpeg" alt="">
-                            </div>
-                            <div class="payment-card">
-                                <img src="../UserProfile/mpesa.jpeg" alt="">
+                                <a href="../Payment System/Payment System/index.php" ><img src="../UserProfile/mpesa.jpeg" alt=""></a>
                             </div>
                         </div>
                     </div>
