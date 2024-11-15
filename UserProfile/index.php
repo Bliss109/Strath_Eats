@@ -1,14 +1,3 @@
-<?php
-session_start(); // Start session to store image info
-
-// Check if the user has uploaded a profile picture and save it in the session
-if (isset($_SESSION['profile_picture'])) {
-    $profilePicture = $_SESSION['profile_picture'];
-} else {
-    // Default profile picture if no image uploaded
-    $profilePicture = '../UserProfile/cindy.jpeg';
-}
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,11 +37,11 @@ if (isset($_SESSION['profile_picture'])) {
                 <div class="left-section">
                     <div class="profile-photo">
                         <!-- Display Current Profile Image -->
-                        <img src="<?php echo $profilePicture; ?>" alt="Profile photo" id="profileImagePreview">
+                        <img src="../UserProfile/cindy.jpeg" alt="profile_picture"/>
 
                         <!-- Change Photo Form -->
-                        <form action="updateProfile.php" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" name="user_id" value="<?php echo $userId; ?>">
+                        <form action="../UserProfile/updateProfile.php" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="user_id" value="">
 
                             <!-- Hidden File Input -->
                             <input type="file" name="profile_picture" id="profilePictureInput" style="display: none;" accept="image/*" onchange="previewImage(event)">
@@ -121,7 +110,7 @@ if (isset($_SESSION['profile_picture'])) {
                         <label>Payment Methods</label>
                         <div class="payment-methods">
                             <div class="payment-card">
-                                <a href="../Payment System/index.php" ><img src="../UserProfile/mpesa.jpeg" alt=""></a>
+                                <a href="../Payment System/Payment System/index.php" ><img src="../UserProfile/mpesa.jpeg" alt=""></a>
                             </div>
                         </div>
                     </div>
