@@ -1,14 +1,16 @@
-*{
-    padding:0;
-    margin:0;
+* {
+    padding: 0;
+    margin: 0;
 }
-body{
-    width:100%;
-    height:100vh;
-    background-image: url(Background2.png);
+
+body {
+    width: 100%;
+    height: 100vh;
+    background-image: url(../Images/Background2.png);
     background-size: cover;
 }
-.top{
+
+.top {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -17,49 +19,56 @@ body{
     padding: 0px 40px;
 }
 
-.logo{
+.logo {
     font-size: 30px;
-    color:orange;
-
+    color: orange;
 }
-.nav{
+
+.logo-image {
+    width: 130px;
+    height: auto;
+}
+
+.nav {
     position: relative;
-    left:15px;
-
+    left: 15px;
 }
-.nav a{
-    padding: 5px 5px ;
-    color:orange;
+
+.nav a {
+    padding: 5px 5px;
+    color: orange;
     font-size: 20px;
     text-decoration: none;
 }
 
-.nav a:hover{
-    color:white;
+.nav a:hover {
+    color: white;
     text-decoration: underline;
     text-underline-position: under;
 }
 
-.search{
+.search {
     font-size: 25px;
     position: relative;
     cursor: pointer;
-
 }
-.search i{
+
+.search i {
     margin-left: 10px;
     cursor: pointer;
 }
-.heading{
+
+.heading {
     display: flex;
     justify-content: space-between;
     padding: 65px;
     align-items: center;
 }
-.right{
+
+.right {
     width: 440px;
-    height:440px;
-    background-image: url(food.jpg);
+    height: 440px;
+    background-image: url(../Images/food.jpg);
     background-size: cover;
     border-radius: 400px;
     justify-content: center;
@@ -68,7 +77,8 @@ body{
     margin-right: 118px;
     margin-top: 46px;
 }
-.right:before{
+
+.right:before {
     width: 430px;
     height: 430px;
     border: 2px solid white;
@@ -77,83 +87,91 @@ body{
     border-radius: 440px;
     padding: 10px;
 }
-.left{
+
+.left {
     display: flex;
     flex-direction: column;
-    align-items: center; 
-    justify-content: center; 
+    align-items: center;
+    justify-content: center;
     text-align: center;
     padding-top: 20px;
 }
-.left p:nth-child(1){
-    color:white;
+
+.left p:nth-child(1) {
+    color: white;
     font-size: 30px;
     letter-spacing: 1px;
     font-style: italic;
 }
 
-.left h1{
+.left h1 {
     font-size: 90px;
-    color:white;
+    color: white;
 }
 
-.left p:nth-child(3){
-    color:orange;
+.left p:nth-child(3) {
+    color: orange;
     font-size: 40px;
-    font-style:italic;
+    font-style: italic;
 }
-.left .button{
+
+.left .button {
     display: block;
     width: 180px;
     height: 40px;
     font-size: 18px;
     border: 2px solid white;
     background-color: transparent;
-    color:white;
-    margin:10px 0px;
+    color: white;
+    margin: 10px 0px;
     text-align: center;
     line-height: 40px;
     cursor: pointer;
     border-radius: 25px;
     font-weight: bold;
-    transition: background-color 0.3s ease, color 0.3s ease; 
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
-.left .button:hover{
+
+.left .button:hover {
     background-color: white;
     color: orange;
     border-color: orange;
 }
-.social{
+
+.social {
     position: absolute;
-    right:0;
+    right: 0;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
     width: 40px;
-    height:200px;
+    height: 200px;
     background-color: white;
-    font-size:25px;
+    font-size: 25px;
 }
-.social i:hover{
-    color:orange;
+
+.social i:hover {
+    color: orange;
 }
+
 .sidebar {
     position: fixed;
     top: 0;
-    right: -200px; 
+    right: -200px;
     width: 200px;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
     flex-direction: column;
     padding-top: 80px;
-    transition: right 0.3s ease; 
+    transition: right 0.3s ease;
 }
 
-.sidebar visible{
-    right:0;
+.sidebar.open {
+    right: 0;
 }
+
 .sidebar a {
     display: block;
     padding: 15px;
@@ -161,18 +179,33 @@ body{
     text-decoration: none;
     font-size: 18px;
 }
+
 .sidebar a:hover {
     background-color: orange;
     color: white;
 }
 
+.sidebar-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
+}
 
 footer {
     text-align: center;
     padding: 20px;
     color: white;
     font-size: 14px;
-    position:fixed;
+    position: fixed;
     bottom: 0;
-    width:100%;
+    width: 100%;
+}
+/* Responsive styles to hide the plate image on smaller screens */
+@media (max-width: 830px) {
+    .right {
+        display: none; /* Hides the plate image on screens smaller than 768px */
+    }
 }

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StrathEats Ordering</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <aside class="sidebar1">
+        <div class="sidebar-close">
+            <i class="fa-solid fa-close"></i>
+        </div>
+      <h2>StrathEats</h2>
+      <img src="../../Images/Logo.jpeg" alt="StrathEats Logo" class="logo-image" />
+      <nav>
+        <ul>
+          <li><a href="#">Dashboard</a></li>
+          <li><a href="#">Food Order</a></li>
+          <li><a href="#">Favorite</a></li>
+          <li><a href="#">Message</a></li>
+          <li><a href="#">Order History</a></li>
+          <li><a href="#">Bills</a></li>
+          <li><a href="#">Login</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <header class="header">
+      <nav class="menu">
+        <div class="burger-icons">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+        <div class="search--box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search" />
+        </div>
+        <div class="menu--icons">
+          <i class="fa-solid fa-bowl-food"></i>
+          <div class="cart-icon">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>0</span>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <h1>Hello Student</h1>
+
+    <div class="content">
+      <section class="cover">
+        <div class="cover-overlay">
+          <h1>
+            <span class="slogan">Flavors on the Go, Fresh to the Core</span>
+          </h1>
+        </div>
+      </section>
+
+      <main>
+        <h2 class="section-heading">Categories</h2>
+        <div class="menu-list">
+            <div class="menu-item">
+                <img src="../../Images/chapati img.jpg " alt="" />
+                <h5>All Menu items</h5>
+              </div>
+          <div class="menu-item" id="breakfast-menu">
+            <img src="../../Images/chapati img.jpg" alt="" />
+            <h5>Breakfast</h5>
+          </div>
+          <div class="menu-item" id="lunch-menu">
+            <img src="../../Images/burger.jpg" alt="" />
+            <h5>Lunch</h5>
+          </div>
+          <div class="menu-item" id="dessert-menu">
+            <img src="../../Images/soda img.jpg" alt="" />
+            <h5>Dessert</h5>
+          </div>
+          <div class="menu-item" id="snacks-menu">
+            <img src="../../Images/Fries image.jpg" alt="" />
+            <h5>Snacks</h5>
+          </div>
+          <div class="menu-item" id="drinks-menu">
+            <img src="../../Images/chicken.jpg" alt="" />
+            <h5>Beverages</h5>
+          </div>
+        </div>
+
+        <!-- card item section-->
+        <h2 class="section-heading">Food Items</h2>
+        <div class="card-list">
+          <div class="card">
+            <img src="../../Images/food.jpg" alt="" />
+            <h4 class="card-title">Salad</h4>
+
+            <div class="card-price">
+              <span class="price">Ksh 350</span>
+              <i class="fa-solid fa-plus add-to-cart"></i>
+            </div>
+          </div>
+          <div class="card">
+            <img src="../../Images/burger.jpg" alt="" />
+            <h4 class="card-title">Burger</h4>
+
+            <div class="card-price">
+              <span class="price">Ksh 350</span>
+              <i class="fa-solid fa-plus add-to-cart"></i>
+            </div>
+          </div>
+          <div class="card">
+            <img src="../../Images/chicken wings.jpg" alt="" />
+            <h4 class="card-title">Nuggets</h4>
+
+            <div class="card-price">
+              <span class="price">Ksh 350</span>
+              <i class="fa-solid fa-plus add-to-cart"></i>
+            </div>
+          </div>
+          <div class="card">
+            <img src="../../Images/pizza.jpg" alt="" />
+            <h4 class="card-title">Pizza</h4>
+
+            <div class="card-price">
+              <span class="price">Ksh 350</span>
+              <i class="fa-solid fa-plus add-to-cart"></i>
+            </div>
+          </div>
+          <div class="card">
+            <img src="../../Images/soda img.jpg" alt="" />
+            <h4 class="card-title">Coffee</h4>
+
+            <div class="card-price">
+              <span class="price">Ksh 350</span>
+              <i class="fa-solid fa-plus add-to-cart"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- cart sidebar section-->
+        <div class="sidebar" id="sidebar">
+          <div class="sidebar-close">
+            <i class="fa-solid fa-close"></i>
+          </div>
+          <div class="cart-menu">
+            <h3>My Cart</h3>
+            <div class="cart-tems"></div>
+          </div>
+
+          <div class="sidebar-footer">
+            <div class="total-amount">
+              <h5>Total</h5>
+              <div class="cart-total">Ksh0.00</div>
+            </div>
+            <button class="checkout-btn">Checkout</button>
+          </div>
+        </div>
+      </main>
+    </div>
+    <footer class="footer">
+        <p>© 2024 StrathEats. All rights reserved.</p>
+      </footer>
+    <script src="main.js"></script>
+  </body>
+</html>

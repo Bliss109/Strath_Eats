@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>StrathEats </title>
+    <title>StrathEats</title>
     <link rel="stylesheet" href="landing.css" />
     <link
       rel="stylesheet"
@@ -15,13 +15,14 @@
   </head>
   <body>
     <div class="top">
-      <div class="logo">StrathEats Logo</div>
+      <div class="logo">
+        <img src="../Images/Logo.jpeg" alt="StrathEats Logo" class="logo-image" />
+      </div>
       <div class="nav">
         <a href="">Log in</a>
         <a href="">Home</a>
         <a href="">Menu</a>
         <a href="">About</a>
-        
       </div>
       <div class="search">
         <i class="fa-solid fa-bars" onclick="toggleSidebar()"></i>
@@ -36,7 +37,7 @@
         <button class="button">EXPLORE CAFES</button>
         <button class="button">JOIN US</button>
       </div>
-      <div class="right" id="food"></div>
+      <div class="right"></div>
       <div class="social">
         <i class="fa-brands fa-square-instagram"></i>
         <i class="fa-brands fa-square-x-twitter"></i>
@@ -44,15 +45,18 @@
       </div>
     </div>
 
-  
     <div class="sidebar" id="sidebar">
-        <a href="">Contact us</a>
+      <div class="sidebar-close">
+        <i class="fa-solid fa-close" onclick="toggleSidebar()"></i>
+      </div>
+      <a href="">Contact us</a>
       <a href="#">Terms and Conditions</a>
       <a href="#">FAQ</a>
       <a href="#">Newsletter</a>
     </div>
+
     <footer>
-        <p>&copy 2024 StrathEats.All rights reserved.</p>
+      <p>&copy 2024 StrathEats. All rights reserved.</p>
     </footer>
     <script src="script.js"></script>
   </body>
