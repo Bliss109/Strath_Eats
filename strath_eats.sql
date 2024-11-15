@@ -56,7 +56,7 @@ CREATE TABLE `categories` (
 --
 
 CREATE TABLE `deliveries` (
-  `delivery_id` int(11) NOT NULL,
+  `deliverer_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `delivery_status` enum('pending','pickup','delivery','completed') DEFAULT 'pending',
   `delivery_date` date DEFAULT NULL,
