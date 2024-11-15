@@ -1,5 +1,6 @@
 <?php
 require_once 'load.php';
 $deliveryModule->navbar();
-$deliveryModule->AvailableJobs();
+$userID=2;
+$deliveryModule->AvailableJobs($userID);
 ?>
