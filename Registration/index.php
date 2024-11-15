@@ -21,22 +21,28 @@
                 <img src="../Registration/Assets/facebook (2).png">
                 <img src="../Registration/Assets/twitterx.png">
             </div>
-            <!-- Login form remains unchanged -->
-            <form id="login" action="../User/login.php" class="input-group" method="POST">
-                <input type="text" class="input-field" placeholder="User Name" name="username" required>
-                <input type="password" class="input-field" placeholder="Enter Password" name="password" required>
+
+            <!-- Login Form -->
+            <form id="login" class="input-group" action="../User/login.php" method="POST">
+                <input type="text" class="input-field" placeholder="User Name" name="name" required id="username">
+                <!-- Password field with eye toggle -->
+                <div class="password-container">
+                    <input type="password" class="input-field" placeholder="Enter Password" name="password" required id="password">
+                    <span id="eye-icon" onclick="togglePasswordVisibility()" class="eye-icon">👁️</span>
+                </div>
                 <input type="checkbox" class="check-box"><span>Remember Password</span>
                 <button type="submit" class="submit-btn">Log In</button>
             </form>
 
-            <!-- Register form with updated ID and method for preventing default submission -->
-            <form id="register" class="input-group" method="POST" enctype="multipart/form-data">
+            <!-- Register Form -->
+            <form id="register" class="input-group" action="../User/register.php">
                 <input type="text" class="input-field" placeholder="User Name" name="name" required id="name">
                 <input type="email" class="input-field" placeholder="Email" name="email" required id="email">
-                <input type="password" class="input-field" placeholder="Enter Password" name="password" required id="password">
+                <div class="password-field">
+                    <input type="password" class="input-field" placeholder="Enter Password" name="password" required id="password">
+                    <span id="eye-icon" onclick="togglePasswordVisibility()" class="eye-icon">👁️</span>
+                </div>
                 <input type="tel" class="input-field" placeholder="e.g 2547xxxx" pattern="\254[0-9]{9}" name="phone_number" required id="phone_number">
-                <!-- Profile Picture Upload -->
-                <input type="file" class="input-field" name="profile_picture" accept="image/*" id="profile_picture">
                 <input type="checkbox" class="check-box" id="terms"><span>I agree to the terms & conditions</span>
                 <button type="submit" class="submit-btn">Register</button>
             </form>
@@ -59,6 +65,8 @@
             y.style.left = "450px";
             z.style.left = "0";
         }
+
+        // Registration form event listener
         document.getElementById('register').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent default form submission
 
@@ -68,74 +76,65 @@
             const password = document.getElementById('password').value;
             const phone_number = document.getElementById('phone_number').value;
             const termsAccepted = document.getElementById('terms').checked;
-            const profile_picture = document.getElementById('profile_picture').files[0]; // Get the selected file
 
-            // Log the collected data for debugging
-            console.log("name:", name);
-            console.log("Email:", email);
-            console.log("Password:", password);
-            console.log("Phone:", phone_number);
-            console.log("Profile Picture:", profile_picture);
-
-            // Check if terms are accepted
+            // Validate terms acceptance
             if (!termsAccepted) {
                 alert("You must agree to the terms & conditions.");
                 return;
             }
 
             // Check for empty fields
-            if (!username || !email || !password || !phone_number || !profile_picture) {
+            if (!name || !email || !password || !phone_number) {
                 alert("All fields are required!");
                 return;
             }
 
-            // Create FormData object to handle file upload and other form fields
-            const formData = new FormData();
-            formData.append('name', name);
-            formData.append('email', email);
-            formData.append('password', password);
-            formData.append('phone_number', phone_number);
+            // Create JSON data
+            const data = {
+                name: name,
+                email: email,
+                password: password,
+                phone_number: phone_number
+            };
 
-            // Append profile picture only if it's selected
-            if (profile_picture) {
-                formData.append('profile_picture', profile_picture);
-            }
-
-            // Send FormData using fetch API
+            // Send JSON data using fetch API
             fetch('../User/register.php', {
                     method: 'POST',
-                    body: formData
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
                 })
                 .then(response => response.text())
                 .then(result => {
-                    // Display server response
-                    alert(result);
+                    alert(result); // Display server response
                 })
                 .catch(error => {
                     console.error('Error:', error);
                 });
         });
 
-
+        // Login form event listener
         document.getElementById('login').addEventListener('submit', function(event) {
             event.preventDefault();
 
-            //Retrieve form data
+            // Retrieve form data
             const name = document.getElementById('name').value;
             const password = document.getElementById('password').value;
 
-            //Check for empty fields
+            // Check for empty fields
             if (!name || !password) {
                 alert("Both fields are required!");
                 return;
             }
-            //Create JSON data
+
+            // Create JSON data
             const data = {
                 name: name,
                 password: password
             };
 
-            //Send JSON data using fetch API
+            // Send JSON data using fetch API
             fetch('../User/login.php', {
                     method: 'POST',
                     headers: {
@@ -145,13 +144,26 @@
                 })
                 .then(response => response.text())
                 .then(result => {
-                    // Display server response (could be a success message or error)
-                    alert(result);
+                    alert(result); // Display server response
                 })
                 .catch(error => {
                     console.error('Error:', error);
                 });
         });
+        // Function to toggle password visibility
+        function togglePasswordVisibility() {
+            var passwordField = document.getElementById('password');
+            var eyeIcon = document.getElementById('eye-icon');
+            
+            // Toggle password field type between text and password
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                eyeIcon.textContent = "🙈";  // Change the icon to "hide"
+            } else {
+                passwordField.type = "password";
+                eyeIcon.textContent = "👁️";  // Change the icon to "show"
+            }
+        }
     </script>
 </body>
 
