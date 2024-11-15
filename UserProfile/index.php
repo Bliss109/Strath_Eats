@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (isset($_SESSION['profile_picture'])) {
+    $profilePicture = 'uploads/' . $_SESSION['profile_picture'];
+} else {
+    $profilePicture = '../UserProfile/cindy.jpeg';
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,11 +45,11 @@
                 <div class="left-section">
                     <div class="profile-photo">
                         <!-- Display Current Profile Image -->
-                        <img src="../UserProfile/cindy.jpeg" alt="profile_picture"/>
+                        <img id="profileImagePreview" src="<?php echo $profilePicture; ?>" alt="profile_picture"/>
 
                         <!-- Change Photo Form -->
                         <form action="../User/profile.php" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" name="user_id" value="">
+                            <input type="hidden" name="user_id" value="1"> <!-- Replace with dynamic user ID -->
 
                             <!-- Hidden File Input -->
                             <input type="file" name="profile_picture" id="profilePictureInput" style="display: none;" accept="image/*" onchange="previewImage(event)">
