@@ -40,7 +40,7 @@
                         <img src="../UserProfile/cindy.jpeg" alt="profile_picture"/>
 
                         <!-- Change Photo Form -->
-                        <form action="../UserProfile/updateProfile.php" method="POST" enctype="multipart/form-data">
+                        <form action="../User/profile.php" method="POST" enctype="multipart/form-data">
                             <input type="hidden" name="user_id" value="">
 
                             <!-- Hidden File Input -->
