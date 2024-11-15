@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 15, 2024 at 07:02 AM
+-- Host: 127.0.0.1:3307
+-- Generation Time: Nov 15, 2024 at 07:43 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -33,7 +33,9 @@ CREATE TABLE `cafeterias` (
   `location` varchar(255) NOT NULL,
   `contact_info` varchar(255) DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `open_hours` varchar(255) DEFAULT NULL
+  `open_hours` varchar(255) DEFAULT NULL,
+  `photo` varchar(255) DEFAULT NULL,
+  `menus` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -54,7 +56,7 @@ CREATE TABLE `categories` (
 --
 
 CREATE TABLE `deliveries` (
-  `deliverer_id` int(11) NOT NULL,
+  `delivery_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `delivery_status` enum('pending','pickup','delivery','completed') DEFAULT 'pending',
   `delivery_date` date DEFAULT NULL,
@@ -102,7 +104,10 @@ CREATE TABLE `products` (
   `price` decimal(10,2) NOT NULL,
   `category` varchar(100) DEFAULT NULL,
   `stock_quantity` int(11) DEFAULT 0,
-  `created_at` timestamp NULL DEFAULT current_timestamp()
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `picture` varchar(255) DEFAULT NULL,
+  `allergens` text DEFAULT NULL,
+  `preparation_time` int(11) DEFAULT NULL COMMENT 'Preparation time in minutes'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -178,9 +183,15 @@ CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `role` enum('client','staff','admin', 'deliverer') NOT NULL,
+  `role` enum('student','staff','admin','deliverer') NOT NULL,
   `password` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT current_timestamp()
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `balance` decimal(10,2) DEFAULT 0.00,
+  `phone_number` varchar(20) DEFAULT NULL,
+  `profile_picture` varchar(255) DEFAULT NULL,
+  `student_id` varchar(20) DEFAULT NULL,
+  `last_login` timestamp NULL DEFAULT NULL,
+  `status` enum('active','inactive','suspended') DEFAULT 'active'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -203,7 +214,7 @@ ALTER TABLE `categories`
 -- Indexes for table `deliveries`
 --
 ALTER TABLE `deliveries`
-  ADD PRIMARY KEY (`deliverer_id`,`order_id`),
+  ADD PRIMARY KEY (`delivery_id`,`order_id`),
   ADD KEY `idx_order_id` (`order_id`);
 
 --
@@ -284,12 +295,6 @@ ALTER TABLE `categories`
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `deliveries`
---
-ALTER TABLE `deliveries`
-  MODIFY `deliverer_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
@@ -335,7 +340,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
