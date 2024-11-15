@@ -11,11 +11,11 @@ class User
     }
 
     // Register a new user
-    public function register($name, $email, $password, $phone_number, $profile_picture = null)
+    public function register($name, $email, $password, $phone_number)
     {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO users (name, email, password, phone_number, profile_picture) VALUES (:name, :email, :password, :phone_number, :profile_picture)";
+        $sql = "INSERT INTO users (name, email, password, phone_number) VALUES (:name, :email, :password, :phone_number)";
         $stmt = $this->db->prepare($sql);
 
         // Bind parameters
@@ -23,7 +23,7 @@ class User
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $hashedPassword);
         $stmt->bindParam(':phone_number', $phone_number);
-        $stmt->bindParam(':profile_picture', $profile_picture);
+        
 
         try {
             return $stmt->execute();
