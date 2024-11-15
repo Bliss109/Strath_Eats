@@ -1,31 +1,29 @@
 <?php
 require_once '../dbConn/Connection.php';
 
-
 class User
 {
-    private $conn;
-    private $table = 'users';
+    private $db;
 
-    public function __construct(){
-        $db =new Database();
-        $this->conn = $db->getConnection();
+    public function __construct()
+    {
+        $this->db = (new Database())->getConnection();
     }
+
     // Register a new user
-    public function register($name, $email, $password, $phone_number)
+    public function register($name, $email, $password, $phone_number, $profile_picture = null)
     {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-
         $sql = "INSERT INTO users (name, email, password, phone_number) VALUES (:name, :email, :password, :phone_number)";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->db->prepare($sql);
 
         // Bind parameters
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $hashedPassword);
         $stmt->bindParam(':phone_number', $phone_number);
-
+        
 
         try {
             return $stmt->execute();
@@ -36,24 +34,7 @@ class User
     }
 
     // Login user
-    public function login($email, $password){
-        $sql = "SELECT * FROM " . $this->table . " WHERE email = :email";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
-
-        if($stmt->rowCount() > 0){
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-             if(password_verify($password, $user['password'])){
-                return $user;
-             }
-        }
-
-        return false;
-    }
-
-
+    
 
     // Get user profile by user ID
     public function getUserProfile($userId)
@@ -124,5 +105,4 @@ class User
         }
     }
 }
-
 
