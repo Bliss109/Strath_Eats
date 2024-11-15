@@ -1,11 +1,9 @@
 <?php
+require 'Connection.php';
+require 'testCon.php';
 header('Content-Type: application/json');
 
-// Database connection
-$mysqli = new mysqli('DB_HOST', 'DB_USER', 'DB_PASS', 'DB_NAME');
-if ($mysqli->connect_error) {
-    die(json_encode(['error' => $mysqli->connect_error]));
-}
+
 
 // Query to calculate monthly revenue
 $query = "

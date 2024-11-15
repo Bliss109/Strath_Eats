@@ -34,6 +34,27 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('deliveryWages').textContent = (totalRevenue * 0.1).toFixed(2);
         });
 
+    // Fetch Order Data
+    fetch('getOrderData.php')
+        .then(response => response.json())
+        .then(data => {
+            const orderDataContainer = document.getElementById('orderData');
+
+            data.forEach(order => {
+                const orderContainer = document.createElement('div');
+                orderContainer.classList.add('order-container');
+                orderContainer.innerHTML = `
+                    <p><strong>Order Date:</strong> ${new Date(order.order_date).toLocaleString()}</p>
+                    <p><strong>Product:</strong> ${order.product_name}</p>
+                    <p><strong>Quantity:</strong> ${order.quantity}</p>
+                    <p><strong>Price per Item:</strong> $${order.price.toFixed(2)}</p>
+                    <p><strong>Total Price:</strong> $${order.total_price.toFixed(2)}</p>
+                `;
+                orderDataContainer.appendChild(orderContainer);
+            });
+        })
+        .catch(error => console.error('Error fetching order data:', error));
+
     // Chart: Popular Dish Categories
     fetch('getDishCategoryData.php')
         .then(response => response.json())

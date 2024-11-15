@@ -1,21 +1,12 @@
 <?php
-// session_start();
-// if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Cafeteria Manager') {
-//     header("Location: login.php");
-//     exit();
-// }
-
-// Database connection
-$host = 'localhost';
-$dbname = 'strath_eats';
-$username = 'root';
-$password = '';
-
-$db = new mysqli($host, $username, $password, $dbname);
-
-if ($db->connect_error) {
-    die("Connection failed: " . $db->connect_error);
+session_start();
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Cafeteria Manager') {
+    header("Location: login.php");
+    exit();
 }
+
+require 'Connection.php';
+require 'testCon.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $name = $_POST['menuName'];
