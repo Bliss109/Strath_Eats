@@ -1,29 +1,31 @@
 <?php
 require_once '../dbConn/Connection.php';
 
+
 class User
 {
-    private $db;
+    private $conn;
+    private $table = 'users';
 
-    public function __construct()
-    {
-        $this->db = (new Database())->getConnection();
+    public function __construct(){
+        $db =new Database();
+        $this->conn = $db->getConnection();
     }
-
     // Register a new user
-    public function register($name, $email, $password, $phone_number, $profile_picture = null)
+    public function register($name, $email, $password, $phone_number)
     {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO users (name, email, password, phone_number, profile_picture) VALUES (:name, :email, :password, :phone_number, :profile_picture)";
-        $stmt = $this->db->prepare($sql);
+
+        $sql = "INSERT INTO users (name, email, password, phone_number) VALUES (:name, :email, :password, :phone_number)";
+        $stmt = $this->conn->prepare($sql);
 
         // Bind parameters
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $hashedPassword);
         $stmt->bindParam(':phone_number', $phone_number);
-        $stmt->bindParam(':profile_picture', $profile_picture);
+
 
         try {
             return $stmt->execute();
@@ -34,40 +36,22 @@ class User
     }
 
     // Login user
-    public function login($name, $password)
-{
-      // Trim whitespace from the name to avoid unintended issues
-      $name = trim($name);
-    // Fetch the user by name
-    $query = "SELECT * FROM users WHERE name = :name";
-    $stmt = $this->db->prepare($query);
+    public function login($email, $password){
+        $sql = "SELECT * FROM " . $this->table . " WHERE email = :email";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
 
-    // Bind the parameter
-    $stmt->bindParam(":name", $name);
+        if($stmt->rowCount() > 0){
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Execute the query
-    $stmt->execute();
-
-    // Fetch the result
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($user) {
-        // Debug output to check hashed password in DB
-        echo "Stored hashed password: " . $user['password'] . "<br>";
-
-        // Verify the password
-        if (password_verify($password, $user['password'])) {
-            echo "Password matched!";
-            return ["success" => true, "user_id" => $user['user_id']];
-        } else {
-            echo "Password does not match.<br>";
+             if(password_verify($password, $user['password'])){
+                return $user;
+             }
         }
-    } else {
-        echo "User not found.<br>";
-    }
 
-    return ["success" => false, "error" => "Invalid username or password."];
-}
+        return false;
+    }
 
 
 
@@ -140,4 +124,5 @@ class User
         }
     }
 }
+
 
