@@ -3,7 +3,26 @@
     padding: 0;
     font-family: sans-serif;
 }
+/* Custom scrollbar for the entire page */
+::-webkit-scrollbar {
+    width: 12px; /* Width of the scrollbar */
+}
+.eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+.password-container > .eye-icon{
+    top: 42%;
+    position: absolute;
+    right: 10px;
+}
 
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Track (background of the scrollbar) */
+}
 .hero {
     height: 100vh;
     width: 100%;
@@ -21,6 +40,15 @@
     background: #fff;
     padding: 5px;
     overflow: hidden;
+    overflow-y: scroll; /* Allow vertical scrolling */
+}
+.form-box::-webkit-scrollbar {
+    width: 0px; /* Remove scrollbar but still allow scroll */
+    background: transparent; /* Make background transparent */
+}
+/* Hide scrollbar on Firefox */
+.form-box {
+    scrollbar-width: none; /* Firefox */
 }
 
 .button-box {
@@ -100,3 +128,4 @@ span{
 #register{
     left: 450px;
 }
+
