@@ -70,6 +70,7 @@ CREATE TABLE `deliveries` (
 --
 
 CREATE TABLE `orders` (
+  `status` varchar(100) NOT NULL,
   `order_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `order_date` timestamp NULL DEFAULT current_timestamp(),
