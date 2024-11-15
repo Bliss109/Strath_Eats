@@ -47,6 +47,7 @@ class DeliveryModule {
                 echo "<td>
                         <form method='POST'>
                             <input type='hidden' name='order_id' value='{$job['order_id']}'>
+                            <input type='hidden' name='userID' value='$userID'>
                             <button type='submit' name='take_job'>Take Job</button>
                         </form>
                       </td>";
@@ -56,8 +57,9 @@ class DeliveryModule {
             echo "</table>";
     
             // Handle Take Job button action
-            if (isset($_POST['take_job']) && isset($_POST['order_id'])) {
+            if (/*isset($_POST['take_job']) && */isset($_POST['order_id'])) {
                 $orderId = $_POST['order_id'];
+                $userID = $_POST['userID'];
                 $this->assignJobToDeliverer($orderId, $userId);
             }
         } else {
@@ -65,7 +67,7 @@ class DeliveryModule {
         }
     }
     
-    public function assignJobToDeliverer($orderId, $delivererId) {
+    public function assignJobToDeliverer($orderId, $userId) {
         // Update the delivery record to assign deliverer and set status to 'pickup'
         $stmt = $this->pdo->prepare("
             UPDATE deliveries 
@@ -73,7 +75,7 @@ class DeliveryModule {
             WHERE order_id = :order_id AND delivery_status = 'pending'
         ");
         $stmt->execute([
-            'deliverer_id' => $delivererId,
+            'deliverer_id' => $userId,
             'order_id' => $orderId
         ]);
     }
@@ -121,11 +123,34 @@ class DeliveryModule {
                 echo "<td>{$job['delivery_status']}</td>";
                 echo "<td>{$job['delivery_location']}</td>";
                 echo "<td>
-                        <form method='POST'>
+                        <form method='POST' >
                             <input type='hidden' name='order_id' value='{$job['order_id']}'>
-                            <button action='$this->PickDeliveryForm()' type='submit' name='pickup'>Pickup</button>
-                        </form>
-                      </td>";
+                            <button type='submit' name='pickup'>Pickup</button>
+                        </form>";
+
+                        if(isset($_POST['order_id'])){
+                            echo "<form method='POST'>
+                                <label>Enter your ID and the order ID for validation</label>
+                                <label for='order_id'>Order ID:</label>
+                                <input type='text' name='order_id' required>
+                                <label for='user_id'>Deliverer ID:</label>
+                                <input type='text' name='deliverer_id' required>
+                                <button type='submit' name='pick_delivery'>Pick Delivery</button>
+                                </form>";
+                                if (isset($_POST['pick_delivery'])) {
+                                    $orderId = $_POST['order_id'];
+                                    $userId = $_POST['user_id'];
+                                    $stmt = $this->pdo->prepare("SELECT order_id, deliverer_id FROM deliveries WHERE order_id = $orderId");
+                                    $stmt->execute();
+                                    $order_id1 = $result['order_id'];
+                                    $deliverer_id = $result['deliverer_id'];
+                                    if ($orderId==$order_id1 && $userId==$deliverer_id){
+                                        $deliveryModule->pickDelivery($orderId, $userId);
+                                
+                                        }
+                                }
+                        }
+                      "</td>";
                 echo "</tr>";
             }
             
@@ -240,16 +265,19 @@ class DeliveryModule {
 
 
  
-public function PickDeliveryForm(){
-    echo "<form method='POST' action='$this->pickDeliveryAction()'>
-    <label>Enter your ID and the order ID for validation</label>
-    <label for='order_id'>Order ID:</label>
-    <input type='text' name='order_id' required>
-    <label for='user_id'>Deliverer ID:</label>
-    <input type='text' name='deliverer_id' required>
-    <button type='submit' name='pick_delivery'>Pick Delivery</button>
-    </form>";
-}
+/*public function PickDeliveryForm(){
+        if(isset($_POST['order_id'])){
+            echo "<form method='POST' action='$this->pickDeliveryAction()'>
+            <label>Enter your ID and the order ID for validation</label>
+            <label for='order_id'>Order ID:</label>
+            <input type='text' name='order_id' required>
+            <label for='user_id'>Deliverer ID:</label>
+            <input type='text' name='deliverer_id' required>
+            <button type='submit' name='pick_delivery'>Pick Delivery</button>
+            </form>";
+    }
+    
+}*/
 public function pickDeliveryAction(){
     if (isset($_POST['pick_delivery'])) {
         $orderId = $_POST['order_id'];
