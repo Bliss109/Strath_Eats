@@ -2,7 +2,7 @@
 
 session_start();
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Cafeteria_Manager') {
-    header("Location: login.php");
+    header("Location: landing.html");
     exit();
 }
 
