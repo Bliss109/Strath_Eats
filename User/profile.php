@@ -1,17 +1,32 @@
 <?php
-require_once 'dbConn\Connection.php'; 
+require_once 'dbConn/Connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
+        $pdo = (new Database())->getConnection();  
         
-        $user_id = $_POST['user_id'];
+        $user_id = $_POST['user_id'] ?? null;
         if (empty($user_id)) {
             throw new Exception("User ID is required.");
         }
 
         
+        $stmt = $pdo->prepare("SELECT profile_picture FROM users WHERE id = ?");
+        $stmt->execute([$user_id]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$user) {
+            throw new Exception("User not found.");
+        }
+
+        
         if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === UPLOAD_ERR_OK) {
             $upload_dir = '../uploads/profile_pictures/';
+            if (!is_dir($upload_dir)) {
+                if (!mkdir($upload_dir, 0777, true)) {
+                    throw new Exception("Failed to create upload directory.");
+                }
+            }
+
             $file_name = basename($_FILES['profile_picture']['name']);
             $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
             $allowed_exts = ['jpg', 'jpeg', 'png'];
@@ -20,11 +35,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 throw new Exception("Invalid file type. Only JPG, JPEG, and PNG are allowed.");
             }
 
+            if ($_FILES['profile_picture']['size'] > 5 * 1024 * 1024) { // 5MB limit
+                throw new Exception("File size exceeds the 5MB limit.");
+            }
+
+            
             $new_file_name = uniqid("profile_", true) . ".$file_ext";
             $target_path = $upload_dir . $new_file_name;
 
+            
             if (!move_uploaded_file($_FILES['profile_picture']['tmp_name'], $target_path)) {
                 throw new Exception("Failed to upload profile picture.");
+            }
+
+            
+            if (!empty($user['profile_picture'])) {
+                $old_file_path = $upload_dir . $user['profile_picture'];
+                if (file_exists($old_file_path)) {
+                    unlink($old_file_path);
+                }
             }
 
             
@@ -32,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute([$new_file_name, $user_id]);
         }
 
+        
         $stmt = $pdo->prepare("
             UPDATE users SET
                 first_name = :first_name,
@@ -56,11 +86,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':user_id' => $user_id,
         ]);
 
-        echo "Profile updated successfully.";
+        echo json_encode(['message' => 'Profile updated successfully.']);
     } catch (Exception $e) {
-        echo "Error: " . $e->getMessage();
+        http_response_code(400);
+        echo json_encode(['error' => $e->getMessage()]);
     }
 } else {
-    echo "Invalid request method.";
+    http_response_code(405);
+    echo json_encode(['error' => 'Invalid request method.']);
 }
-?>
