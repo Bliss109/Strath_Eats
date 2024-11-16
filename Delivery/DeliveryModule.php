@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Deliveries</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+
 <?php
 class DeliveryModule {
     private $pdo;
@@ -13,17 +23,16 @@ class DeliveryModule {
     }
 
     // Function to display deliveries with "Add Delivery" buttons
-    
     public function navbar() {
         echo '
         <nav>
             <ul>
-                <li><a href="DeliveryHome.php">Home</a></li>
-                <li><a href="DeliveryProfile.php">Profile</a></li>
-                <li><a href="DeliveryWallet.php">Wallet</a></li>
-                <li><a href="AvailableJobs.php">Available Jobs </a></li>
-                <li><a href="#">Order</a></li>
-                <li><a href="#">Logout</a></li>
+                <a href="DeliveryHome.php">Home</a>
+                <a href="DeliveryProfile.php">Profile</a>
+                <a href="DeliveryWallet.php">Wallet</a>
+                <a href="AvailableJobs.php">Available Jobs </a>
+                <a href="#">Order</a>
+                <a href="#">Logout</a>
             </ul>
         </nav>
         ';
@@ -113,7 +122,7 @@ class DeliveryModule {
         $jobs = $stmt->fetchAll();
     
         if ($jobs) {
-            echo "Your current jobs ready to be picked up are:";
+            echo "<h3>Your current jobs ready to be picked up are:";
             echo "<table>";
             echo "<tr><th>Order ID</th><th>Delivery Status</th><th>Delivery Location</th><th>Action</th></tr>";
     
@@ -165,7 +174,7 @@ class DeliveryModule {
         $jobs = $stmt->fetchAll();
     
         if ($jobs) {
-            echo "<h3>Your current jobs on delivery jobs are:</h3>";
+            echo "<h3>Your current jobs on delivery are:</h3>";
             echo "<table>";           
             echo "<tr><th>Order ID</th><th>Delivery Status</th><th>Delivery Location</th><th>Action</th></tr>";
     
@@ -351,3 +360,5 @@ public function completeDeliveryAction(){
 
 
 ?>
+ </body>
+ </html>
