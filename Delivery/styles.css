@@ -30,20 +30,20 @@ h2 {
 
 header.navbar-header {
     text-align: center;
-    background-color: rgb(55, 50, 42); 
+    background-color: rgb(90, 68, 34); 
     color: rgb(254, 254, 254); 
-    padding: 10px 20px; /* Spacing around the content */
+    padding: 3px 3px; /* Spacing around the content */
     display: flex; /* Flexbox for layout control */
     align-items: center; /* Vertically align content */
-    justify-content: space-between; /* Spread items across the navbar */
+    justify-content: flex-start; /* Spread items across the navbar */
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    border-radius: 5px;
 }
 
-/* Optional styling for links within the navbar */
 header.navbar-header a {
-    color: white; /* White links */
-    text-decoration: none; /* Remove underline */
-    padding: 0 10px; /* Add spacing between links */
+    color: white; 
+    text-decoration: none; 
+    padding: 0 50px; /* Add spacing between links */
 }
 
 
@@ -69,4 +69,15 @@ table th, table td {
 table th {
     background-color: papayawhip;
     color: black;
+}
+
+.logo {
+    font-size: 30px;
+    color: orange;
+}
+
+.logo-image {
+    width: 130px;
+    height: auto;
+    margin-right: 100px;
 }
