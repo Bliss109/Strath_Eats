@@ -23,7 +23,7 @@
             </div>
 
             <!-- Login Form -->
-            <form id="login" class="input-group" action="../User/login.php" method="POST">
+            <form id="login" class="input-group" action="../User/login.php" method="POST" onsubmit="submitLoginForm(event)">
                 <input type="text" class="input-field" placeholder="User Name" name="name" required id="username">
                 <!-- Password field with eye toggle -->
                 <div class="password-container">
@@ -35,7 +35,7 @@
             </form>
 
             <!-- Register Form -->
-            <form id="register" class="input-group" action="../User/register.php">
+            <form id="register" class="input-group" action="../User/register.php" method="POST" onsubmit="submitRegisterForm(event)">
                 <input type="text" class="input-field" placeholder="User Name" name="name" required id="name">
                 <input type="email" class="input-field" placeholder="Email" name="email" required id="email">
                 <div class="password-field">
@@ -43,7 +43,7 @@
                     <span id="eye-icon" onclick="togglePasswordVisibility()" class="eye-icon">👁️</span>
                 </div>
                 <input type="tel" class="input-field" placeholder="e.g 2547xxxx" pattern="\254[0-9]{9}" name="phone_number" required id="phone_number">
-                <input type="checkbox" class="check-box" id="terms"><span>I agree to the terms & conditions</span>
+                <input type="checkbox" class="check-box" id="terms" name="terms"><span>I agree to the terms & conditions</span>
                 <button type="submit" class="submit-btn">Register</button>
             </form>
         </div>
@@ -66,90 +66,6 @@
             z.style.left = "0";
         }
 
-        // Registration form event listener
-        document.getElementById('register').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
-
-            // Retrieve form data
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const phone_number = document.getElementById('phone_number').value;
-            const termsAccepted = document.getElementById('terms').checked;
-
-            // Validate terms acceptance
-            if (!termsAccepted) {
-                alert("You must agree to the terms & conditions.");
-                return;
-            }
-
-            // Check for empty fields
-            if (!name || !email || !password || !phone_number) {
-                alert("All fields are required!");
-                return;
-            }
-
-            // Create JSON data
-            const data = {
-                name: name,
-                email: email,
-                password: password,
-                phone_number: phone_number
-            };
-
-            // Send JSON data using fetch API
-            fetch('../User/register.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                })
-                .then(response => response.text())
-                .then(result => {
-                    alert(result); // Display server response
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        });
-
-        // Login form event listener
-        document.getElementById('login').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            // Retrieve form data
-            const name = document.getElementById('name').value;
-            const password = document.getElementById('password').value;
-
-            // Check for empty fields
-            if (!name || !password) {
-                alert("Both fields are required!");
-                return;
-            }
-
-            // Create JSON data
-            const data = {
-                name: name,
-                password: password
-            };
-
-            // Send JSON data using fetch API
-            fetch('../User/login.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                })
-                .then(response => response.text())
-                .then(result => {
-                    alert(result); // Display server response
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        });
         // Function to toggle password visibility
         function togglePasswordVisibility() {
             var passwordField = document.getElementById('password');
@@ -163,6 +79,60 @@
                 passwordField.type = "password";
                 eyeIcon.textContent = "👁️";  // Change the icon to "show"
             }
+        }
+
+        function submitLoginForm(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const form = event.target;
+            const formData = new FormData(form);
+            const data = {};
+
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            fetch(form.action, {
+                method: form.method,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                alert(result.message); // Display server response
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function submitRegisterForm(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const form = event.target;
+            const formData = new FormData(form);
+            const data = {};
+
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            fetch(form.action, {
+                method: form.method,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                alert(result.message); // Display server response
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         }
     </script>
 </body>

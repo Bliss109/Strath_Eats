@@ -70,6 +70,7 @@ CREATE TABLE `deliveries` (
 --
 
 CREATE TABLE `orders` (
+  `status` varchar(100) NOT NULL,
   `order_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `order_date` timestamp NULL DEFAULT current_timestamp(),
@@ -183,7 +184,7 @@ CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `role` enum('student','staff','admin','deliverer') NOT NULL,
+  `role` enum('student','staff','admin','deliverer', 'Cafeteria_Manager') NOT NULL,
   `password` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `balance` decimal(10,2) DEFAULT 0.00,

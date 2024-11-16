@@ -1,11 +1,11 @@
 <?php
-/*
+
 session_start();
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Cafeteria Manager') {
-    header("Location: login.php");
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Cafeteria_Manager') {
+    header("Location: landing.html");
     exit();
 }
-*/
+
 ?>
 
 <!DOCTYPE html>
