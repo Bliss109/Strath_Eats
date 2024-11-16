@@ -47,7 +47,7 @@ $conn->close();
                 <th>Role</th>
                 <th>Password</th>
                 <th>Phone Number</th>
-                <th>Profile</th>
+                <th>Profile Picture</th>
                 <th>Student ID</th>
             </tr>
         </thead>
