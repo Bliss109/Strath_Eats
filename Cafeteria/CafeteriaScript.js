@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const viewButton = document.createElement('button');
         viewButton.textContent = "View Menu";
         viewButton.onclick = function() {
-            window.location.href = `Index page/index.html?cafeteria=${cafeteria.name}`;
+            window.location.href = `Index page 2/Index page 2/index.html?cafeteria=${cafeteria.name}`;
         };
 
         // Append elements to the card
