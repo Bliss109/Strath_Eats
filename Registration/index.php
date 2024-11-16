@@ -24,11 +24,11 @@
 
             <!-- Login Form -->
             <form id="login" class="input-group" action="../User/login.php" method="POST" onsubmit="submitLoginForm(event)">
-                <input type="text" class="input-field" placeholder="User Name" name="name" required id="username">
+                <input type="email" class="input-field" placeholder="email" name="email" required id="email">
                 <!-- Password field with eye toggle -->
                 <div class="password-container">
                     <input type="password" class="input-field" placeholder="Enter Password" name="password" required id="password">
-                    <span id="eye-icon" onclick="togglePasswordVisibility()" class="eye-icon">👁️</span>
+                    <span id="eye-icon" onclick="togglePasswordVisibility()" class="eye-icon">👁</span>
                 </div>
                 <input type="checkbox" class="check-box"><span>Remember Password</span>
                 <button type="submit" class="submit-btn">Log In</button>
@@ -40,7 +40,7 @@
                 <input type="email" class="input-field" placeholder="Email" name="email" required id="email">
                 <div class="password-field">
                     <input type="password" class="input-field" placeholder="Enter Password" name="password" required id="password">
-                    <span id="eye-icon" onclick="togglePasswordVisibility()" class="eye-icon">👁️</span>
+                    <span id="eye-icon" onclick="togglePasswordVisibility()" class="eye-icon">👁</span>
                 </div>
                 <input type="tel" class="input-field" placeholder="e.g 2547xxxx" pattern="\254[0-9]{9}" name="phone_number" required id="phone_number">
                 <input type="checkbox" class="check-box" id="terms" name="terms"><span>I agree to the terms & conditions</span>
@@ -77,7 +77,7 @@
                 eyeIcon.textContent = "🙈";  // Change the icon to "hide"
             } else {
                 passwordField.type = "password";
-                eyeIcon.textContent = "👁️";  // Change the icon to "show"
+                eyeIcon.textContent = "👁";  // Change the icon to "show"
             }
         }
 
