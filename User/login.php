@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    $password = $data['password'] ?? '';
 
    if (empty($email) || empty($password)) {
-      echo json_encode(["message" => "Both name and password are required!"]);
+      echo json_encode(["message" => "Both email and password are required!"]);
       exit;
    }
 
