@@ -72,7 +72,7 @@ $conn->close();
         <section class="cover">
             <div class="cover-overlay">
                 <h1>
-                    <span class="slogan">Satisfy Your Sweet Tooth!</span>
+                    <span class="slogan">Sip, Relax, and Refresh Your Spirit!</span>
                 </h1>
             </div>
         </section>
