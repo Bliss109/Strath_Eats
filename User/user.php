@@ -34,16 +34,16 @@ class User
     }
 
     // Login user
-    public function login($name, $password)
+    public function login($email, $password)
 {
       // Trim whitespace from the name to avoid unintended issues
-      $name = trim($name);
+      $email = trim($email);
     // Fetch the user by name
-    $query = "SELECT * FROM users WHERE name = :name";
+    $query = "SELECT * FROM users WHERE email = :email";
     $stmt = $this->db->prepare($query);
 
     // Bind the parameter
-    $stmt->bindParam(":name", $name);
+    $stmt->bindParam(":email", $email);
 
     // Execute the query
     $stmt->execute();
@@ -140,4 +140,3 @@ class User
         }
     }
 }
-
