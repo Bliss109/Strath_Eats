@@ -132,20 +132,21 @@ class DeliveryModule {
                             echo "<form method='POST'>
                                 <label>Enter your ID and the order ID for validation</label>
                                 <label for='order_id'>Order ID:</label>
-                                <input type='text' name='order_id' required>
+                                <input type='text' name='order_id'required>
                                 <label for='user_id'>Deliverer ID:</label>
                                 <input type='text' name='deliverer_id' required>
-                                <button type='submit' name='pick_delivery'>Pick Delivery</button>
+                                <button type='submit' name='pick_delivery' value='pick_delivery'>Pick Delivery</button>
                                 </form>";
                                 if (isset($_POST['pick_delivery'])) {
                                     $orderId = $_POST['order_id'];
-                                    $userId = $_POST['user_id'];
+                                    $userId = $_POST['deliverer_id'];
                                     $stmt = $this->pdo->prepare("SELECT order_id, deliverer_id FROM deliveries WHERE order_id = $orderId");
                                     $stmt->execute();
+                                    $result = $stmt->fetch();
                                     $order_id1 = $result['order_id'];
                                     $deliverer_id = $result['deliverer_id'];
                                     if ($orderId==$order_id1 && $userId==$deliverer_id){
-                                        $deliveryModule->pickDelivery($orderId, $userId);
+                                        $this->pickDelivery($orderId, $userId);
                                 
                                         }
                                 }
@@ -164,8 +165,8 @@ class DeliveryModule {
         $jobs = $stmt->fetchAll();
     
         if ($jobs) {
-            echo "<table>";
             echo "<h3>Your current jobs on delivery jobs are:</h3>";
+            echo "<table>";           
             echo "<tr><th>Order ID</th><th>Delivery Status</th><th>Delivery Location</th><th>Action</th></tr>";
     
             foreach ($jobs as $job) {
@@ -260,7 +261,7 @@ class DeliveryModule {
         ");
         $stmt->execute(['user_id' => $userId]);
         $results = $stmt->fetchAll();
-    }
+    } 
 
 
 
