@@ -11,7 +11,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$query = "SELECT u.user_id, u.name, u.email, ut.role, u.password, u.phone_number, u.student_id
+$query = "SELECT u.user_id, u.name, u.email, ut.role, u.phone_number, u.student_id
           FROM users u
           JOIN users ut ON u.user_id = ut.user_id";
 $result = $conn->query($query);
@@ -45,7 +45,6 @@ $conn->close();
                 <th>Name</th>
                 <th>Email</th>
                 <th>Role</th>
-                <th>Password</th>
                 <th>Phone Number</th>
                 <th>Profile</th>
                 <th>Student ID</th>
@@ -59,7 +58,6 @@ $conn->close();
                         <td><?php echo htmlspecialchars($user['name']); ?></td>
                         <td><?php echo htmlspecialchars($user['email']); ?></td>
                         <td><?php echo htmlspecialchars($user['role']); ?></td>
-                        <td><?php echo htmlspecialchars($user['password']); ?></td>
                         <td><?php echo htmlspecialchars($user['phone_number']); ?></td>
                         <?php if (!empty($user['profile_picture'])): ?>
                                 <img src="Uploads/<?php echo htmlspecialchars($user['profile_picture']); ?>" alt="Profile Picture" style="width:25px;height:25px;">
