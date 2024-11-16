@@ -28,15 +28,17 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `cafeterias` (
-  `cafe_id` int(11) NOT NULL,
-  `cafe_name` varchar(100) NOT NULL,
-  `location` varchar(255) NOT NULL,
-  `contact_info` varchar(255) DEFAULT NULL,
-  `description` text DEFAULT NULL,
-  `open_hours` varchar(255) DEFAULT NULL,
-  `photo` varchar(255) DEFAULT NULL,
-  `menus` text DEFAULT NULL
+  `cafe_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `cafe_name` VARCHAR(100) NOT NULL,
+  `location` VARCHAR(255) NOT NULL,
+  `contact_info` VARCHAR(255) DEFAULT NULL,
+  `description` TEXT DEFAULT NULL,
+  `open_hours` VARCHAR(255) DEFAULT NULL,
+  `photo` VARCHAR(255) DEFAULT NULL,
+  `menus` TEXT DEFAULT NULL,
+  PRIMARY KEY (`cafe_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 -- --------------------------------------------------------
 
@@ -99,17 +101,22 @@ CREATE TABLE `order_items` (
 --
 
 CREATE TABLE `products` (
-  `product_id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `description` text DEFAULT NULL,
-  `price` decimal(10,2) NOT NULL,
-  `category` varchar(100) DEFAULT NULL,
-  `stock_quantity` int(11) DEFAULT 0,
-  `created_at` timestamp NULL DEFAULT current_timestamp(),
-  `picture` varchar(255) DEFAULT NULL,
-  `allergens` text DEFAULT NULL,
-  `preparation_time` int(11) DEFAULT NULL COMMENT 'Preparation time in minutes'
+  `product_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NOT NULL,
+  `description` TEXT DEFAULT NULL,
+  `price` DECIMAL(10,2) NOT NULL,
+  `category` enum('student','staff','admin','deliverer', 'Cafeteria_Manager')DEFAULT NULL,
+  `stock_quantity` INT(11) DEFAULT 0,
+  `created_at` TIMESTAMP NULL DEFAULT current_timestamp(),
+  `picture` VARCHAR(255) DEFAULT NULL,
+  `allergens` TEXT DEFAULT NULL,
+  `preparation_time` INT(11) DEFAULT NULL COMMENT 'Preparation time in minutes',
+  `cafeteria_id` INT(11) NOT NULL,
+  PRIMARY KEY (`product_id`),
+  KEY `fk_cafeteria` (`cafeteria_id`),
+  CONSTRAINT `fk_cafeteria` FOREIGN KEY (`cafeteria_id`) REFERENCES `cafeterias`(`cafe_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 -- --------------------------------------------------------
 
@@ -390,7 +397,4 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
-ALTER TABLE `products`
-ADD COLUMN `cafeteria_id` INT NOT NULL,
-ADD CONSTRAINT `fk_cafeteria`
-FOREIGN KEY (`cafeteria_id`) REFERENCES `cafeterias`(`id`);
+
