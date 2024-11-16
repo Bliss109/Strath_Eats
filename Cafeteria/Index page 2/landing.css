@@ -69,7 +69,7 @@ body {
 .right {
     width: 440px;
     height: 440px;
-    background-image: url(../Images/food.jpg);
+    background-image: url(../../Images/food.jpg);
     background-size: cover;
     border-radius: 400px;
     justify-content: center;
