@@ -1,6 +1,6 @@
 <?php
-require '../../dbConn/Connection.php'; // Your database connection file
-require '../../dbConn/testCon.php'; 
+require '../../../dbConn/Connection.php'; // Your database connection file
+require '../../../dbConn/testCon.php'; 
 
 // Fetch desserts for the respective cafeteria
 $cafeteria_id = isset($_GET['cafeteria_id']) ? intval($_GET['cafeteria_id']) : 1; // Default to cafeteria ID 1
@@ -68,7 +68,7 @@ $conn->close();
 
     <!-- Main Content -->
     <div class="content">
-        <h1>Dessert Menu</h1>
+        <h1>Drinks Menu</h1>
         <section class="cover">
             <div class="cover-overlay">
                 <h1>

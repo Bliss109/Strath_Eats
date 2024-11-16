@@ -1,6 +1,6 @@
 <?php
-require '../../dbConn/Connection.php'; // Your database connection file
-require '../../dbConn/testCon.php'; 
+require '../../../dbConn/Connection.php'; // Your database connection file
+require '../../../dbConn/testCon.php'; 
 
 
 // Fetch desserts for the respective cafeteria
@@ -69,7 +69,7 @@ $conn->close();
 
     <!-- Main Content -->
     <div class="content">
-        <h1>Dessert Menu</h1>
+        <h1>Lunch Menu</h1>
         <section class="cover">
             <div class="cover-overlay">
                 <h1>
