@@ -1,6 +1,7 @@
 <?php
 header("Content-Type: application/json");
-include 'Connection.php'; // Your database connection file
+require '../dbConn/Connection.php'; // Your database connection file
+require '../dbConn/testCon.php'; 
 
 $sql = "SELECT order_id, user_id, order_time, payment_status FROM orders ORDER BY order_time DESC";
 $result = $conn->query($sql);

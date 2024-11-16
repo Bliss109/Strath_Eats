@@ -1,6 +1,6 @@
 <?php
-require 'Connection.php';
-require 'testCon.php'; 
+require '../dbConn/Connection.php';
+require '../dbConn/testCon.php'; 
 header('Content-Type: application/json');
 
 
