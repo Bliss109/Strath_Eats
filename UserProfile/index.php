@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (isset($_SESSION['profile_picture'])) {
+    $profilePicture = 'uploads/' . $_SESSION['profile_picture'];
+} else {
+    $profilePicture = '../UserProfile/cindy.jpeg';
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,12 +45,10 @@
                 <div class="left-section">
                     <div class="profile-photo">
                         <!-- Display Current Profile Image -->
-                        <img src="../UserProfile/cindy.jpeg" alt="profile_picture"/>
+                        <img id="profileImagePreview" src="<?php echo $profilePicture; ?>" alt="profile_picture"/>
 
                         <!-- Change Photo Form -->
-                        <form action="../User/profile.php" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" name="user_id" value="">
-
+                        <form id="profileForm" action="../User/profile.php" method="POST" enctype="multipart/form-data">
                             <!-- Hidden File Input -->
                             <input type="file" name="profile_picture" id="profilePictureInput" style="display: none;" accept="image/*" onchange="previewImage(event)">
 
@@ -60,11 +66,7 @@
 
                     <!-- Left Section Form Groups -->
                     <div class="form-group">
-                        <label>First Name</label>
-                        <input type="text" class="form-control" value="">
-                    </div>
-                    <div class="form-group">
-                        <label>Last Name</label>
+                        <label>name</label>
                         <input type="text" class="form-control" value="">
                     </div>
                     <div class="form-group">
@@ -78,19 +80,6 @@
                 </div>
 
                 <div class="right-section">
-                    <!-- Right Section Form Groups -->
-                    <div class="form-group">
-                        <label>Gender</label>
-                        <select class="form-control">
-                            <option>Male</option>
-                            <option>Female</option>
-                            <option>Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Date of Birth</label>
-                        <input type="date" class="form-control">
-                    </div>
                     <div class="form-group">
                         <label>Student id (if applicable)</label>
                         <input type="text" class="form-control" value="">
@@ -99,7 +88,6 @@
                         <label>Role</label>
                         <select class="form-control">
                             <option value="">Select a role</option>
-                            <option value="admin">Admin</option>
                             <option value="user">Student</option>
                             <option value="editor">Cafeteria Manager</option>
                             <option value="viewer">Delivery Guy</option>
@@ -110,7 +98,7 @@
                         <label>Payment Methods</label>
                         <div class="payment-methods">
                             <div class="payment-card">
-                                <a href="../Payment System/Payment System/index.php" ><img src="../UserProfile/mpesa.jpeg" alt=""></a>
+                                <a href="../Payment System/index.php" ><img src="../UserProfile/mpesa.jpeg" alt=""></a>
                             </div>
                         </div>
                     </div>
@@ -132,6 +120,30 @@
             };
             reader.readAsDataURL(event.target.files[0]);
         }
+
+        // Handle form submission
+        document.getElementById('profileForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+
+            fetch(this.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.success);
+                    location.reload();
+                } else {
+                    alert(data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while updating the profile picture.');
+            });
+        });
     </script>
 </body>
 

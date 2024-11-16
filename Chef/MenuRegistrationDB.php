@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Cafeteria Manager') {
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Cafeteria_Manager') {
     header("Location: login.php");
     exit();
 }

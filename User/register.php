@@ -1,6 +1,10 @@
 <?php
 require_once '../User/user.php';
 
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Methods: POST");
+
 // Set the response header to JSON format
 header('Content-Type: application/json');
 
@@ -21,33 +25,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $inputData['email'] ?? '';
     $password = $inputData['password'] ?? '';
     $phone_number = $inputData['phone_number'] ?? '';
+    $terms = isset($inputData['terms']) ? true : false;
 
     // Basic validation to ensure fields are not empty
-    if (empty($name) || empty($email) || empty($password) || empty($phone_number)) {
+    if (empty($name) || empty($email) || empty($password) || empty($phone_number) || !$terms) {
         echo json_encode(["message" => "All fields are required!"]);
         exit;
     }
 
-    // Sanitize email
-    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-
-    // Validate email
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo json_encode(["message" => "Invalid email format."]);
-        exit;
-    }
-
-    // Password hashing for security
+    // Hash the password
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    // Create a new User object and attempt registration
+    // Further processing (e.g., saving to database)
+    // Assuming you have a function to save the user data
     $user = new User();
-    $registrationResult = $user->register($name, $email, $hashedPassword, $phone_number);
+    $result = $user->register($name, $email, $hashedPassword, $phone_number);
 
-    if ($registrationResult) {
-        echo json_encode(["message" => "Registration Successful"]);
+    if ($result) {
+        echo json_encode(["message" => "Registration successful!"]);
     } else {
-        echo json_encode(["message" => "Registration failed"]);
+        echo json_encode(["message" => "Registration failed!"]);
     }
 
 } else {
@@ -55,4 +52,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo json_encode(["message" => "Invalid request method."]);
 }
 ?>
-

@@ -70,6 +70,7 @@ CREATE TABLE `deliveries` (
 --
 
 CREATE TABLE `orders` (
+  `status` varchar(100) NOT NULL,
   `order_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `order_date` timestamp NULL DEFAULT current_timestamp(),
@@ -214,7 +215,7 @@ ALTER TABLE `categories`
 -- Indexes for table `deliveries`
 --
 ALTER TABLE `deliveries`
-  ADD PRIMARY KEY (`delivery_id`,`order_id`),
+  ADD PRIMARY KEY (`deliverer_id`,`order_id`),
   ADD KEY `idx_order_id` (`order_id`);
 
 --
