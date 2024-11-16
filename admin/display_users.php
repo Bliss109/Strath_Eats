@@ -49,6 +49,7 @@ $conn->close();
                 <th>Phone Number</th>
                 <th>Profile</th>
                 <th>Student ID</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
