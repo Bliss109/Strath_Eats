@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const cafeteriaList = document.getElementById('cafeteriaList');
 
     // Sample cafeteria data
@@ -6,22 +6,26 @@ document.addEventListener('DOMContentLoaded', function() {
         {
             name: "Groundfloor Cafeteria",
             description: "Plenty of dining space and a wide variety of food options.",
-            image: "images/cafeteria.jpg"
+            image: "images/cafeteria.jpg",
+            page: "groundfloor.html"
         },
         {
             name: "Springs of Olive Cafeteria",
             description: "Famously known for its chips and wings.",
-            image: "images/cafeteria2.jpg"
+            image: "images/cafeteria2.jpg",
+            page: "springsofolive.html"
         },
         {
             name: "Pate Cafeteria",
             description: "Culinary delights from around the world.",
-            image: "images/cafeteria1.jpg"
+            image: "images/cafeteria1.jpg",
+            page: "Cafeteria.html"
         },
         {
             name: "Coffee Bar",
             description: "Delicious coffee and milkshakes",
-            image: "images/cafeteria3.jpg"
+            image: "images/cafeteria3.jpg",
+            page: "Cafeteria.html"
         }
     ];
 
@@ -29,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Create a cafeteria card
         const cafeteriaCard = document.createElement('div');
         cafeteriaCard.classList.add('cafeteria-card');
-        
+
         const image = document.createElement('img');
         image.src = cafeteria.image;
         image.alt = `${cafeteria.name} Image`;
@@ -42,8 +46,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const viewButton = document.createElement('button');
         viewButton.textContent = "View Menu";
-        viewButton.onclick = function() {
-            window.location.href = `Index page 2/Index page 2/index.html?cafeteria=${cafeteria.name}`;
+
+        // Redirect to the specific page for the selected cafeteria
+        viewButton.onclick = function () {
+            window.location.href = cafeteria.page;
         };
 
         // Append elements to the card
