@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 $servername = "localhost";
 $username = "root";
@@ -14,7 +13,7 @@ if ($conn->connect_error) {
 
 $query = "SELECT u.user_id, u.name, u.email, ut.role, u.password, u.phone_number, u.student_id
           FROM users u
-          JOIN user_types ut ON u.id = ut.user_id";
+          JOIN users ut ON u.user_id = ut.user_id";
 $result = $conn->query($query);
 
 if ($result->num_rows > 0) {
@@ -33,7 +32,7 @@ $conn->close();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Users Information</title>
-    <link rel="stylesheet" href="display_users.css">
+    <link rel="stylesheet" href="display_user.css">
 </head>
 <body>
     <header id="header">
@@ -48,7 +47,7 @@ $conn->close();
                 <th>Role</th>
                 <th>Password</th>
                 <th>Phone Number</th>
-                <th>Profile Picture</th>
+                <th>Profile</th>
                 <th>Student ID</th>
             </tr>
         </thead>
