@@ -144,7 +144,7 @@ class DeliveryModule {
                                 <input type='text' name='order_id'required>
                                 <label for='user_id'>Deliverer ID:</label>
                                 <input type='text' name='deliverer_id' required>
-                                <button type='submit' name='pick_delivery' value='pick_delivery'>Pick Delivery</button>
+                                <button type='submit' name='pick_delivery'>Pick Delivery</button>
                                 </form>";
                                 if (isset($_POST['pick_delivery'])) {
                                     $orderId = $_POST['order_id'];
@@ -195,7 +195,7 @@ class DeliveryModule {
                         <label for='complete_order_id'>Order ID:</label>
                         <input type='text' name='complete_order_id' required>
                         <label for'userID'>User ID:</label>
-                        <input type='text' name='userID' required>
+                        <input type='text' name='user_id' required>
                         <button type='submit' name='complete_delivery'>Complete Delivery</button>
                         </form>";
                         if (isset($_POST['complete_delivery'])) {
@@ -203,12 +203,15 @@ class DeliveryModule {
                             $userId = $_POST['user_id'];    
                             $stmt = $this->pdo->prepare("SELECT order_id, user_id FROM orders WHERE order_id = $orderId ");
                             $stmt->execute();
-                            $result = $stmt->fetchAll();
+                            $result = $stmt->fetch();
                             $order_id_done = $result['order_id'];
                             $user_id_done = $result['user_id'];
                         
                             if ($orderId==$order_id_done && $userId==$user_id_done){
                                 $this->completeDelivery($orderId);
+                            }
+                            else{
+                                echo "Check again";
                             }
                         }
                 }
