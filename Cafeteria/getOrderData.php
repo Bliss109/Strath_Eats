@@ -1,6 +1,6 @@
 <?php
-require 'Connection.php'; // Ensure this file establishes a connection to the database
-require 'testCon.php'; // Ensure this file establishes a connection to the database
+require '../dbConn/Connection.php'; // Ensure this file establishes a connection to the database
+require '../dbConn/testCon.php'; // Ensure this file establishes a connection to the database
 
 $sql = "
     SELECT 
