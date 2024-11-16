@@ -38,10 +38,15 @@ th, td {
     padding: 12px;
     text-align: left;
 }
+tr {
+    background-color: papayaWhip;
+    color: black;
+}
+
 
 th {
-    background-color: #bf670f;
-    color: #fafafa;
+    background-color: papayawhip;
+    color: black;
 }
 
 tr:nth-child(even) {
@@ -54,6 +59,6 @@ tr:hover {
 
 h1 {
     text-align: center;
-    color: #bf670f;
+    color: black;
     margin: 20px 0;
 }
