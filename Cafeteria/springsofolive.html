@@ -4,158 +4,185 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Springs of Olive - StrathEats</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="springs.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
   </head>
   <body>
-    <div class="container">
-      <!-- Sidebar -->
-      <aside class="sidebar">
-        <h2>StrathEats</h2>
-        <nav>
-          <ul>
-            <li><a href="index.html">Dashboard</a></li>
-            <li><a href="food-order.html">Food Order</a></li>
-            <li><a href="#">Favorite</a></li>
-            <li><a href="#">Message</a></li>
-            <li><a href="#">Order History</a></li>
-            <li><a href="#">Bills</a></li>
-            <li><a href="#">Login</a></li>
-          </ul>
-        </nav>
-      </aside>
+    <aside class="sidebar1">
+      <div class="sidebar-close">
+        <i class="fa-solid fa-close"></i>
+      </div>
+      <h2>StrathEats</h2>
+      <img src="../../Images/Logo.jpeg" alt="StrathEats Logo" class="logo-image" />
+      <nav>
+        <ul>
+          <li><a href="#">Dashboard</a></li>
+          <li><a href="#">Food Order</a></li>
+          <li><a href="#">Favorite</a></li>
+          <li><a href="#">Message</a></li>
+          <li><a href="#">Order History</a></li>
+          <li><a href="#">Bills</a></li>
+          <li><a href="#">Login</a></li>
+        </ul>
+      </nav>
+    </aside>
 
-      <!-- Main content -->
-      <main>
-        <header>
-          <h1>Springs of Olive Menu</h1>
-          <input
-            type="text"
-            class="search-bar"
-            placeholder="Search for a dish..."
-          />
-        </header>
-
-        <!-- Restaurant Info -->
-        <section class="restaurant-info">
-          <h2>Welcome to Springs of Olive</h2>
-          <p>Known for delicious and freshly prepared dishes, Springs of Olive offers a variety of meals catering to every taste. Explore our menu below and enjoy a delightful experience!</p>
-        </section>
-
-        <!-- Menu Categories -->
-        <section class="menu-categories">
-          <h3>Categories</h3>
-          <div class="category-list">
-            <button class="category-item" data-category="starter">
-              <img src="../Images/starter.jpg" alt="Starter" />
-              <span>Starters</span>
-            </button>
-            <button class="category-item" data-category="main-course">
-              <img src="../Images/main-course.jpg" alt="Main Course" />
-              <span>Main Course</span>
-            </button>
-            <button class="category-item" data-category="dessert">
-              <img src="../Images/dessert.jpg" alt="Dessert" />
-              <span>Desserts</span>
-            </button>
-            <button class="category-item" data-category="drinks">
-              <img src="../Images/drinks.jpg" alt="Drinks" />
-              <span>Drinks</span>
-            </button>
-          </div>
-        </section>
-
-        <!-- Dishes List -->
-        <section class="dishes-list">
-          <h3>Available Dishes</h3>
-          <div class="dish-grid">
-            <!-- Starter Dishes -->
-            <div class="dish-card" data-category="starter">
-              <img src="../Images/soup.jpg" alt="Tomato Soup" />
-              <p>Tomato Soup</p>
-              <p>KSh 200.00</p>
-              <button class="add-btn" data-name="Tomato Soup" data-price="200">
-                +
-              </button>
-            </div>
-            <div class="dish-card" data-category="starter">
-              <img src="../Images/samosa.jpg" alt="Beef Samosa" />
-              <p>Beef Samosa</p>
-              <p>KSh 150.00</p>
-              <button class="add-btn" data-name="Beef Samosa" data-price="150">
-                +
-              </button>
-            </div>
-
-            <!-- Main Course Dishes -->
-            <div class="dish-card" data-category="main-course">
-              <img src="../Images/grilled-chicken.jpg" alt="Grilled Chicken" />
-              <p>Grilled Chicken</p>
-              <p>KSh 500.00</p>
-              <button class="add-btn" data-name="Grilled Chicken" data-price="500">
-                +
-              </button>
-            </div>
-            <div class="dish-card" data-category="main-course">
-              <img src="../Images/spaghetti.jpg" alt="Spaghetti Bolognese" />
-              <p>Spaghetti Bolognese</p>
-              <p>KSh 450.00</p>
-              <button class="add-btn" data-name="Spaghetti Bolognese" data-price="450">
-                +
-              </button>
-            </div>
-
-            <!-- Dessert Dishes -->
-            <div class="dish-card" data-category="dessert">
-              <img src="../Images/ice-cream.jpg" alt="Vanilla Ice Cream" />
-              <p>Vanilla Ice Cream</p>
-              <p>KSh 100.00</p>
-              <button class="add-btn" data-name="Vanilla Ice Cream" data-price="100">
-                +
-              </button>
-            </div>
-            <div class="dish-card" data-category="dessert">
-              <img src="../Images/cheesecake.jpg" alt="Cheesecake" />
-              <p>Cheesecake</p>
-              <p>KSh 300.00</p>
-              <button class="add-btn" data-name="Cheesecake" data-price="300">
-                +
-              </button>
-            </div>
-
-            <!-- Drinks -->
-            <div class="dish-card" data-category="drinks">
-              <img src="../Images/juice.jpg" alt="Orange Juice" />
-              <p>Orange Juice</p>
-              <p>KSh 150.00</p>
-              <button class="add-btn" data-name="Orange Juice" data-price="150">
-                +
-              </button>
-            </div>
-            <div class="dish-card" data-category="drinks">
-              <img src="../Images/coffee.jpg" alt="Latte" />
-              <p>Latte</p>
-              <p>KSh 200.00</p>
-              <button class="add-btn" data-name="Latte" data-price="200">
-                +
-              </button>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <!-- Right Sidebar -->
-      <aside class="right-sidebar">
-        <div class="order-summary">
-          <h3>Order Summary</h3>
-          <ul id="order-list"></ul>
-          <p>Service Fee: KSh 100.00</p>
-          <p id="total-price">Total: KSh 0.00</p>
-          <button class="checkout-btn">Checkout</button>
+    <header class="header">
+      <nav class="menu">
+        <div class="burger-icons">
+          <i class="fa-solid fa-bars"></i>
         </div>
-      </aside>
-    </div>
+        <div class="search--box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search" />
+        </div>
+        <div class="menu--icons">
+          <i class="fa-solid fa-bowl-food"></i>
+          <div class="cart-icon">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>0</span>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <h1>Welcome to Springs of Olive</h1>
 
-    <footer class="footer">&copy; 2024 StrathEats. All rights reserved.</footer>
-    <script src="script.js"></script>
+    <div class="content">
+      <section class="cover">
+        <div class="cover-overlay">
+          <h1>
+            <span class="slogan">Flavors on the Go, Fresh to the Core</span>
+          </h1>
+        </div>
+      </section>
+
+      <main>
+        <h2 class="section-heading">Categories</h2>
+        <div class="menu-list">
+          <div class="menu-item">
+            <img src="../../../Images/chapati img.jpg" alt="" />
+            <h5>All Menu Items</h5>
+          </div>
+          <div class="menu-item" id="starter-menu">
+            <img src="../../../Images/starter.jpg" alt="Breakfast" />
+            <h5>Breakfast</h5>
+          </div>
+          <div class="menu-item" id="main-course-menu">
+            <img src="../../../Images/main-course.jpg" alt="Lunch" />
+            <h5>Lunch</h5>
+          </div>
+          <div class="menu-item" id="dessert-menu">
+            <img src="../../../Images/dessert.jpg" alt="Dessert" />
+            <h5>Dessert</h5>
+          </div>
+          <div class="menu-item" id="drinks-menu">
+            <img src="../../../Images/drinks.jpg" alt="Beverages" />
+            <h5>Beverages</h5>
+          </div>
+        </div>
+
+        <!-- card item section-->
+        <h2 class="section-heading">Food Items</h2>
+        <div class="card-list">
+          <!-- Starter Dishes -->
+          <div class="card" id="starter">
+            <img src="../../Images/Chapati.png" alt="chapati" />
+            <h4 class="card-title">Chapati</h4>
+            <div class="card-price">
+              <span class="price">Ksh 30</span>
+              <i class="fa-solid fa-plus add-to-cart"></i>
+            </div>
+          </div>
+          <div class="card" id="starter">
+            <img src="../../../Images/samosas.png" alt="Beef Samosa" />
+            <h4 class="card-title">Beef Samosa</h4>
+            <div class="card-price">
+              <span class="price">Ksh 40</span>
+              <i class="fa-solid fa-plus add-to-cart"></i>
+            </div>
+          </div>
+
+          <!-- Main Course Dishes -->
+          <div class="card" id="main-course">
+            <img src="../../../Images/grilled-chicken.jpg" alt="Grilled Chicken" />
+            <h4 class="card-title">Grilled Chicken</h4>
+            <div class="card-price">
+              <span class="price">Ksh 500</span>
+              <i class="fa-solid fa-plus add-to-cart"></i>
+            </div>
+          </div>
+          <div class="card" id="main-course">
+            <img src="../../../Images/spaghetti.jpg" alt="Spaghetti Bolognese" />
+            <h4 class="card-title">Spaghetti Bolognese</h4>
+            <div class="card-price">
+              <span class="price">Ksh 450</span>
+              <i class="fa-solid fa-plus add-to-cart"></i>
+            </div>
+          </div>
+
+          <!-- Dessert Dishes -->
+          <div class="card" id="dessert">
+            <img src="../../../Images/ice-cream.jpg" alt="Vanilla Ice Cream" />
+            <h4 class="card-title">Vanilla Ice Cream</h4>
+            <div class="card-price">
+              <span class="price">Ksh 100</span>
+              <i class="fa-solid fa-plus add-to-cart"></i>
+            </div>
+          </div>
+          <div class="card" id="dessert">
+            <img src="../../../Images/cheesecake.jpg" alt="Cheesecake" />
+            <h4 class="card-title">Cheesecake</h4>
+            <div class="card-price">
+              <span class="price">Ksh 300</span>
+              <i class="fa-solid fa-plus add-to-cart"></i>
+            </div>
+          </div>
+
+          <!-- Beverages -->
+          <div class="card" id="drinks">
+            <img src="../../../Images/juice.jpg" alt="Orange Juice" />
+            <h4 class="card-title">Orange Juice</h4>
+            <div class="card-price">
+              <span class="price">Ksh 150</span>
+              <i class="fa-solid fa-plus add-to-cart"></i>
+            </div>
+          </div>
+          <div class="card" id="drinks">
+            <img src="../../../Images/coffee.jpg" alt="Latte" />
+            <h4 class="card-title">Latte</h4>
+            <div class="card-price">
+              <span class="price">Ksh 200</span>
+              <i class="fa-solid fa-plus add-to-cart"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- cart sidebar section-->
+        <div class="sidebar" id="sidebar">
+          <div class="sidebar-close">
+            <i class="fa-solid fa-close"></i>
+          </div>
+          <div class="cart-menu">
+            <h3>My Cart</h3>
+            <div class="cart-items"></div>
+          </div>
+
+          <div class="sidebar-footer">
+            <div class="total-amount">
+              <h5>Total</h5>
+              <div class="cart-total">Ksh 0.00</div>
+            </div>
+            <button class="checkout-btn">Checkout</button>
+          </div>
+        </div>
+      </main>
+    </div>
+    <footer class="footer">
+      <p>© 2024 StrathEats. All rights reserved.</p>
+    </footer>
+    <script src="main.js"></script>
   </body>
 </html>
