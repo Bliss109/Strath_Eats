@@ -215,7 +215,7 @@ ALTER TABLE `categories`
 -- Indexes for table `deliveries`
 --
 ALTER TABLE `deliveries`
-  ADD PRIMARY KEY (`delivery_id`,`order_id`),
+  ADD PRIMARY KEY (`deliverer_id`,`order_id`),
   ADD KEY `idx_order_id` (`order_id`);
 
 --

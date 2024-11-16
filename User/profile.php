@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         $pdo = (new Database())->getConnection();  
         
-        // Assuming user_id is stored in the session
+        
         $user_id = $_SESSION['user_id'] ?? null;
         if (empty($user_id)) {
             throw new Exception("User ID is required.");
@@ -60,7 +60,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Update the session with the new profile picture path
             $_SESSION['profile_picture'] = $new_file_name;
-
             echo json_encode(["success" => "Profile picture updated successfully."]);
         } else {
             throw new Exception("No file uploaded or upload error.");

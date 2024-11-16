@@ -66,11 +66,7 @@ if (isset($_SESSION['profile_picture'])) {
 
                     <!-- Left Section Form Groups -->
                     <div class="form-group">
-                        <label>First Name</label>
-                        <input type="text" class="form-control" value="">
-                    </div>
-                    <div class="form-group">
-                        <label>Last Name</label>
+                        <label>name</label>
                         <input type="text" class="form-control" value="">
                     </div>
                     <div class="form-group">
@@ -84,19 +80,6 @@ if (isset($_SESSION['profile_picture'])) {
                 </div>
 
                 <div class="right-section">
-                    <!-- Right Section Form Groups -->
-                    <div class="form-group">
-                        <label>Gender</label>
-                        <select class="form-control">
-                            <option>Male</option>
-                            <option>Female</option>
-                            <option>Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Date of Birth</label>
-                        <input type="date" class="form-control">
-                    </div>
                     <div class="form-group">
                         <label>Student id (if applicable)</label>
                         <input type="text" class="form-control" value="">
@@ -105,7 +88,6 @@ if (isset($_SESSION['profile_picture'])) {
                         <label>Role</label>
                         <select class="form-control">
                             <option value="">Select a role</option>
-                            <option value="admin">Admin</option>
                             <option value="user">Student</option>
                             <option value="editor">Cafeteria Manager</option>
                             <option value="viewer">Delivery Guy</option>
@@ -116,7 +98,7 @@ if (isset($_SESSION['profile_picture'])) {
                         <label>Payment Methods</label>
                         <div class="payment-methods">
                             <div class="payment-card">
-                                <a href="../Payment System/Payment System/index.php" ><img src="../UserProfile/mpesa.jpeg" alt=""></a>
+                                <a href="../Payment System/index.php" ><img src="../UserProfile/mpesa.jpeg" alt=""></a>
                             </div>
                         </div>
                     </div>
