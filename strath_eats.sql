@@ -384,13 +384,50 @@ ALTER TABLE `stock`
 --
 ALTER TABLE `transactions`
   ADD CONSTRAINT `fk_transactions_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+
+ALTER TABLE `products`
+ADD COLUMN `cafeteria_id` INT NOT NULL,
+ADD CONSTRAINT `fk_cafeteria`
+FOREIGN KEY (`cafeteria_id`) REFERENCES `cafeterias`(`id`);
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `withdrawals`
+--
+
+CREATE TABLE `withdrawals` (
+  `withdrawal_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `withdrawal_date` timestamp NULL DEFAULT current_timestamp(),
+  `status` enum('pending','completed','failed') DEFAULT 'pending'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+-- 
+-- Indexes for table `withdrawals`
+--
+ALTER TABLE `withdrawals`
+  ADD PRIMARY KEY (`withdrawal_id`),
+  ADD KEY `idx_user_id` (`user_id`);
+
+-- 
+-- AUTO_INCREMENT for table `withdrawals`
+--
+ALTER TABLE `withdrawals`
+  MODIFY `withdrawal_id` int(11) NOT NULL AUTO_INCREMENT;
+
+-- 
+-- Constraints for table `withdrawals`
+--
+ALTER TABLE `withdrawals`
+  ADD CONSTRAINT `fk_withdrawals_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
-ALTER TABLE `products`
-ADD COLUMN `cafeteria_id` INT NOT NULL,
-ADD CONSTRAINT `fk_cafeteria`
-FOREIGN KEY (`cafeteria_id`) REFERENCES `cafeterias`(`id`);
