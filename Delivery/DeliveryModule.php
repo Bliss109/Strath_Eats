@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Deliveries</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+
 <?php
 class DeliveryModule {
     private $pdo;
@@ -13,17 +23,16 @@ class DeliveryModule {
     }
 
     // Function to display deliveries with "Add Delivery" buttons
-    
     public function navbar() {
         echo '
         <nav>
             <ul>
-                <li><a href="DeliveryHome.php">Home</a></li>
-                <li><a href="DeliveryProfile.php">Profile</a></li>
-                <li><a href="DeliveryWallet.php">Wallet</a></li>
-                <li><a href="AvailableJobs.php">Available Jobs </a></li>
-                <li><a href="#">Order</a></li>
-                <li><a href="#">Logout</a></li>
+                <a href="DeliveryHome.php">Home</a>
+                <a href="DeliveryProfile.php">Profile</a>
+                <a href="DeliveryWallet.php">Wallet</a>
+                <a href="AvailableJobs.php">Available Jobs </a>
+                <a href="#">Order</a>
+                <a href="#">Logout</a>
             </ul>
         </nav>
         ';
@@ -113,7 +122,7 @@ class DeliveryModule {
         $jobs = $stmt->fetchAll();
     
         if ($jobs) {
-            echo "Your current jobs ready to be picked up are:";
+            echo "<h3>Your current jobs ready to be picked up are:";
             echo "<table>";
             echo "<tr><th>Order ID</th><th>Delivery Status</th><th>Delivery Location</th><th>Action</th></tr>";
     
@@ -128,7 +137,7 @@ class DeliveryModule {
                             <button type='submit' name='pickup'>Pickup</button>
                         </form>";
 
-                        if(isset($_POST['order_id'])){
+                        if(isset($_POST['pickup'])){
                             echo "<form method='POST'>
                                 <label>Enter your ID and the order ID for validation</label>
                                 <label for='order_id'>Order ID:</label>
@@ -165,7 +174,7 @@ class DeliveryModule {
         $jobs = $stmt->fetchAll();
     
         if ($jobs) {
-            echo "<h3>Your current jobs on delivery jobs are:</h3>";
+            echo "<h3>Your current jobs on delivery are:</h3>";
             echo "<table>";           
             echo "<tr><th>Order ID</th><th>Delivery Status</th><th>Delivery Location</th><th>Action</th></tr>";
     
@@ -177,10 +186,33 @@ class DeliveryModule {
                 echo "<td>
                         <form method='POST'>
                             <input type='hidden' name='order_id' value='{$job['order_id']}'>
-                            <button type='submit' name='delivered' action='$this->CompleteDeliveryForm()'>Delivered</button>
+                            <button type='submit' name='delivered'>Delivered</button>
                         </form>
-                      </td>";
-                echo "</tr>";
+                        ";
+                if(isset($_POST['delivered'])){
+                    echo"<form method='POST'>
+                        <label>Enter your ID and the order ID for validation</label>
+                        <label for='complete_order_id'>Order ID:</label>
+                        <input type='text' name='complete_order_id' required>
+                        <label for'userID'>User ID:</label>
+                        <input type='text' name='userID' required>
+                        <button type='submit' name='complete_delivery'>Complete Delivery</button>
+                        </form>";
+                        if (isset($_POST['complete_delivery'])) {
+                            $orderId = $_POST['complete_order_id'];
+                            $userId = $_POST['user_id'];    
+                            $stmt = $this->pdo->prepare("SELECT order_id, user_id FROM orders WHERE order_id = $orderId ");
+                            $stmt->execute();
+                            $result = $stmt->fetchAll();
+                            $order_id_done = $result['order_id'];
+                            $user_id_done = $result['user_id'];
+                        
+                            if ($orderId==$order_id_done && $userId==$user_id_done){
+                                $this->completeDelivery($orderId);
+                            }
+                        }
+                }
+                echo "</td> </tr>";
             }
             
             echo "</table>";
@@ -206,16 +238,11 @@ class DeliveryModule {
 
     // Function to pick a delivery and change status from pickup to delivery
     public function pickDelivery($orderId, $userId) {
-        $stmt = $this->pdo->prepare("SELECT * FROM pickup WHERE order_id = :order_id AND deliverer_id = :deliverer_id AND status = 'pickup'");
-        $stmt->execute(['order_id' => $orderId, 'deliverer_id' => $userId]);
-
-        if ($stmt->rowCount() > 0) {
-            $updateStmt = $this->pdo->prepare("UPDATE pickup SET status = 'delivery' WHERE order_id = :order_id AND deliverer_id = :deliverer_id");
+            $updateStmt = $this->pdo->prepare("UPDATE deliveries SET delivery_status = 'delivery' WHERE order_id = :order_id AND deliverer_id = :deliverer_id");
             $updateStmt->execute(['order_id' => $orderId, 'deliverer_id' => $userId]);
             echo "Order ID: $orderId status updated to 'delivery'.";
-        } else {
-            echo "Order ID or User ID does not match, or order is not in 'pickup' status.";
-        }
+
+        
     }
 
     // Function to complete a delivery, moving the status in orders table to "complete"
@@ -285,6 +312,7 @@ public function pickDeliveryAction(){
         $userId = $_POST['user_id'];
         $stmt = $this->pdo->prepare("SELECT order_id, deliverer_id FROM deliveries WHERE order_id = $orderId");
         $stmt->execute();
+        $
         $order_id1 = $result['order_id'];
         $deliverer_id = $result['deliverer_id'];
         if ($orderId==$order_id1 && $userId==$deliverer_id){
@@ -295,7 +323,7 @@ public function pickDeliveryAction(){
 }
 
 
-public function CompleteDeliveryForm(){
+/*public function CompleteDeliveryForm(){
     echo"<form method='POST' action='<?php $this->completeDeliveryAction()?>'>
     <label>Enter your ID and the order ID for validation</label>
     <label for='complete_order_id'>Order ID:</label>
@@ -318,7 +346,7 @@ public function completeDeliveryAction(){
             $deliveryModule->completeDelivery($orderId);
         }
     }
-}
+}*/
 
 }
 
@@ -329,3 +357,5 @@ public function completeDeliveryAction(){
 
 
 ?>
+ </body>
+ </html>

@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(249, 201, 123);
+    color: black;
+}
+
+/*header {
+    background-color: rgb(255, 179, 56);
+    padding: 1rem;
+    text-align: center;
+}*/
+
+main {
+    padding: 2rem;
+}
+
+section {
+    background: white;
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color:black;
+}
+
+header.navbar-header {
+    text-align: center;
+    background-color: rgb(55, 50, 42); 
+    color: rgb(254, 254, 254); 
+    padding: 10px 20px; /* Spacing around the content */
+    display: flex; /* Flexbox for layout control */
+    align-items: center; /* Vertically align content */
+    justify-content: space-between; /* Spread items across the navbar */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Optional styling for links within the navbar */
+header.navbar-header a {
+    color: white; /* White links */
+    text-decoration: none; /* Remove underline */
+    padding: 0 10px; /* Add spacing between links */
+}
+
+
+@media (max-width: 768px) {
+    header.navbar-header {
+        flex-direction: column;
+        padding: 20px;
+    }
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th, table td {
+    border: 1px solid #dee2e6;
+    padding: 8px;
+    text-align: left;
+}
+
+table th {
+    background-color: papayawhip;
+    color: black;
+}
