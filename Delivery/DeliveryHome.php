@@ -15,6 +15,7 @@ $userID = $_SESSION["user_ID"];
 </head>
 <body>
     <header class="navbar-header" > 
+    <img src="../Images/logoo.png" alt="StrathEats Logo" class="logo-image" />
         <?php $deliveryModule->navbar(); ?>
     </header>
 

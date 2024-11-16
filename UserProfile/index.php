@@ -1,7 +1,11 @@
 <?php
 session_start();
 if (isset($_SESSION['profile_picture'])) {
+<<<<<<< HEAD
     $profilePicture = 'uploads/' . $_SESSION['profile_picture'];
+=======
+    $profilePicture = 'C:/xampp/htdocs/Strath_Eats/uploads/' . $_SESSION['profile_picture'];
+>>>>>>> 5adc3d3 (Updated profile)
 } else {
     $profilePicture = '../UserProfile/cindy.jpeg';
 }
@@ -48,7 +52,13 @@ if (isset($_SESSION['profile_picture'])) {
                         <img id="profileImagePreview" src="<?php echo $profilePicture; ?>" alt="profile_picture"/>
 
                         <!-- Change Photo Form -->
+<<<<<<< HEAD
                         <form id="profileForm" action="../User/profile.php" method="POST" enctype="multipart/form-data">
+=======
+                        <form action="../User/profile.php" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="user_id" value="1"> <!-- Replace with dynamic user ID -->
+
+>>>>>>> 5adc3d3 (Updated profile)
                             <!-- Hidden File Input -->
                             <input type="file" name="profile_picture" id="profilePictureInput" style="display: none;" accept="image/*" onchange="previewImage(event)">
 
