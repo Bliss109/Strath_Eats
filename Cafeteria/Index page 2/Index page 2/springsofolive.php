@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Springs of Olive - StrathEats</title>
-    <link rel="stylesheet" href="springs.css" />
+    <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -191,6 +191,6 @@
     <footer class="footer">
       <p>© 2024 StrathEats. All rights reserved.</p>
     </footer>
-    <script src="../Index page 2/main.js"></script>
+    <script src="main.js"></script>
   </body>
 </html>
