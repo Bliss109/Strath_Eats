@@ -69,10 +69,11 @@ class DeliveryModule {
             echo "</table>";
 
             // Handle Take Job button action
-            if (/*isset($_POST['take_job']) && */isset($_POST['order_id'])) {
+            if (isset($_POST['take_job']) && isset($_POST['order_id'])) {
                 $orderId = $_POST['order_id'];
                 $userId = $_POST['userID'];
                 $this->assignJobToDeliverer($orderId, $userId);
+                
             }
         } else {
             echo "<div>No available jobs at the moment.</div>";
@@ -159,6 +160,9 @@ class DeliveryModule {
                                         $this->pickDelivery($orderId, $userId);
 
                                         }
+                                    foreach ($_POST as $key => $value) {
+                                        unset($_POST[$key]);
+                                    }
                                 }
                         }
                       "</td>";
@@ -194,6 +198,9 @@ class DeliveryModule {
                         </form>";
                         if(isset($_POST['delivered'])){
                             $this->CompleteDeliveryForm();
+                            foreach ($_POST as $key => $value) {
+                                unset($_POST[$key]);
+                            }
                         }
                       echo "</td>
                             </tr>";
@@ -261,15 +268,16 @@ class DeliveryModule {
         }
         
         echo"<form  method='post'>
-            <label for='amount'Enter Amount to Withdraw:</label>
-            <input type='number' name='amount' min='1' required>
-            <button type='submit'>Withdraw</button>
+            <label for='amount'>Enter Amount to Withdraw:</label>
+            <input type='number' name='amount' required>
+            <button type='submit' name ='withdraw'>Withdraw</button>
             </form>";
         
-        if(isset($_POST['amount'])){
+        if(isset($_POST['withdraw'])){
             if($_POST['amount']<= $result['balance']){
                 $stmt = $this->pdo->prepare("INSERT INTO withdrawals (user_id, amount) VALUES (:user_id, :amount)");
                 $stmt->execute(['user_id' => $deliverer_id, 'amount' => $_POST['amount']]);
+                
             }
         }
         $stmt = $this->pdo->prepare("SELECT withdrawal_id, amount, withdrawal_date, status FROM withdrawals WHERE user_id = :user_id");
@@ -344,6 +352,7 @@ public function pickDeliveryAction(){
             $deliveryModule->pickDelivery($orderId, $userId);
     
             }
+        
     }
 }
 
@@ -353,20 +362,21 @@ public function CompleteDeliveryForm(){
     <label>Enter your ID and the order ID for validation</label>
     <label for='complete_order_id'>Order ID:</label>
     <input type='text' name='complete_order_id' required>
-    <label for'userID'>User ID:</label>
+    <label for='userID'>User ID:</label>
     <input type='text' name='user_id' required>
     <button type='submit' name='complete_delivery'>Complete Delivery</button>
     </form>";
     if(isset($_POST['complete_delivery'])){
         $orderId = $_POST['complete_order_id'];
         $userId = $_POST['user_id'];    
-        $stmt = $this->pdo->prepare("SELECT user_id FROM users WHERE order_id = $orderId ");
+        $stmt = $this->pdo->prepare("SELECT user_id FROM orders WHERE order_id = $orderId ");
         $stmt->execute();
         $result = $stmt->fetch();
         $user_id_done = $result['user_id'];
 
         if ($userId==$user_id_done){
             $this->completeDelivery($orderId);
+            
         }
     }
 }
