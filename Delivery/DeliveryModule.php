@@ -29,7 +29,6 @@ class DeliveryModule {
         <nav>
             <ul>
                 <a href="DeliveryHome.php">Home</a>
-                <a href="DeliveryProfile.php">Profile</a>
                 <a href="DeliveryWallet.php">Wallet</a>
                 <a href="AvailableJobs.php">Available Jobs </a>
                 <a href="DeliveryCompleted.php">Completed Jobs </a>
@@ -91,6 +90,8 @@ class DeliveryModule {
             'deliverer_id' => $userId,
             'order_id' => $orderId
         ]);
+        header("Location: AvailableJobs.php");
+
     }
 
 
@@ -228,6 +229,8 @@ class DeliveryModule {
         $updateStmt = $this->pdo->prepare("UPDATE deliveries SET delivery_status = 'delivery' WHERE order_id = :order_id AND deliverer_id = :deliverer_id");
             $updateStmt->execute(['order_id' => $orderId, 'deliverer_id' => $userId]);
             echo "Order ID: $orderId status updated to 'delivery'.";
+            header("Location: DeliveryHome.php");
+
 
     }
 
@@ -251,6 +254,7 @@ class DeliveryModule {
         } else {
             echo "Failed to update order status. Please check the order ID.";
         }
+        header("Location: DeliveryCompleted.php");
     }
     public function Balance($delivererId) {
         // Prepare and execute the SQL statement to fetch the balance
@@ -277,6 +281,8 @@ class DeliveryModule {
             if($_POST['amount']<= $result['balance']){
                 $stmt = $this->pdo->prepare("INSERT INTO withdrawals (user_id, amount) VALUES (:user_id, :amount)");
                 $stmt->execute(['user_id' => $delivererId, 'amount' => $_POST['amount']]);
+                header("Location: DeliveryWallet.php");
+
                 
             }
         }
