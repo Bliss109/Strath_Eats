@@ -141,12 +141,11 @@ class DeliveryModule {
 
                         if(isset($_POST['order_id'])){
                             echo "<form method='POST'>
-                                <label>Enter your ID and the order ID for validation</label>
                                 <label for='order_id'>Order ID:</label>
                                 <input type='text' name='order_id' required>
                                 <label for='user_id'>Deliverer ID:</label>
                                 <input type='text' name='deliverer_id' required>
-                                <button type='submit' name='pick_delivery' value='pick_delivery'>Pick Delivery</button>
+                                <button type='submit' name='pick_delivery' value='pick_delivery'>Validate Pick Delivery</button>
                                 </form>";
                                 if (isset($_POST['pick_delivery'])) {
                                     $orderId = $_POST['order_id'];
@@ -196,7 +195,7 @@ class DeliveryModule {
                             <button type='submit' name='delivered'>Delivered</button>
                         </form>";
                         if(isset($_POST['delivered'])){
-                            $this->CompleteDeliveryForm();
+                            $this->completeDelivery($_POST['order_id'],$userId);
                             
                         }
                       echo "</td>
@@ -233,15 +232,18 @@ class DeliveryModule {
     }
 
     // Function to complete a delivery, moving the status in orders table to "complete"
-    public function completeDelivery($orderId){
+    public function completeDelivery($orderId, $userId){
         // Update the delivery_status to 'completed' for the given order_id
         $stmt = $this->pdo->prepare("
             UPDATE deliveries 
             SET delivery_status = 'completed' 
-            WHERE order_id = :order_id
+            WHERE order_id = :order_id;
+            UPDATE users
+            SET balance = balance + 50
+            WHERE user_id = :user_id;
             
         ");
-        $stmt->execute(['order_id' => $orderId]);
+        $stmt->execute(['order_id' => $orderId, 'user_id' => $userId]);
 
         // Check if any rows were affected
         if ($stmt->rowCount() > 0) {
@@ -354,13 +356,12 @@ public function pickDeliveryAction(){
 
 
 public function CompleteDeliveryForm(){
-    echo"<form method='POST'>
-    <label>Enter your ID and the order ID for validation</label>
+    echo"<form method='POST' action = ''>    
     <label>Order ID:</label>
     <input type='text' name='complete_order_id' required>
     <label>User ID:</label>
     <input type='text' name='user_id' required>
-    <button type='submit' name='complete_delivery'>Complete Delivery</button>
+    <button type='submit' name='complete_delivery'>Validate Complete Delivery</button>
     </form>";
     if(isset($_POST['complete_delivery'])){
         $orderId = $_POST['complete_order_id'];
@@ -368,11 +369,15 @@ public function CompleteDeliveryForm(){
         $stmt = $this->pdo->prepare("SELECT user_id FROM orders WHERE order_id = $orderId ");
         $stmt->execute();
         $result = $stmt->fetch();
+        echo $result['user_id'];
         $user_id_done = $result['user_id'];
 
         if ($userId==$user_id_done){
             $this->completeDelivery($orderId);
             
+        }
+        else{
+            echo"userID is wrong";
         }
     }
 }
