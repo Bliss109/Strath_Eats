@@ -1,6 +1,6 @@
 <?php
 require_once 'load.php';
-
+$userID= 1;
 ?>
 
 <!DOCTYPE html>
