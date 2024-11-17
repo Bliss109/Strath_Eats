@@ -160,9 +160,7 @@ class DeliveryModule {
                                         $this->pickDelivery($orderId, $userId);
 
                                         }
-                                    foreach ($_POST as $key => $value) {
-                                        unset($_POST[$key]);
-                                    }
+                                    
                                 }
                         }
                       "</td>";
@@ -198,9 +196,7 @@ class DeliveryModule {
                         </form>";
                         if(isset($_POST['delivered'])){
                             $this->CompleteDeliveryForm();
-                            foreach ($_POST as $key => $value) {
-                                unset($_POST[$key]);
-                            }
+                            
                         }
                       echo "</td>
                             </tr>";
@@ -242,6 +238,7 @@ class DeliveryModule {
             UPDATE deliveries 
             SET delivery_status = 'completed' 
             WHERE order_id = :order_id
+            
         ");
         $stmt->execute(['order_id' => $orderId]);
 
@@ -261,13 +258,13 @@ class DeliveryModule {
         $result = $stmt->fetch();
 
         if ($result) {
-            echo "<div>Balance: ". $result['balance']."</div" ;
+            echo "<div>Balance: ". $result['balance']."</div>" ;
         } else {
             echo "Deliverer not found.";
             return null; // or return 0 if you'd like to return a default balance
         }
         
-        echo"<form  method='post'>
+        echo"<form  method='POST'>
             <label for='amount'>Enter Amount to Withdraw:</label>
             <input type='number' name='amount' required>
             <button type='submit' name ='withdraw'>Withdraw</button>
@@ -276,7 +273,7 @@ class DeliveryModule {
         if(isset($_POST['withdraw'])){
             if($_POST['amount']<= $result['balance']){
                 $stmt = $this->pdo->prepare("INSERT INTO withdrawals (user_id, amount) VALUES (:user_id, :amount)");
-                $stmt->execute(['user_id' => $deliverer_id, 'amount' => $_POST['amount']]);
+                $stmt->execute(['user_id' => $delivererId, 'amount' => $_POST['amount']]);
                 
             }
         }
@@ -306,9 +303,7 @@ class DeliveryModule {
             echo "No withdrawals found for this user.";
         }
     }
-    public function withdraw(){
-        
-    }
+
     public function deliveryAnalysis($userId) {
         // Query to count orders grouped by delivery_date in descending order
         $stmt = $this->pdo->prepare("
@@ -345,11 +340,11 @@ public function pickDeliveryAction(){
         $userId = $_POST['user_id'];
         $stmt = $this->pdo->prepare("SELECT order_id, deliverer_id FROM deliveries WHERE order_id = $orderId");
         $stmt->execute();
-        $
+        $result= $stmt->fetch();
         $order_id1 = $result['order_id'];
         $deliverer_id = $result['deliverer_id'];
         if ($orderId==$order_id1 && $userId==$deliverer_id){
-            $deliveryModule->pickDelivery($orderId, $userId);
+            $this->pickDelivery($orderId, $userId);
     
             }
         
@@ -360,9 +355,9 @@ public function pickDeliveryAction(){
 public function CompleteDeliveryForm(){
     echo"<form method='POST'>
     <label>Enter your ID and the order ID for validation</label>
-    <label for='complete_order_id'>Order ID:</label>
+    <label>Order ID:</label>
     <input type='text' name='complete_order_id' required>
-    <label for='userID'>User ID:</label>
+    <label>User ID:</label>
     <input type='text' name='user_id' required>
     <button type='submit' name='complete_delivery'>Complete Delivery</button>
     </form>";
