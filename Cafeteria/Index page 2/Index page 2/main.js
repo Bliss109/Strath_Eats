@@ -7,38 +7,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeButtonSidebar1 = sidebar1.querySelector('.sidebar-close');
     const content = document.querySelector('.content');
 
-    // Redirect to new page on "Breakfast" click
-    const breakfastMenu = document.getElementById('breakfast-menu');
-    if (breakfastMenu) {
-        breakfastMenu.addEventListener('click', () => {
-            window.location.href = 'breakfast.html';
-        });
-    }
+    // Redirect to new page on menu click
+    const menuRedirects = {
+        'breakfast-menu': 'breakfast.php',
+        'lunch-menu': 'lunch.php',
+        'dessert-menu': 'dessert.php',
+        'snacks-menu': 'snacks.php',
+        'drinks-menu': 'drinks.php',
+    };
 
-    const lunchMenu = document.getElementById('lunch-menu');
-    if (lunchMenu) {
-        lunchMenu.addEventListener('click', () => {
-            window.location.href = 'lunch.html';
-        });
-    }
-    const dessert = document.getElementById('dessert-menu');
-    if (dessert) {
-        dessert.addEventListener('click', () => {
-            window.location.href = 'dessert.html';
-        });
-    }
-    const snacks = document.getElementById('snacks-menu');
-    if (snacks) {
-        snacks.addEventListener('click', () => {
-            window.location.href = 'snacks.html';
-        });
-    }
-    const drinks = document.getElementById('drinks-menu');
-    if (drinks) {
-        drinks.addEventListener('click', () => {
-            window.location.href = 'drinks.html';
-        });
-    }
+    Object.entries(menuRedirects).forEach(([menuId, url]) => {
+        const menuElement = document.getElementById(menuId);
+        if (menuElement) {
+            menuElement.addEventListener('click', () => {
+                window.location.href = url;
+            });
+        }
+    });
 
     // Toggle sidebar visibility
     barsIcon.addEventListener('click', () => {
@@ -52,24 +37,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cart functionality
     const addToCartButtons = document.querySelectorAll('.add-to-cart');
     const cartItemCount = document.querySelector('.cart-icon span');
-    const cartItemsList = document.querySelector('.cart-tems');
+    const cartItemsList = document.querySelector('.cart-items');
     const cartTotal = document.querySelector('.cart-total');
     let cartItems = [];
     let totalAmount = 0;
 
-    // Check if elements for cart UI exist
     if (cartItemCount && cartItemsList && cartTotal) {
-        addToCartButtons.forEach((button, index) => {
+        addToCartButtons.forEach((button) => {
             button.addEventListener('click', (e) => {
                 e.stopPropagation(); // Prevent click event from closing the cart sidebar
 
-                const itemName = document.querySelectorAll('.card .card-title')[index]?.textContent;
-                const itemPriceText = document.querySelectorAll('.price')[index]?.textContent;
-
-                if (!itemName || !itemPriceText) {
-                    console.error("Item name or price not found.");
-                    return;
-                }
+                const card = button.closest('.card');
+                const itemName = card.querySelector('.card-title').textContent;
+                const itemPriceText = card.querySelector('.price').textContent;
 
                 const itemPrice = parseFloat(itemPriceText.replace('Ksh', '').trim());
 
@@ -111,7 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
             cartItem.innerHTML = `
                 <span>(${item.quantity} x) ${item.name}</span>
                 <span class="cart-item-price">Ksh ${(item.price * item.quantity).toFixed(2)}
-                
                     <button class="remove-item" data-index="${index}"><i class="fa-solid fa-times"></i></button>
                 </span>
             `;
