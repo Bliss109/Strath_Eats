@@ -46,7 +46,6 @@ $conn->close();
                 <th>Email</th>
                 <th>Role</th>
                 <th>Phone Number</th>
-                <th>Profile</th>
                 <th>Student ID</th>
                 <th>Actions</th>
             </tr>
@@ -59,15 +58,10 @@ $conn->close();
                         <td><?php echo htmlspecialchars($user['email']); ?></td>
                         <td><?php echo htmlspecialchars($user['role']); ?></td>
                         <td><?php echo htmlspecialchars($user['phone_number']); ?></td>
-                        <?php if (!empty($user['profile_picture'])): ?>
-                                <img src="Uploads/<?php echo htmlspecialchars($user['profile_picture']); ?>" alt="Profile Picture" style="width:25px;height:25px;">
-                            <?php else: ?>
-                                No image
-                            <?php endif; ?>
                         <td><?php echo htmlspecialchars($user['student_id']); ?></td>
                         <td>
-                            <a href="edit_user.php?id=<?php echo $user['id']; ?>">Edit</a> | 
-                            <a href="delete_user.php?id=<?php echo $user['id']; ?>" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                            <a href="edit_users.php?id=<?php echo $user['user_id']; ?>">Edit</a> | 
+                            <a href="delete_users.php?id=<?php echo $user['user_id']; ?>" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
