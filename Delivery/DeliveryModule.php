@@ -32,8 +32,8 @@ class DeliveryModule {
                 <a href="DeliveryWallet.php">Wallet</a>
                 <a href="AvailableJobs.php">Available Jobs </a>
                 <a href="DeliveryCompleted.php">Completed Jobs </a>
-                <a href="#">Order</a>
-                <a href="#">Logout</a>
+                <a href="../Cafeteria/Cafeteria.php">Order</a>
+                <a href="DeliveryLogout.php">Logout</a>
             </ul>
         </nav>
         ';
