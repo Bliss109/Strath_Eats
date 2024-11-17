@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Deliveries</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="styles.css">
     </head>
     <body>
 
@@ -161,6 +161,7 @@ class DeliveryModule {
 
                                         }
                                     
+                                    
                                 }
                         }
                       "</td>";
@@ -258,7 +259,7 @@ class DeliveryModule {
         $result = $stmt->fetch();
 
         if ($result) {
-            echo "<div>Balance: ". $result['balance']."</div>" ;
+            echo "<div>Balance: ". $result['balance']."</div" ;
         } else {
             echo "Deliverer not found.";
             return null; // or return 0 if you'd like to return a default balance

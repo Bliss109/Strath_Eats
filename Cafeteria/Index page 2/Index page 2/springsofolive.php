@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Groundfloor Cafeteria - StrathEats</title>
-    <link rel="stylesheet" href="groundfloor.css" />
+    <title>Springs of Olive - StrathEats</title>
+    <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -16,7 +16,7 @@
         <i class="fa-solid fa-close"></i>
       </div>
       <h2>StrathEats</h2>
-      <img src="../../Images/Logo.jpeg" alt="StrathEats Logo" class="logo-image" />
+      <img src="../../../Images/logoo.png" alt="StrathEats Logo" class="logo-image" />
       <nav>
         <ul>
           <li><a href="#">Dashboard</a></li>
@@ -48,13 +48,13 @@
         </div>
       </nav>
     </header>
-    <h1>Welcome to Groundfloor Cafeteria</h1>
+    <h1>Welcome to Springs of Olive</h1>
 
     <div class="content">
       <section class="cover">
         <div class="cover-overlay">
           <h1>
-            <span class="slogan">Delicious Meals, Quick and Easy</span>
+            <span class="slogan">Best in Quality and Price!</span>
           </h1>
         </div>
       </section>
@@ -63,119 +63,112 @@
         <h2 class="section-heading">Categories</h2>
         <div class="menu-list">
           <div class="menu-item">
-            <img src="../Images/chapati img.jpg" alt="" />
+            <img src="../../../Images/chapati img.jpg" alt="" />
             <h5>All Menu Items</h5>
           </div>
-          <div class="menu-item" id="starter-menu">
-            <img src="../Images/croissant.jpg" alt="Breakfast" />
+          <div class="menu-item" id="breakfast-menu">
+            <img src="../../../Images/croissant.jpg" alt="Breakfast" />
             <h5>Breakfast</h5>
           </div>
-          <div class="menu-item" id="main-course-menu">
-            <img src="../Images/beef.png" alt="Lunch" />
+          <div class="menu-item" id="lunch-menu">
+            <img src="../../../Images/beef.png" alt="Lunch" />
             <h5>Lunch</h5>
           </div>
           <div class="menu-item" id="dessert-menu">
-            <img src="../Images/Red_Velvet_Cake.png" alt="Dessert" />
+            <img src="../../../Images/Red_Velvet_Cake.png" alt="Dessert" />
             <h5>Dessert</h5>
           </div>
           <div class="menu-item" id="drinks-menu">
-            <img src="../Images/mirinda.png" alt="Beverages" />
+            <img src="../../../Images/mirinda.png" alt="Beverages" />
             <h5>Beverages</h5>
           </div>
         </div>
 
-        <!-- Food Items Section -->
+        <!-- card item section-->
         <h2 class="section-heading">Food Items</h2>
-        
         <div class="card-list">
-          <div class="card" id="starter">
-            <img src="../Images/cupcakes.jpg" alt="Mandazi" />
-            <h4 class="card-title">Cupcakes</h4>
+          <!-- Starter Dishes -->
+          <div class="card" id="snacks-menu">
+            <img src="../../../Images/smokies.png" alt="smokies" />
+            <h4 class="card-title">Smokies</h4>
             <div class="card-price">
-              <span class="price">Ksh 50</span>
+              <span class="price">Ksh 30</span>
               <i class="fa-solid fa-plus add-to-cart"></i>
             </div>
           </div>
-          <div class="card-list">
-            <div class="card" id="starter">
-              <img src="../Images/samosas.png" alt="Samosas" />
-              <h4 class="card-title">Samosas</h4>
-              <div class="card-price">
-                <span class="price">Ksh 50</span>
-                <i class="fa-solid fa-plus add-to-cart"></i>
-              </div>
-            </div>
-            </div>
-            <div class="card-list">
-          <div class="card" id="main-course">
-            <img src="../Images/pilau.png" alt="pilau" />
-            <h4 class="card-title">Pilau</h4>
-            <div class="card-price">
-              <span class="price">Ksh 300</span>
-              <i class="fa-solid fa-plus add-to-cart"></i>
-            </div>
-          </div>
-          </div>
-          <div class="card" id="main-course">
-            <img src="../Images/Lyonnaise_Potatoes.jpg" alt="Chocolate Cake" />
-            <h4 class="card-title">Lyonnaise Potatoes</h4>
-            <div class="card-price">
-              <span class="price">Ksh 80</span>
-              <i class="fa-solid fa-plus add-to-cart"></i>
-            </div>
-          </div>
-          <div class="card" id="main-course">
-            <img src="../Images/Potato_wedges.png" alt="Wedges" />
-            <h4 class="card-title">Potato Wedges</h4>
-            <div class="card-price">
-              <span class="price">Ksh 60</span>
-              <i class="fa-solid fa-plus add-to-cart"></i>
-            </div>
-          </div>
-          <div class="card" id="main-course">
-            <img src="../Images/Rice.png" alt="Rise" />
-            <h4 class="card-title">Rice</h4>
+          <div class="card" id="snacks-menu">
+            <img src="../../../Images/samosas.png" alt="Beef Samosa" />
+            <h4 class="card-title">Beef Samosa</h4>
             <div class="card-price">
               <span class="price">Ksh 40</span>
               <i class="fa-solid fa-plus add-to-cart"></i>
             </div>
           </div>
-          <div class="card" id="main-course">
-            <img src="../Images/Salad.png" alt="Salad" />
-            <h4 class="card-title">Salad</h4>
+
+          <!-- Main Course Dishes -->
+          <div class="card" id="lunch-menu">
+            <img src="../../../Images/wraps.png" alt="wraps" />
+            <h4 class="card-title">Chicken wraps</h4>
             <div class="card-price">
-              <span class="price">Ksh 40</span>
+              <span class="price">Ksh 180</span>
               <i class="fa-solid fa-plus add-to-cart"></i>
             </div>
           </div>
-          <div class="card" id="main-course">
-            <img src="../Images/Potato_Pea_Curry.png" alt="Curry" />
-            <h4 class="card-title">Potato and Pea Curry</h4>
+          <div class="card" id="lunch-menu">
+            <img src="../../../Images/masala_chips.png" alt="Masala" />
+            <h4 class="card-title">Masala Chips</h4>
             <div class="card-price">
-              <span class="price">Ksh 80</span>
+              <span class="price">Ksh 180</span>
               <i class="fa-solid fa-plus add-to-cart"></i>
             </div>
           </div>
-          <div class="card" id="drinks">
-            <img src="../Images/soda img.jpg" alt="Soda" />
+
+          <!-- Dessert Dishes -->
+          <div class="card" id="dessert-menu">
+            <img src="../../../Images/chips_wings.png" alt="chips" />
+            <h4 class="card-title">Chips and Wings</h4>
+            <div class="card-price">
+              <span class="price">Ksh 200</span>
+              <i class="fa-solid fa-plus add-to-cart"></i>
+            </div>
+          </div>
+          <div class="card" id="dessert-menu">
+            <img src="../../../Images/chapati_beef.png" alt="Chapati" />
+            <h4 class="card-title">Chapati and Beef</h4>
+            <div class="card-price">
+              <span class="price">Ksh 30</span>
+              <i class="fa-solid fa-plus add-to-cart"></i>
+            </div>
+          </div>
+          <div class="card" id="dessert-menu">
+            <img src="../../../Images/fries.png" alt="Chapati" />
+            <h4 class="card-title">Chips</h4>
+            <div class="card-price">
+              <span class="price">Ksh 130</span>
+              <i class="fa-solid fa-plus add-to-cart"></i>
+            </div>
+          </div>
+
+          <!-- Beverages -->
+          <div class="card" id="drinks-menu">
+            <img src="../../../Images/soda img.jpg" alt="soda" />
             <h4 class="card-title">Soda</h4>
             <div class="card-price">
               <span class="price">Ksh 50</span>
               <i class="fa-solid fa-plus add-to-cart"></i>
             </div>
           </div>
-          <div class="card-list">
-            <div class="card" id="starter">
-              <img src="../Images/Apple.png" alt="Apple" />
-              <h4 class="card-title">Apples</h4>
-              <div class="card-price">
-                <span class="price">Ksh 30</span>
-                <i class="fa-solid fa-plus add-to-cart"></i>
-              </div>
+          <div class="card" id="drinks-menu">
+            <img src="../../../Images/mirinda.png" alt="soda" />
+            <h4 class="card-title">Mirinda</h4>
+            <div class="card-price">
+              <span class="price">Ksh 40</span>
+              <i class="fa-solid fa-plus add-to-cart"></i>
             </div>
+          </div>
         </div>
 
-        <!-- Cart Sidebar Section -->
+        <!-- cart sidebar section-->
         <div class="sidebar" id="sidebar">
           <div class="sidebar-close">
             <i class="fa-solid fa-close"></i>
@@ -198,6 +191,6 @@
     <footer class="footer">
       <p>© 2024 StrathEats. All rights reserved.</p>
     </footer>
-    <script src="strath_eats\Strath_Eats\Cafeteria\Index page 2\Index page 2\main.js"></script>
+    <script src="main.js"></script>
   </body>
 </html>

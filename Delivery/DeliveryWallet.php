@@ -21,15 +21,13 @@ $userId = 2;
     </header>
 
     <main>
-        <h2> Wallet Balance</h2>
-        <section id="wallet-balance">
+        <div class="container">
+            <div class="wallet-balance" >
+        
             <?php $deliveryModule->Balance($userId); ?>
-        </section>
 
-        <h2> Delivery Analysis </h2>
-        <section id="delivery-analysis">
-            <?php $deliveryModule->deliveryAnalysis($userId); ?>
-        </section>
+            </div>
+
     </main>
 </body>
 </html>

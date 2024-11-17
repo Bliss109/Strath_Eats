@@ -1,64 +1,70 @@
 document.addEventListener('DOMContentLoaded', function () {
     const cafeteriaList = document.getElementById('cafeteriaList');
 
-    // Sample cafeteria data
-    const cafeterias = [
-        {
-            name: "Groundfloor Cafeteria",
-            description: "Plenty of dining space and a wide variety of food options.",
-            image: "images/cafeteria.jpg",
-            page: "groundfloor.html"
-        },
-        {
-            name: "Springs of Olive Cafeteria",
-            description: "Famously known for its chips and wings.",
-            image: "images/cafeteria2.jpg",
-            page: "springsofolive.html"
-        },
-        {
-            name: "Pate Cafeteria",
-            description: "Culinary delights from around the world.",
-            image: "images/cafeteria1.jpg",
-            page: "Cafeteria.html"
-        },
-        {
-            name: "Coffee Bar",
-            description: "Delicious coffee and milkshakes",
-            image: "images/cafeteria3.jpg",
-            page: "Cafeteria.html"
-        }
-    ];
+    // Fetch cafeteria data from the server
+    fetch('CafeteriaData.php') // Ensure this file is in the correct path
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch cafeteria data');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.length === 0) {
+                cafeteriaList.innerHTML = '<p>No cafeterias available.</p>';
+                return;
+            }
 
-    cafeterias.forEach(cafeteria => {
-        // Create a cafeteria card
-        const cafeteriaCard = document.createElement('div');
-        cafeteriaCard.classList.add('cafeteria-card');
+            // Iterate over the data and create cafeteria cards
+            data.forEach(cafeteria => {
+                const cafeteriaCard = document.createElement('div');
+                cafeteriaCard.classList.add('cafeteria-card');
 
-        const image = document.createElement('img');
-        image.src = cafeteria.image;
-        image.alt = `${cafeteria.name} Image`;
+                // Cafeteria image
+                const photo = document.createElement('img');
+                photo.src = cafeteria.image; // Matches backend JSON key
+                photo.alt = `${cafeteria.name} Image`;
 
-        const name = document.createElement('h2');
-        name.textContent = cafeteria.name;
+                // Cafeteria name
+                const name = document.createElement('h2');
+                name.textContent = cafeteria.name;
 
-        const description = document.createElement('p');
-        description.textContent = cafeteria.description;
+                // Cafeteria description
+                const description = document.createElement('p');
+                description.textContent = cafeteria.description;
 
-        const viewButton = document.createElement('button');
-        viewButton.textContent = "View Menu";
+                // View Menu button
+                const viewButton = document.createElement('button');
+                viewButton.textContent = "View Menu";
 
-        // Redirect to the specific page for the selected cafeteria
-        viewButton.onclick = function () {
-            window.location.href = cafeteria.page;
-        };
+                // Handle redirection to menu and session setting
+                viewButton.onclick = function () {
+                    fetch('SetCafeteriaSession.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ cafeteria: cafeteria.name }),
+                    })
+                        .then(() => {
+                            window.location.href = '../../index.php';
+                        })
+                        .catch(error => {
+                            console.error('Error setting cafeteria session:', error);
+                        });
+                };
 
-        // Append elements to the card
-        cafeteriaCard.appendChild(image);
-        cafeteriaCard.appendChild(name);
-        cafeteriaCard.appendChild(description);
-        cafeteriaCard.appendChild(viewButton);
+                // Append elements to the card
+                cafeteriaCard.appendChild(photo);
+                cafeteriaCard.appendChild(name);
+                cafeteriaCard.appendChild(description);
+                cafeteriaCard.appendChild(viewButton);
 
-        // Append the card to the list
-        cafeteriaList.appendChild(cafeteriaCard);
-    });
+                // Append the card to the container
+                cafeteriaList.appendChild(cafeteriaCard);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching cafeteria data:', error);
+        });
 });
