@@ -81,3 +81,12 @@ table th {
     height: auto;
     margin-right: 100px;
 }
+button{
+    background-color: rgb(255, 161, 21);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}

@@ -56,7 +56,7 @@ class DeliveryModule {
                 echo "<td>
                         <form method='POST'>
                             <input type='hidden' name='order_id' value='{$job['order_id']}'>
-                            <input type='hidden' name='userID' value='$userID'>
+                            <input type='hidden' name='userID' value='$userId'>
                             <button type='submit' name='take_job'>Take Job</button>
                         </form>
                       </td>";
@@ -122,7 +122,7 @@ class DeliveryModule {
         $jobs = $stmt->fetchAll();
     
         if ($jobs) {
-            echo "<h3>Your current jobs ready to be picked up are:";
+            echo "<h3>Your current jobs ready to be picked up are:</h3>";
             echo "<table>";
             echo "<tr><th>Order ID</th><th>Delivery Status</th><th>Delivery Location</th><th>Action</th></tr>";
     
@@ -315,11 +315,11 @@ public function pickDeliveryAction(){
         $userId = $_POST['user_id'];
         $stmt = $this->pdo->prepare("SELECT order_id, deliverer_id FROM deliveries WHERE order_id = $orderId");
         $stmt->execute();
-        $
+        $result= $stmt->fetch();
         $order_id1 = $result['order_id'];
         $deliverer_id = $result['deliverer_id'];
         if ($orderId==$order_id1 && $userId==$deliverer_id){
-            $deliveryModule->pickDelivery($orderId, $userId);
+            $this->pickDelivery($orderId, $userId);
     
             }
     }
