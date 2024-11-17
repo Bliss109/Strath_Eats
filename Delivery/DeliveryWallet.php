@@ -23,7 +23,7 @@ $deliveryModule->Balance($userId);
     <main>
         <h2> Wallet Balance</h2>
         <section id="wallet-balance">
-            <?php $deliveryModule->Balance(); ?>
+            <?php $deliveryModule->Balance($userId); ?>
         </section>
 
         <h2> Delivery Analysis </h2>
