@@ -15,27 +15,30 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
 
+            // Iterate over the data and create cafeteria cards
             data.forEach(cafeteria => {
-                // Create a cafeteria card
                 const cafeteriaCard = document.createElement('div');
                 cafeteriaCard.classList.add('cafeteria-card');
 
-                const image = document.createElement('img');
-                image.src = cafeteria.image;
-                image.alt = `${cafeteria.name} Image`;
+                // Cafeteria image
+                const photo = document.createElement('img');
+                photo.src = cafeteria.image; // Matches backend JSON key
+                photo.alt = `${cafeteria.name} Image`;
 
+                // Cafeteria name
                 const name = document.createElement('h2');
                 name.textContent = cafeteria.name;
 
+                // Cafeteria description
                 const description = document.createElement('p');
                 description.textContent = cafeteria.description;
 
+                // View Menu button
                 const viewButton = document.createElement('button');
                 viewButton.textContent = "View Menu";
 
-                // Handle redirection to menu
+                // Handle redirection to menu and session setting
                 viewButton.onclick = function () {
-                    // Set the selected cafeteria in session
                     fetch('SetCafeteriaSession.php', {
                         method: 'POST',
                         headers: {
@@ -52,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 };
 
                 // Append elements to the card
-                cafeteriaCard.appendChild(image);
+                cafeteriaCard.appendChild(photo);
                 cafeteriaCard.appendChild(name);
                 cafeteriaCard.appendChild(description);
                 cafeteriaCard.appendChild(viewButton);

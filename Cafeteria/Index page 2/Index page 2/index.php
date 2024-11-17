@@ -1,8 +1,10 @@
 <?php
 session_start();
 $cafeteria = $_SESSION['selected_cafeteria'] ?? null;
-if (!$cafeteria) {
-    header('Location: Cafeteria.php'); // Redirect to cafeteria selection if not set
+
+// Redirect to cafeteria selection if not set
+if (!$cafeteria || !is_string($cafeteria)) {
+    header('Location: Cafeteria.php');
     exit();
 }
 ?>
@@ -12,7 +14,7 @@ if (!$cafeteria) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $cafeteria; ?> - StrathEats</title>
+    <title><?php echo htmlspecialchars($cafeteria, ENT_QUOTES, 'UTF-8'); ?> - StrathEats</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
@@ -55,13 +57,13 @@ if (!$cafeteria) {
     </nav>
 </header>
 
-<h1>Welcome to <?php echo htmlspecialchars($cafeteria); ?></h1>
+<h1>Welcome to <?php echo htmlspecialchars($cafeteria, ENT_QUOTES, 'UTF-8'); ?></h1>
 
 <div class="content">
     <section class="cover">
         <div class="cover-overlay">
             <h1>
-                <span class="slogan"><?php echo htmlspecialchars($cafeteria); ?> - Explore Our Menu!</span>
+                <span class="slogan"><?php echo htmlspecialchars($cafeteria, ENT_QUOTES, 'UTF-8'); ?> - Explore Our Menu!</span>
             </h1>
         </div>
     </section>
