@@ -1,6 +1,6 @@
 <?php
 require_once 'load.php';
-$userID=2;
+
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +20,9 @@ $userID=2;
     <main> 
         <h2> Available Jobs</h2>
         <section id="available jobs">
-            <?php $deliveryModule->AvailableJobs($userID);?>
+            <?php
+            $userID=2;
+            $deliveryModule->AvailableJobs($userID);?>
         </section>
     </main>
 </body>

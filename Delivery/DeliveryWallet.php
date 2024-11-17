@@ -1,6 +1,7 @@
 <?php
 require_once 'load.php';
 $deliveryModule->navbar();
-$deliveryModule->Balance();
-$deliveryModule->deliveryAnalysis($userId);
+$userId = 2;
+$deliveryModule->Balance($userId);
+//$deliveryModule->deliveryAnalysis($userId);
 ?>
