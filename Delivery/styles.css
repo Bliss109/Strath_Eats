@@ -68,7 +68,7 @@ table th, table td {
 }
 
 table th {
-    background-color: papayawhip;
+    background-color: white;
     color: black;
 }
 
@@ -115,7 +115,7 @@ button{
     border: 2px solid #e2b554;
     padding: 10px;
     border-radius: 5px;
-    background-color: rgb(234, 233, 230);
+    background-color: white;
 }
 
 form {

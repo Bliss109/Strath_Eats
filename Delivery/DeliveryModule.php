@@ -259,7 +259,7 @@ class DeliveryModule {
         $result = $stmt->fetch();
 
         if ($result) {
-            echo "<div>Balance: ". $result['balance']."</div" ;
+            echo "<div>Balance: ". $result['balance']."</div>" ;
         } else {
             echo "Deliverer not found.";
             return null; // or return 0 if you'd like to return a default balance
