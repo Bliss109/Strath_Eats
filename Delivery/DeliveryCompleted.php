@@ -18,7 +18,7 @@ require_once 'load.php';
     </header>
 
     <main> 
-        <h2> Available Jobs</h2>
+        <h2> Completed Jobs</h2>
         <section id="available jobs">
             <?php
             $userID=2;
