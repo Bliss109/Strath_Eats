@@ -124,7 +124,7 @@ class DeliveryModule {
         $jobs = $stmt->fetchAll();
 
         if ($jobs) {
-            echo "Your current jobs ready to be picked up are:";
+            echo "<h3>Your current jobs ready to be picked up are:</h3>";
             echo "<table>";
             echo "<tr><th>Order ID</th><th>Delivery Status</th><th>Delivery Location</th><th>Action</th></tr>";
 
@@ -345,11 +345,12 @@ public function pickDeliveryAction(){
         $userId = $_POST['user_id'];
         $stmt = $this->pdo->prepare("SELECT order_id, deliverer_id FROM deliveries WHERE order_id = $orderId");
         $stmt->execute();
+        $
         $order_id1 = $result['order_id'];
         $deliverer_id = $result['deliverer_id'];
         if ($orderId==$order_id1 && $userId==$deliverer_id){
             $deliveryModule->pickDelivery($orderId, $userId);
-
+    
             }
         
     }
