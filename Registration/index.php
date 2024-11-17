@@ -17,9 +17,9 @@
                 <button type="button" class="toggle-btn" onclick="register()">Register</button>
             </div>
             <div class="social-icons">
-                <img src="../Registration/Assets/instagram (2).png">
-                <img src="../Registration/Assets/facebook (2).png">
-                <img src="../Registration/Assets/twitterx.png">
+                <img src="../Registration/instagram (2).png">
+                <img src="../Registration/facebook (2).png">
+                <img src="../Registration/twitterx.png">
             </div>
 
             <!-- Login Form -->

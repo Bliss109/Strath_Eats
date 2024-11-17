@@ -53,15 +53,15 @@ class User
 
     if ($user) {
         // Debug output to check hashed password in DB
-        echo "Stored hashed password: " . $user['password'] . "<br>";
+        //echo "Stored hashed password: " . $user['password'] . "<br>";
 
         // Verify the password
-        if (password_verify($password, $user['password'])) {
-            echo "Password matched!";
-            return ["success" => true, "user_id" => $user['user_id']];
-        } else {
-            echo "Password does not match.<br>";
-        }
+        //if (password_verify($password, $user['password'])) {
+            //echo "Password matched!";
+           // return ["success" => true, "user_id" => $user['user_id']];
+        //} else {
+            //echo "Password does not match.<br>";
+        //}
     } else {
         echo "User not found.<br>";
     }

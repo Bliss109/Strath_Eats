@@ -1,5 +1,5 @@
 <?php
-require '../dbConn/Connection.php'; 
+require '../../../dbConn/Connection.php'; 
 require '../dbConn/testCon.php';
 header('Content-Type: application/json');
 

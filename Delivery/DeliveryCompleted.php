@@ -1,8 +1,6 @@
 <?php
 require_once 'load.php';
-session_start();
-$_SESSION["user_ID"] = 2;
-$userID = $_SESSION["user_ID"];
+
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +8,7 @@ $userID = $_SESSION["user_ID"];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deliveries Dasboard</title>
+    <title>Available Jobs</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -19,20 +17,13 @@ $userID = $_SESSION["user_ID"];
         <?php $deliveryModule->navbar(); ?>
     </header>
 
-    <main>
-        <h2> Pickup Jobs</h2>
-        <section id="pickup-jobs">
-        <?php $deliveryModule->currentPickupJobs($userID); ?>
+    <main> 
+        <h2> Available Jobs</h2>
+        <section id="available jobs">
+            <?php
+            $userID=2;
+            $deliveryModule->completedDeliveries($userID);?>
         </section>
-
-        <h2> Delivery Jobs </h2>
-        <section id="delivery jobs">
-        <?php $deliveryModule->CurrentDeliveryJobs($userID); ?>
-        </section>
-
     </main>
 </body>
 </html>
-
-
-

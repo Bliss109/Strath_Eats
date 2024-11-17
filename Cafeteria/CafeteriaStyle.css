@@ -1,5 +1,5 @@
 body {
-    background-color: #c19a6b;
+    background-color: orange;
     font-family: Arial, sans-serif;
 }
 
@@ -10,7 +10,7 @@ header {
 
 h1 {
     color: #333;
-    font-size: 36px;
+    font-size: 45px;
 }
 
 .cafeteria-container {
