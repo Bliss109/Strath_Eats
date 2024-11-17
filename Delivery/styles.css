@@ -58,6 +58,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
+    font-size: 17px;
 }
 
 table th, table td {
@@ -114,13 +115,14 @@ button{
     border: 2px solid #e2b554;
     padding: 10px;
     border-radius: 5px;
-    background-color: rgb(255, 244, 214);
+    background-color: rgb(234, 233, 230);
 }
 
 form {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    align-items: center;
 }
 
 label {
@@ -136,14 +138,22 @@ input {
 }
 
 button {
-    padding: 10px;
+    margin-bottom: 20px; /* Add space below the button */
     background-color: orange;
     color: white;
-    border: none;
-    border-radius: 5px;
+    border: none;;
     font-size: 16px;
     cursor: pointer;
 }
 button:hover {
     background-color: rgb(230, 185, 111);
+}
+
+input, button {
+    width: 150px; /* Set the same width for both */
+    padding: 8px; /* Adjust padding for a smaller look */
+    font-size: 14px; /* Ensure text is appropriately sized */
+    border-radius: 5px; /* Rounded corners for uniformity */
+    border: 1px solid #ccc; /* Consistent border for input and button */
+    text-align: center; /* Center text for better alignment */
 }

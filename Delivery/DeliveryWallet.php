@@ -1,7 +1,7 @@
 <?php
 require_once 'load.php';
 //$deliveryModule->navbar();
-$userId = 2;
+$userId = 1;
 //$deliveryModule->Balance($userId);
 //$deliveryModule->deliveryAnalysis($userId);
 ?>
@@ -21,12 +21,11 @@ $userId = 2;
     </header>
 
     <main>
-        <div class="container">
+       
             <div class="wallet-balance" >
         
             <?php $deliveryModule->Balance($userId); ?>
 
-            </div>
 
     </main>
 </body>

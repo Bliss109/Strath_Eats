@@ -2,9 +2,10 @@
 
 session_start();
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Cafeteria_Manager') {
-    header("Location: landing.html");
+    header("Location:Index Page 2/landing.html");
     exit();
-}
+} 
+
 
 ?>
 
