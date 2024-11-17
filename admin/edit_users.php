@@ -6,18 +6,15 @@ $username = "root";
 $password = "";
 $dbname = "strath_eats";
 
-// Database connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Check if user ID is provided
 if (isset($_GET['id'])) {
     $id = intval($_GET['id']);
 
-    // Fetch user data
     $query = "SELECT name, email, role, phone_number, student_id 
               FROM users 
               WHERE user_id = $id";
@@ -34,7 +31,6 @@ if (isset($_GET['id'])) {
     exit();
 }
 
-// Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $conn->real_escape_string($_POST['name']);
     $email = $conn->real_escape_string($_POST['email']);
@@ -42,14 +38,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone_number = $conn->real_escape_string($_POST['phone_number']);
     $student_id = $conn->real_escape_string($_POST['student_id']);
 
-    // Update user data
     $update_user_query = "UPDATE users 
                           SET name='$name', email='$email', role='$role', 
                               phone_number='$phone_number', student_id='$student_id' 
                           WHERE user_id = $id";
 
     if ($conn->query($update_user_query) === TRUE) {
-        // Redirect after successful update
+   
         header("Location: display_users.php");
         exit();
     } else {
