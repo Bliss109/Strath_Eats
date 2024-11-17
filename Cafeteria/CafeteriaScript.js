@@ -7,13 +7,13 @@ document.addEventListener('DOMContentLoaded', function () {
             name: "Groundfloor Cafeteria",
             description: "Plenty of dining space and a wide variety of food options.",
             image: "images/cafeteria.jpg",
-            page: "groundfloor.html"
+            page: "Index page 2/Index page 2/groundfloor.html"
         },
         {
             name: "Springs of Olive Cafeteria",
             description: "Famously known for its chips and wings.",
             image: "images/cafeteria2.jpg",
-            page: "springsofolive.html"
+            page: "Index page 2/Index page 2/springsofolive.html"
         },
         {
             name: "Pate Cafeteria",
