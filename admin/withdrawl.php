@@ -98,3 +98,25 @@ if ($conn->connect_error) {
 displayPendingWithdrawals($conn);
 $conn->close();
 ?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pending Withdrawals</title>
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Pending Withdrawals</h1>
+    <?php
+    // Display pending withdrawals
+    displayPendingWithdrawals($conn);
+    $conn->close();
+    ?>
+
+<footer>&copy; <?php echo date('Y'); ?> StrathEats. All rights reserved.</footer>
+</body>
+</html>
